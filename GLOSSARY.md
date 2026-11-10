@@ -1,87 +1,101 @@
 # CVKE Fridge
 
-The shared terms of the Android app and the iOS app. This is a first draft from the FridgeFriend code. Each term that
-replaces an old word names that word after _Avoid_. The owner agrees the terms in milestone 1 of
-[the plan](docs/plan.md).
+The shared terms of the Android app and the iOS app. This is the second draft, after the decisions of 10 November 2026
+in [the plan](docs/plan.md). The owner agrees the words in milestone 1. Household sharing is deferred, so its terms
+are not here.
 
 ## Inventory
 
-**Item**:
-One food in the inventory, with a name, a quantity, a **category**, a **storage area**, and an optional
-**expiry date**.
-_Avoid_: Fridge item, product, entry
+**Inventory**:
+All the **batches** on the phone that are not ended.
+_Avoid_: Fridge (the Fridge is one **storage area**), list, stock
+
+**Product**:
+What a food is: its name, its **category**, and its optional **barcode** and photo. A product has no quantity and no
+date.
+_Avoid_: Item, food type
+
+**Batch**:
+One purchase of a **product**: its **quantity**, its **storage area**, its **date added**, and its optional
+**expiry date**. One **product** can have more than one batch.
+_Avoid_: Item, fridge item, entry, lot
 
 **Quantity**:
-How much there is of an **item**: a number with an optional **unit**.
+How much there is of a **batch**: a number with an optional **unit**.
 _Avoid_: Count, amount
 
 **Unit**:
 The measure of a **quantity**: pcs, g, kg, ml, l, pack, bottle, slice, or cup.
 
 **Category**:
-The food group of an **item**: produce, dairy, meat, condiment, beverage, bakery, leftovers, or other. The category
-and the **storage area** give the **shelf life**.
+The food group of a **product**: produce, dairy, meat, condiment, beverage, bakery, leftovers, or other. It is for
+groups and filters. It does not give the **expiry estimate**.
 _Avoid_: Type, tag
 
 **Storage area**:
-A place where an **item** is kept. Fridge and Freezer are fixed. The person can create more.
+A place where a **batch** is kept. Fridge and Freezer are fixed. The person can create more.
 _Avoid_: Area, location, zone
 
 **Date added**:
-The calendar date on which the **item** came into the inventory.
+The calendar date on which the **batch** came into the **inventory**.
 _Avoid_: Timestamp, created date
 
 ## Freshness
 
 **Expiry date**:
-The calendar date after which the **item** is not good to eat. It has no time of day and no time zone.
+The calendar date after which the **batch** is not good to eat. It has no time of day and no time zone. It is a
+**printed date** or an **estimated date**.
 _Avoid_: Expiration, best before, use by, expires on
 
+**Printed date**:
+An **expiry date** from the package, which the person entered.
+_Avoid_: Real date, exact date
+
+**Estimated date**:
+An **expiry date** that the app suggested from the **expiry estimate**. The app shows it as an estimate.
+_Avoid_: Default date, guess
+
+**Expiry estimate**:
+The number of days that a food stays good in a **storage area**, from the table of foods. The app adds it to the
+**date added** to get an **estimated date**.
+_Avoid_: Shelf life (the old rule with eight categories), lifetime
+
 **Days left**:
-The number of calendar days from today to the **expiry date**, in the time zone of the device. It is 0 on the expiry
-date and negative after it.
+The number of calendar days from today to the **expiry date**. Today is the date in the time zone of the device. It is
+0 on the expiry date and negative after it.
 _Avoid_: Days remaining, time left
 
 **Freshness**:
-The state of an **item** that its **days left** give: fresh, expiring, expired, or no expiry date. The app calculates
+The state of a **batch** that its **days left** give: fresh, expiring, expired, or no expiry date. The app calculates
 it each time. The app does not store it.
 _Avoid_: Status, condition
 
-**Shelf life**:
-The default number of days that a **category** stays good in a **storage area**. The app uses it to suggest an
-**expiry date**.
-_Avoid_: Lifetime, duration
+**Use-first list**:
+The **batches** of the **inventory**, with the fewest **days left** first. It is the first screen of the app.
+_Avoid_: Home, dashboard
 
-## Sessions
+**Reminder**:
+A notification that the phone shows before a **batch** expires. The phone calculates it from its own copy of the
+**inventory**.
+_Avoid_: Alert, push
 
-**Fridge device**:
-The hardware in the fridge that detects the food that goes in and comes out, and sends **sessions** to the app.
-_Avoid_: Sensor, camera, hardware, Pi
+## The end of a batch
 
-**Session**:
-The **detections** of one use of the fridge, which the **fridge device** sends as one message.
-_Avoid_: Event, batch, scan
+**Used**:
+The end of a **batch**, or of a part of its **quantity**, because somebody ate it or cooked with it.
+_Avoid_: Consumed, finished, taken out
 
-**Detection**:
-One food that the **fridge device** saw in a **session**, with an **action** and a **confidence**.
-_Avoid_: Session item, item (an **item** is in the inventory; a detection is a report from the device)
+**Thrown away**:
+The end of a **batch**, or of a part of its **quantity**, because nobody used it.
+_Avoid_: Wasted, discarded, binned
 
-**Action**:
-The direction of a **detection**: put in, or taken out.
-_Avoid_: In/out, direction, type
+**History**:
+The **batches** that ended, with **used** or **thrown away** for each.
+_Avoid_: Archive, log
 
-**Confidence**:
-How sure the **fridge device** is of a **detection**, from 0 to 1.
-_Avoid_: Score, accuracy
-
-**Review**:
-The step in which the person reads the **detections** of a **session** and corrects them.
-_Avoid_: Verify, check
-
-**Approve**:
-To apply a **session** to the inventory. A "put in" **detection** adds a **quantity** or creates an **item**. A "taken
-out" **detection** removes a **quantity**. An approved session does not change again.
-_Avoid_: Process, verify, confirm, accept
+**Delete**:
+To remove a **batch** or a **product** that was a mistake. A deleted batch is not in the **history**.
+_Avoid_: Remove (when the food was used or thrown away)
 
 ## Product lookup
 
@@ -89,6 +103,16 @@ _Avoid_: Process, verify, confirm, accept
 The number on a package: 8, 12, 13, or 14 digits.
 _Avoid_: Code, UPC, EAN (use them only for the specific formats)
 
+**Scan**:
+To read a **barcode** with the phone camera.
+_Avoid_: Capture, detect
+
 **Product lookup**:
 The request that gets a product name and a **category** for a **barcode** from Open Food Facts.
-_Avoid_: Scan, search, barcode fetch
+_Avoid_: Search, barcode fetch
+
+## Change log
+
+**Change**:
+One record of the change log: one thing that the person did to the **inventory**, and when.
+_Avoid_: Event, edit, operation

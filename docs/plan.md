@@ -1,41 +1,45 @@
 # Plan: two native apps for CVKE Fridge
 
-Date: 10 November 2026. Status: proposal. The repository setup in section 3 is done. All other sections need the
-owner's agreement before work starts. Section 8 lists the decisions to make.
+Date: 10 November 2026, third version. The owner agreed the scope in section 2 and the decisions in section 8.1 on
+10 November 2026. Section 8.2 lists the decisions that are open.
 
-CVKE Fridge is the overhaul of FridgeFriend, a React Native app. The overhaul replaces it with a native Android app and
-a native iOS app. [legacy-fridgefriend.md](legacy-fridgefriend.md) records what FridgeFriend does today.
+CVKE Fridge is the overhaul of FridgeFriend, a React Native app. The overhaul is a full rewrite as a native Android
+app and a native iOS app. [legacy-fridgefriend.md](legacy-fridgefriend.md) records what FridgeFriend does today.
+The rewrite does not copy it. Section 2 says what stays.
 
 ## 1. The product in one page
 
-A person keeps a list of the food in the fridge. Each item has a quantity, a category, a storage area, and an expiry
-date. The app shows which items to use first.
+A person keeps a list of the food in the fridge. The app shows what to use first, and it sends a reminder before food
+expires.
 
-A fridge device can be in the fridge. It detects the food that goes in and comes out each time the door opens, and it
-sends the detections to the app as a session. The person reviews the session and approves it. Approval changes the item list.
+One phone does each task. To add food, the person scans the barcode on the package with the phone camera, or types a
+name. The app suggests an expiry date, and the person can replace it with the date on the package. When food is
+finished, the person records it as used or as thrown away.
 
-The app can find a product name and a category from a barcode, with the Open Food Facts service.
+The product has no fridge device. [ADR 0002](adr/0002-use-one-phone-and-no-fridge-device.md) records that decision.
 
-## 2. Scope of the overhaul
+Household sharing is deferred. It is not in this plan. [household-sharing.md](household-sharing.md) keeps the design
+for later.
 
-This scope is a recommendation. It comes from the FridgeFriend code, not from an agreed requirement.
+## 2. Scope
 
-| Keep | Change | Remove |
-|---|---|---|
-| Items with quantity, unit, category, storage area, expiry date, notes, and a photo | Dates: an expiry date becomes a calendar date with no time zone. Today is the date in the device time zone. FridgeFriend mixes UTC and local dates, and the days left are wrong by one for some hours each day. | The seven card styles. Each app has one design, from the design language. |
-| Freshness from the days left | Approval: all changes of one approval apply together, or none apply. FridgeFriend can stop in the middle. | The sample items and sample sessions that FridgeFriend adds each time the item list or the session list is empty. |
-| Shelf-life defaults for each category and storage area | A session that the device sends again does not replace the edits of the person or cancel an approval. FridgeFriend does both. | The screen and the controls that nothing uses. |
-| Storage areas: Fridge, Freezer, and the areas that the person creates | A failed product lookup is not kept as a result. FridgeFriend keeps the failure for 24 hours. | The name field as a place for a barcode. FridgeFriend accepts a barcode field, but it looks up only a barcode in the name. |
-| Sessions from the fridge device, with review and approval | One word for each state. FridgeFriend uses "processed", "approved", and "verified" for the same state. | |
-| Product lookup from a barcode | The category rules for a product lookup. FridgeFriend finds a word anywhere in the tags, and the first group wins: a tag with "fresh" gives produce, and "cream" finds ice cream. | |
+| Keep from FridgeFriend | Change | Add | Remove |
+|---|---|---|---|
+| Quantity, unit, category, and storage area | One item with one expiry date becomes a product with batches. Each batch has its own quantity, date added, and expiry date. | A barcode scanner with the phone camera | The fridge device, sessions, detections, approval, and MQTT |
+| Freshness from the days left, calculated each time | An expiry date is printed or estimated. The app shows an estimate as an estimate. | Reminders before food expires | The seven card styles |
+| A suggested expiry date when the person adds food | The suggestion comes from a table of foods, not from eight categories. | Used and thrown away as the two ends of a batch, with a history | The Home screen with a greeting and totals. The use-first list is the first screen. |
+| Storage areas: Fridge, Freezer, and the areas that the person creates | An expiry date is a calendar date with no time zone. Today is the date in the device time zone. | A log of each change to the inventory | Sample items in the released app |
+| Product lookup from a barcode with Open Food Facts | A failed product lookup is not kept as a result. The category rules do not match parts of words. | | The screen and the controls that nothing uses |
+| The inventory on the phone, with no account | | | |
+| Undo after a delete | | | |
+| Oldest batch first when food is used | | | |
 
-Not in FridgeFriend, and not in this plan until the owner adds them: expiry notifications, a barcode scanner with the
-phone camera, cloud sync, more than one household member.
+[ADR 0003](adr/0003-keep-stock-as-products-and-batches.md) records the product and batch model.
 
 ## 3. Repositories
 
-The setup is the same as for CVKE GPS. [ADR 0001](adr/0001-build-two-native-apps-from-one-product-repository.md)
-records it.
+[ADR 0001](adr/0001-build-two-native-apps-from-one-product-repository.md) records the setup. It is the same as for
+CVKE GPS.
 
 | Repository | Contents | CI |
 |---|---|---|
@@ -43,12 +47,12 @@ records it.
 | [cvkefridge-android](https://github.com/Glebenator/cvkefridge-android) | The Android app: Kotlin, Jetpack Compose, Material 3. Application ID `com.cvke.fridge`. | `android.yml`: core tests, debug and release builds, lint, and the device test on an emulator. |
 | [cvkefridge-ios](https://github.com/Glebenator/cvkefridge-ios) | The iOS app: Swift, SwiftUI, XcodeGen. | `ios.yml`: core tests, the simulator build, and the UI test in light and dark appearance. |
 
-All three repositories are public. GitHub Actions is then free, and that includes the macOS runners.
+All repositories are public. GitHub Actions is then free, and that includes the macOS runners.
 
 ## 4. How the two apps stay the same
 
-The two apps share no code. Five mechanisms keep them the same product. Mechanisms 4.1 and 4.2 and the parent
-issue of 4.4 exist now. The others are recommendations.
+The two apps share no code. Five mechanisms keep them the same product. Mechanisms 4.1 and 4.2 and the parent issue
+of 4.4 exist now. Mechanism 4.3 is open decision 1 in section 8.2.
 
 ### 4.1 One set of product documents
 
@@ -66,7 +70,7 @@ Each app keeps the product rules in a module that cannot see the platform.
 | | Android | iOS |
 |---|---|---|
 | Module | `:core`, pure Kotlin on the JVM | `CVKEFridgeCore`, a Swift package with Foundation only |
-| Contents | Models, date rules, freshness, shelf life, sort orders, quantity rules, the session payload parser, the approval rules | The same |
+| Contents | Products and batches, calendar dates, days left, freshness, the expiry estimate, the use-first order, and the change log | The same |
 | Tests | `./gradlew :core:test` | `swift test` |
 
 Rules for the two modules:
@@ -83,26 +87,21 @@ Both modules have one file now, `AppVersion`, with the same two test cases. It p
 
 The same file names do not prove the same behaviour. Test vectors do.
 
-- The hub repository gets a `spec/` folder. It holds JSON files of inputs and expected outputs, for example
+- This repository gets a `spec/` folder. It holds JSON files of inputs and expected outputs, for example
   `spec/vectors/freshness.json`: a date for today, an expiry date, the expected days left, and the expected freshness.
-- `spec/` also holds the contracts that both apps read: the JSON Schema of the session payload from the fridge device,
-  and the table of shelf-life defaults.
-- Each app has a file `spec.ref` that names one commit of the hub repository. The CI of the app gets `spec/` at that
+- `spec/` also holds the data that both apps read: the table of foods for the expiry estimate.
+- Each app has a file `spec.ref` that names one commit of this repository. The CI of the app gets `spec/` at that
   commit and runs each vector through its core module.
-- A rule change is then one change to a vector in the hub, and one change of `spec.ref` in each app. An app that does
-  not follow the rule has a red build.
-- The hub gets a small workflow that checks that each vector file is valid JSON and agrees with its schema.
-
-This mechanism costs one test runner in each app and one checkout step in each workflow. It replaces the manual
-comparison of two test suites.
+- A rule change is then one change to a vector here, and one change of `spec.ref` in each app. An app that does not
+  follow the rule has a red build.
+- This repository gets a small workflow that checks that each vector file is valid JSON and agrees with its schema.
 
 ### 4.4 One feature, three issues
 
 - A feature starts as a parent issue in `cvkefridge`. It states the behaviour in glossary terms, and it names the
   vectors and the ADRs that the feature adds.
 - Each app repository gets one sub-issue.
-- The parent issue closes when both sub-issues are closed, both CI runs are green on the same `spec.ref`, and the
-  progress report has the change with both app commits as the baseline.
+- The parent issue closes when both sub-issues are closed and both CI runs are green on the same `spec.ref`.
 
 ### 4.5 Work order for one feature
 
@@ -110,10 +109,9 @@ comparison of two test suites.
 2. Build the Android side first. The Android app builds and runs on the development machine (Windows), and the
    emulator gives a result in minutes.
 3. Build the iOS side second, from the same vectors and the finished Android behaviour. The development machine has no
-   Xcode, so each iOS build is a CI run. The core tests in `CVKEFridgeCore` also run with a Swift toolchain on Windows
-   or Linux, which makes the rule work fast. Only the interface needs the macOS runner.
+   Xcode, so each iOS build is a CI run. Only the interface needs the macOS runner. The core tests are fast.
 4. Compare the screens. The iOS workflow uploads its screenshots as an artifact. The Android device test can do the
-   same. The progress report shows both.
+   same.
 
 The lead platform can change for a feature that is harder on iOS. The vectors are the reference in each case, not the
 first app.
@@ -129,23 +127,17 @@ first app.
 
 ## 6. Milestones
 
-Each milestone is one parent issue with one sub-issue for each app. The order puts the rules before the screens, and
-the device contract before the network code.
+Each milestone is one parent issue with one sub-issue for each app. The order puts the rules before the screens.
 
 | # | Milestone | Result |
 |---|---|---|
 | 0 | Scaffold | Three repositories, a start screen in each app, green CI. Done on 10 November 2026. |
-| 1 | Core rules | Calendar dates, days left, freshness, shelf-life defaults, sort orders, quantity steps. Vectors for each. No screens. |
-| 2 | Item list | Storage on the device. List, create, edit, and delete items, with undo. Storage areas and categories. Empty, loading, and error states. |
-| 3 | Item detail | The signature component, the photo, the notes, the quantity control. |
-| 4 | Product lookup | Open Food Facts lookup with a cache on the device, the category rules as vectors, and the failure states. |
-| 5 | Session contract | The session payload schema in `spec/`, the parser in both cores, vectors for valid and invalid payloads. |
-| 6 | Session review and approval | The session list, the review screen, and approval as one transaction. The match rules for "put in" and "taken out" as vectors. |
-| 7 | Device connection | The MQTT connection to the fridge device, discovery on the local network, the permission texts, and the connection states. |
-| 8 | Release preparation | Settings, large text, screen readers, rotation, store listings, privacy details, signing. |
-
-Milestone 7 comes late on purpose. Milestones 5 and 6 work from payload files, so the session screens do not wait for
-the network code or for the fridge device.
+| 1 | Core rules | Products and batches, calendar dates, days left, freshness, the expiry estimate from the table of foods, the use-first order, and the change log. Vectors for each. `spec/` and `spec.ref`. No screens. |
+| 2 | Inventory on one phone | Storage on the phone. The use-first list as the first screen. Create and edit by hand. Used and thrown away, with undo. Storage areas. Empty, loading, and error states. |
+| 3 | Add with a barcode | The camera scanner, the product lookup with a cache on the phone, the entry of a printed or an estimated expiry date, and the failure states. |
+| 4 | Reminders | Local notifications before a batch expires, the explanation before the permission request, and the reminder settings. |
+| 5 | History | What was used and what was thrown away, add a product again, and the product photo. |
+| 6 | Release preparation | Large text, screen readers, rotation, store listings, privacy details, signing. |
 
 ## 7. CI today
 
@@ -158,16 +150,28 @@ the network code or for the fridge device.
 
 Each workflow runs for a push to `main`, for a pull request, and on request.
 
-## 8. Decisions to make
+## 8. Decisions
+
+### 8.1 Agreed on 10 November 2026
+
+| Decision | Record |
+|---|---|
+| The rewrite has no fridge device. One phone does each task. | ADR 0002 |
+| The app is complete on one phone: the barcode scanner and the reminders are early milestones. | Section 6 |
+| Stock is products and batches. | ADR 0003 |
+| An expiry date is printed or estimated, and the estimate comes from a table of foods. | ADR 0003 |
+| A batch ends as used or as thrown away, and the app keeps a history. | ADR 0003 |
+| The use-first list is the first screen. The app has no dashboard. | Section 2 |
+| The app keeps a log of each change from the start. | ADR 0003 |
+| Household sharing is deferred. The change log and the random identifiers stay, so that sharing can come later with no conversion of data. | [household-sharing.md](household-sharing.md) |
+
+### 8.2 Open
 
 | # | Decision | Recommendation |
 |---|---|---|
-| 1 | Is the scope in section 2 correct? | Agree the Keep, Change, and Remove columns before milestone 1. |
-| 2 | Shared test vectors (section 4.3)? | Yes. Record it as ADR 0002 and add `spec/` in milestone 1. |
-| 3 | The product name in the stores and on the screen | "CVKE Fridge", as for CVKE GPS. The old name FridgeFriend stays in the legacy document only. |
+| 1 | Shared test vectors (section 4.3) | Yes. Add `spec/` in milestone 1. |
+| 2 | The source of the table of foods for the expiry estimate | Examine the USDA FoodKeeper data in milestone 1: its licence, its contents, and its fit. Use the FridgeFriend table of eight categories only as the last fallback. |
+| 3 | The product name in the stores and on the screen | "CVKE Fridge", as for CVKE GPS. |
 | 4 | The product identity in `design/product.md` (teal accent, the shelf line motif) | Agree or change it before milestone 2, the first milestone with real screens. |
-| 5 | The words in `GLOSSARY.md`, mainly "detection" for a session item, and "approved" as the one word for a finished session | Agree in milestone 1. The glossary is a first draft. |
-| 6 | Storage: the same SQLite schema in both apps, or only the same export file? | The same logical schema, written one time in `spec/`. Each app uses its native storage library. |
-| 7 | Features that FridgeFriend does not have: expiry notifications and a camera barcode scanner | Add both after milestone 6. An inventory app without a reminder gives its answer only when the person opens it. |
-| 8 | The fridge device firmware: where is its code, and can the payload change? | The payload contract in `spec/` needs an owner on the device side before milestone 5. |
-| 9 | A progress report (`PROGRESS.html`) as in CVKE GPS | Start it with milestone 1. The scaffold has no product behaviour to report. |
+| 5 | The words in `GLOSSARY.md`, mainly "batch", "used", and "thrown away" | Agree in milestone 1. |
+| 6 | A progress report (`PROGRESS.html`) as in CVKE GPS | Start it with milestone 2, the first milestone with screens. |

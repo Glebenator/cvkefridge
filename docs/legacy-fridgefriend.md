@@ -1,8 +1,11 @@
 # FridgeFriend: what the old app does
 
 Date: 10 November 2026. Source: the FridgeFriend code (`basic_ff`, Expo 54, React Native 0.81) at its commit of
-25 March 2026. This document records behaviour. It is the reference for the overhaul, not a specification. The values
+25 March 2026. This document records behaviour. It is the reference for the rewrite, not a specification. The values
 here are the values in the old code. [The plan](plan.md) says which of them change.
+
+The rewrite has no fridge device ([ADR 0002](adr/0002-use-one-phone-and-no-fridge-device.md)). The sections on
+sessions are a record only.
 
 ## Screens
 

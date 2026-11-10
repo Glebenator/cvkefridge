@@ -1,7 +1,7 @@
 # Project rules: CVKE Fridge product
 
-CVKE Fridge is a food inventory for the fridge with a native Android app and a native iOS app. It has three
-repositories:
+CVKE Fridge is a food inventory for the fridge with a native Android app and a native iOS app. One phone does each
+task. The product has no fridge device. It has three repositories:
 
 - [cvkefridge](https://github.com/Glebenator/cvkefridge): this repository, the product. The plan, the decisions (ADRs),
   the glossary, the product identity, and the legacy reference. It has no app code.
@@ -14,8 +14,13 @@ repositories:
 - Build native apps for publication on Android and iOS.
 - Use ASD-STE100 Simplified Technical English for instructions and documentation.
 - Implement only the agreed feature scope. Do not add inactive controls or simulated production data.
-- `docs/plan.md` is a proposal until the owner agrees its open decisions. Do not treat a recommendation as agreed.
-- `docs/legacy-fridgefriend.md` records the old app. It is a reference, not a specification.
+- `docs/plan.md` has the agreed scope and the open decisions. Do not treat a recommendation or an open decision as
+  agreed.
+- The app is complete on one phone with no other hardware and no connection. Do not add a feature that needs a
+  device, an account, or a network connection to do its main task.
+- Household sharing is deferred. `docs/household-sharing.md` is a design note, not agreed scope. Do not build it.
+- `docs/legacy-fridgefriend.md` records the old app. It is a reference, not a specification. The rewrite does not copy
+  the old app.
 - Commit and push only when the user asks.
 
 ## Shared rules for both apps
@@ -27,14 +32,16 @@ repositories:
 - Change a product rule in both apps in the same piece of work. A feature is complete when both apps have it.
 - Record each decision that affects both apps, and each intended difference between the apps, in an ADR in `docs/adr/`.
 - Define each shared term in `GLOSSARY.md`. Use these terms in code, in the interface, and in issues.
+- Stock is products and batches (ADR 0003). Each change to the inventory is one record in the change log.
 - An expiry date is a calendar date. Calculate the days left from data. Do not write a fixed value.
-- Show a value that is missing as missing. Do not show a guess as a fact.
+- Show a value that is missing as missing. Show an estimated date as an estimate. Do not show a guess as a fact.
 - Explain each permission before the system asks for it. Provide a recovery action when access is off.
 - Support light and dark appearance, large text, screen readers, and rotation.
-- Keep the item list on the device. Do not add analytics, accounts, or cloud backup without an agreed product
-  requirement.
-- Use the network only for a feature that needs it. State in the interface what leaves the device.
-- Do not write item names, barcodes, or photos to logs or to crash reports.
+- Keep the inventory on the phone. Do not add analytics or accounts.
+- Use the network only for a feature that needs it. The product lookup is the only one. State in the interface what
+  leaves the phone.
+- Give each product, each batch, and each change a random identifier that is unique on all phones.
+- Do not write product names, barcodes, or photos to logs or to crash reports.
 
 ## Design
 
