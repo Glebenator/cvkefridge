@@ -1,0 +1,8 @@
+# Local tools, test output, raw captures, and credentials.
+/artifacts/
+__pycache__/
+.DS_Store
+Thumbs.db
+.idea/
+.env
+.env.*
