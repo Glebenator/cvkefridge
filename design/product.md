@@ -56,10 +56,10 @@ The only facts, figures, prices, policies, names and claims the interface may st
 
 | Fact | Value | Source |
 | --- | --- | --- |
-| Product name | CVKE Fridge (proposed) | Decision 3 in `docs/plan.md`, open |
+| Product name | CVKE Fridge (proposed) | An open decision in `docs/plan.md` |
 | Maker | cvke | House |
 | Product lookup service | Open Food Facts | FridgeFriend code |
-| Expiry estimates | None yet. The table of foods has no agreed source (decision 2 in `docs/plan.md`). | |
+| Expiry estimates | The days in `spec/foods.json` | USDA FSIS FoodKeeper Data, CC0 1.0 |
 
 **Sample data** used in demos and screenshots: none yet. It is labelled "Sample" wherever it appears.
 

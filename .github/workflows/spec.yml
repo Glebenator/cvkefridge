@@ -1,0 +1,25 @@
+# Checks the shared specification: each test vector must agree with the reference model, and the table of foods must
+# be valid. It uses the Python standard library only.
+name: Spec
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: spec-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check the test vectors and the table of foods
+        run: python3 spec/tools/vectors.py

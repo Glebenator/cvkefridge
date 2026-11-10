@@ -17,15 +17,17 @@ _Avoid_: Item, food type
 
 **Batch**:
 One purchase of a **product**: its **quantity**, its **storage area**, its **date added**, and its optional
-**expiry date**. One **product** can have more than one batch.
+**expiry date**. One **product** can have more than one batch. A batch is active while its quantity is above 0. After
+that it is ended.
 _Avoid_: Item, fridge item, entry, lot
 
 **Quantity**:
-How much there is of a **batch**: a number with an optional **unit**.
+How much there is of a **batch**: a number in the **unit** of its **product**. The apps keep it as whole thousandths.
 _Avoid_: Count, amount
 
 **Unit**:
-The measure of a **quantity**: pcs, g, kg, ml, l, pack, bottle, slice, or cup.
+The measure of the **quantities** of a **product**: pcs, g, kg, ml, l, pack, bottle, slice, cup, or none. All
+**batches** of a product have the same unit.
 
 **Category**:
 The food group of a **product**: produce, dairy, meat, condiment, beverage, bakery, leftovers, or other. It is for
@@ -33,8 +35,14 @@ groups and filters. It does not give the **expiry estimate**.
 _Avoid_: Type, tag
 
 **Storage area**:
-A place where a **batch** is kept. Fridge and Freezer are fixed. The person can create more.
+A place where a **batch** is kept. Fridge and Freezer are fixed. The person can create more. Each storage area has a
+**storage kind**.
 _Avoid_: Area, location, zone
+
+**Storage kind**:
+How a **storage area** keeps food: pantry, fridge, or freezer. The **expiry estimate** of a food is different for
+each kind.
+_Avoid_: Temperature, type
 
 **Date added**:
 The calendar date on which the **batch** came into the **inventory**.
@@ -56,7 +64,7 @@ An **expiry date** that the app suggested from the **expiry estimate**. The app 
 _Avoid_: Default date, guess
 
 **Expiry estimate**:
-The number of days that a food stays good in a **storage area**, from the table of foods. The app adds it to the
+The number of days that a food stays good in a **storage kind**, from the table of foods. The app adds it to the
 **date added** to get an **estimated date**.
 _Avoid_: Shelf life (the old rule with eight categories), lifetime
 
@@ -116,3 +124,11 @@ _Avoid_: Search, barcode fetch
 **Change**:
 One record of the change log: one thing that the person did to the **inventory**, and when.
 _Avoid_: Event, edit, operation
+
+**Replay**:
+The calculation of the **inventory** from all **changes**, in the order of their time.
+_Avoid_: Rebuild, sync
+
+**Undo**:
+A **change** that names an earlier change. The **replay** then skips the earlier change.
+_Avoid_: Revert, rollback

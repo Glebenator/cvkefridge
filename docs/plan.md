@@ -1,6 +1,6 @@
 # Plan: two native apps for CVKE Fridge
 
-Date: 10 November 2026, third version. The owner agreed the scope in section 2 and the decisions in section 8.1 on
+Date: 10 November 2026, fourth version. The owner agreed the scope in section 2 and the decisions in section 8.1 on
 10 November 2026. Section 8.2 lists the decisions that are open.
 
 CVKE Fridge is the overhaul of FridgeFriend, a React Native app. The overhaul is a full rewrite as a native Android
@@ -43,16 +43,15 @@ CVKE GPS.
 
 | Repository | Contents | CI |
 |---|---|---|
-| [cvkefridge](https://github.com/Glebenator/cvkefridge) | The product: this plan, the glossary, the decisions, the product identity, and the legacy reference. No app code. | None now. Section 4.3 recommends a check of the test vectors. |
-| [cvkefridge-android](https://github.com/Glebenator/cvkefridge-android) | The Android app: Kotlin, Jetpack Compose, Material 3. Application ID `com.cvke.fridge`. | `android.yml`: core tests, debug and release builds, lint, and the device test on an emulator. |
-| [cvkefridge-ios](https://github.com/Glebenator/cvkefridge-ios) | The iOS app: Swift, SwiftUI, XcodeGen. | `ios.yml`: core tests, the simulator build, and the UI test in light and dark appearance. |
+| [cvkefridge](https://github.com/Glebenator/cvkefridge) | The product: this plan, the glossary, the decisions, the product identity, the shared specification in `spec/`, and the legacy reference. No app code. | `spec.yml`: the test vectors agree with the reference model. |
+| [cvkefridge-android](https://github.com/Glebenator/cvkefridge-android) | The Android app: Kotlin, Jetpack Compose, Material 3. Application ID `com.cvke.fridge`. | `android.yml`: the copy of `spec/`, core tests with the vectors, debug and release builds, lint, and the device test on an emulator. |
+| [cvkefridge-ios](https://github.com/Glebenator/cvkefridge-ios) | The iOS app: Swift, SwiftUI, XcodeGen. | `ios.yml`: the copy of `spec/`, core tests with the vectors, the simulator build, and the UI test in light and dark appearance. |
 
 All repositories are public. GitHub Actions is then free, and that includes the macOS runners.
 
 ## 4. How the two apps stay the same
 
-The two apps share no code. Five mechanisms keep them the same product. Mechanisms 4.1 and 4.2 and the parent issue
-of 4.4 exist now. Mechanism 4.3 is open decision 1 in section 8.2.
+The two apps share no code. Five mechanisms keep them the same product. Milestone 1 adds mechanism 4.3.
 
 ### 4.1 One set of product documents
 
@@ -83,18 +82,23 @@ Rules for the two modules:
 
 Both modules have one file now, `AppVersion`, with the same two test cases. It proves the structure and the CI.
 
-### 4.3 Shared test vectors (recommended)
+### 4.3 Shared test vectors
 
 The same file names do not prove the same behaviour. Test vectors do.
 
-- This repository gets a `spec/` folder. It holds JSON files of inputs and expected outputs, for example
+- This repository has a `spec/` folder. It holds JSON files of inputs and expected outputs, for example
   `spec/vectors/freshness.json`: a date for today, an expiry date, the expected days left, and the expected freshness.
-- `spec/` also holds the data that both apps read: the table of foods for the expiry estimate.
-- Each app has a file `spec.ref` that names one commit of this repository. The CI of the app gets `spec/` at that
-  commit and runs each vector through its core module.
-- A rule change is then one change to a vector here, and one change of `spec.ref` in each app. An app that does not
-  follow the rule has a red build.
-- This repository gets a small workflow that checks that each vector file is valid JSON and agrees with its schema.
+- `spec/` also holds the rules in words (`spec/rules.md`) and the data that both apps read: the table of foods for the
+  expiry estimate.
+- Each app has an exact copy of `spec/`, and a file `spec.ref` that names the commit of this repository from which
+  the copy comes. The core tests run each vector through the core module. The CI of the app fails when the copy is
+  different from this repository at that commit.
+- A rule change is then one change here, and one change of the copy and of `spec.ref` in each app. An app that does
+  not follow the rule has a red build.
+- A reference model in `spec/tools/vectors.py` calculates the expected results. The workflow `spec.yml` checks each
+  vector file against it.
+
+[ADR 0004](adr/0004-prove-the-same-behaviour-with-shared-test-vectors.md) records this mechanism.
 
 ### 4.4 One feature, three issues
 
@@ -162,16 +166,16 @@ Each workflow runs for a push to `main`, for a pull request, and on request.
 | An expiry date is printed or estimated, and the estimate comes from a table of foods. | ADR 0003 |
 | A batch ends as used or as thrown away, and the app keeps a history. | ADR 0003 |
 | The use-first list is the first screen. The app has no dashboard. | Section 2 |
-| The app keeps a log of each change from the start. | ADR 0003 |
+| The app keeps a log of each change from the start. | ADR 0003, ADR 0005 |
+| Shared test vectors prove the same behaviour. Each app has a copy of `spec/`. | ADR 0004 |
+| The table of foods is the USDA FSIS FoodKeeper data (CC0 1.0). | ADR 0004 |
 | Household sharing is deferred. The change log and the random identifiers stay, so that sharing can come later with no conversion of data. | [household-sharing.md](household-sharing.md) |
 
 ### 8.2 Open
 
 | # | Decision | Recommendation |
 |---|---|---|
-| 1 | Shared test vectors (section 4.3) | Yes. Add `spec/` in milestone 1. |
-| 2 | The source of the table of foods for the expiry estimate | Examine the USDA FoodKeeper data in milestone 1: its licence, its contents, and its fit. Use the FridgeFriend table of eight categories only as the last fallback. |
-| 3 | The product name in the stores and on the screen | "CVKE Fridge", as for CVKE GPS. |
-| 4 | The product identity in `design/product.md` (teal accent, the shelf line motif) | Agree or change it before milestone 2, the first milestone with real screens. |
-| 5 | The words in `GLOSSARY.md`, mainly "batch", "used", and "thrown away" | Agree in milestone 1. |
-| 6 | A progress report (`PROGRESS.html`) as in CVKE GPS | Start it with milestone 2, the first milestone with screens. |
+| 1 | The product name in the stores and on the screen | "CVKE Fridge", as for CVKE GPS. |
+| 2 | The product identity in `design/product.md` (teal accent, the shelf line motif) | Agree or change it before milestone 2, the first milestone with real screens. |
+| 3 | The words in `GLOSSARY.md`, mainly "batch", "used", and "thrown away" | Agree in milestone 1. |
+| 4 | A progress report (`PROGRESS.html`) as in CVKE GPS | Start it with milestone 2, the first milestone with screens. |

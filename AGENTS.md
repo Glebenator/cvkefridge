@@ -4,7 +4,7 @@ CVKE Fridge is a food inventory for the fridge with a native Android app and a n
 task. The product has no fridge device. It has three repositories:
 
 - [cvkefridge](https://github.com/Glebenator/cvkefridge): this repository, the product. The plan, the decisions (ADRs),
-  the glossary, the product identity, and the legacy reference. It has no app code.
+  the glossary, the product identity, the shared specification (`spec/`), and the legacy reference. It has no app code.
 - [cvkefridge-android](https://github.com/Glebenator/cvkefridge-android): the Android app. Its `AGENTS.md` has the
   Android rules.
 - [cvkefridge-ios](https://github.com/Glebenator/cvkefridge-ios): the iOS app. Its `AGENTS.md` has the iOS rules.
@@ -32,7 +32,11 @@ task. The product has no fridge device. It has three repositories:
 - Change a product rule in both apps in the same piece of work. A feature is complete when both apps have it.
 - Record each decision that affects both apps, and each intended difference between the apps, in an ADR in `docs/adr/`.
 - Define each shared term in `GLOSSARY.md`. Use these terms in code, in the interface, and in issues.
-- Stock is products and batches (ADR 0003). Each change to the inventory is one record in the change log.
+- Stock is products and batches (ADR 0003). Each change to the inventory is one record in the change log, and the
+  inventory is the replay of the log (ADR 0005).
+- `spec/` is the reference for the core rules (ADR 0004). To change a rule, change `spec/rules.md` and the vectors
+  first, and run `python spec/tools/vectors.py --write`. Do not write an expected result by hand.
+- Do not edit the copy of `spec/` in an app repository. Update it with `python scripts/update-spec.py <commit>`.
 - An expiry date is a calendar date. Calculate the days left from data. Do not write a fixed value.
 - Show a value that is missing as missing. Show an estimated date as an estimate. Do not show a guess as a fact.
 - Explain each permission before the system asks for it. Provide a recovery action when access is off.

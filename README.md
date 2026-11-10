@@ -16,6 +16,7 @@ Each app has a start screen only. The CI of each app builds it and runs its test
 
 [![Android](https://github.com/Glebenator/cvkefridge-android/actions/workflows/android.yml/badge.svg)](https://github.com/Glebenator/cvkefridge-android/actions/workflows/android.yml)
 [![iOS](https://github.com/Glebenator/cvkefridge-ios/actions/workflows/ios.yml/badge.svg)](https://github.com/Glebenator/cvkefridge-ios/actions/workflows/ios.yml)
+[![Spec](https://github.com/Glebenator/cvkefridge/actions/workflows/spec.yml/badge.svg)](https://github.com/Glebenator/cvkefridge/actions/workflows/spec.yml)
 
 ## Documents
 
@@ -23,8 +24,9 @@ Each app has a start screen only. The CI of each app builds it and runs its test
 - [docs/household-sharing.md](docs/household-sharing.md): a design note for a deferred feature.
 - [docs/legacy-fridgefriend.md](docs/legacy-fridgefriend.md): what the old app does, with its rules and values. The
   rewrite does not copy it.
+- [spec/](spec/): the core rules, the test vectors that both apps run, and the table of foods.
 - [GLOSSARY.md](GLOSSARY.md): the shared terms. It is a draft.
-- [docs/adr/](docs/adr/): the decisions: three repositories (0001), no fridge device (0002), and products and batches
-  (0003).
+- [docs/adr/](docs/adr/): the decisions: three repositories (0001), no fridge device (0002), products and batches
+  (0003), shared test vectors (0004), and the replay of the change log (0005).
 - [design/product.md](design/product.md): the product identity. It is a proposal.
 - [AGENTS.md](AGENTS.md): the rules for this repository and the shared rules for both apps.
