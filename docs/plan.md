@@ -136,7 +136,7 @@ Each milestone is one parent issue with one sub-issue for each app. The order pu
 | # | Milestone | Result |
 |---|---|---|
 | 0 | Scaffold | Three repositories, a start screen in each app, green CI. Done on 10 November 2026. |
-| 1 | Core rules | Products and batches, calendar dates, days left, freshness, the expiry estimate from the table of foods, the use-first order, and the change log. Vectors for each. `spec/` and `spec.ref`. No screens. |
+| 1 | Core rules | Products and batches, calendar dates, days left, freshness, the expiry estimate from the table of foods, the use-first order, and the change log. Vectors for each. `spec/` and `spec.ref`. No screens. Done on 10 November 2026: both core modules pass the 165 vector cases at the same commit of `spec/`. |
 | 2 | Inventory on one phone | Storage on the phone. The use-first list as the first screen. Create and edit by hand. Used and thrown away, with undo. Storage areas. Empty, loading, and error states. |
 | 3 | Add with a barcode | The camera scanner, the product lookup with a cache on the phone, the entry of a printed or an estimated expiry date, and the failure states. |
 | 4 | Reminders | Local notifications before a batch expires, the explanation before the permission request, and the reminder settings. |
@@ -147,9 +147,10 @@ Each milestone is one parent issue with one sub-issue for each app. The order pu
 
 | Workflow | Job | What it proves |
 |---|---|---|
-| `android.yml` | `build` | `:core` tests pass. The debug app, the device tests, the release APK, and the release bundle build. Lint has no warnings. |
+| `spec.yml` | `check` | Each test vector agrees with the reference model. The table of foods is valid. |
+| `android.yml` | `build` | The copy of `spec/` is exact. `:core` tests pass with each vector. The debug app, the device tests, the release APK, and the release bundle build. Lint has no warnings. |
 | `android.yml` | `device` | The start screen test passes on an Android 15 emulator. |
-| `ios.yml` | `core` | `CVKEFridgeCore` tests pass. |
+| `ios.yml` | `core` | The copy of `spec/` is exact. `CVKEFridgeCore` tests pass with each vector. |
 | `ios.yml` | `app` | The app builds for the simulator. The start screen test passes in light and dark appearance. The screenshots are an artifact. |
 
 Each workflow runs for a push to `main`, for a pull request, and on request.

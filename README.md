@@ -12,7 +12,8 @@ This repository holds the product: the plan, the decisions, the glossary, and th
 
 ## Status
 
-Each app has a start screen only. The CI of each app builds it and runs its tests.
+Milestone 1 is complete. Each app has a start screen and the core rules, with no other screens. The CI of each app
+builds it and runs the shared test vectors in `spec/` through its core module.
 
 [![Android](https://github.com/Glebenator/cvkefridge-android/actions/workflows/android.yml/badge.svg)](https://github.com/Glebenator/cvkefridge-android/actions/workflows/android.yml)
 [![iOS](https://github.com/Glebenator/cvkefridge-ios/actions/workflows/ios.yml/badge.svg)](https://github.com/Glebenator/cvkefridge-ios/actions/workflows/ios.yml)
