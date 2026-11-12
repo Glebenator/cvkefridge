@@ -15,7 +15,7 @@ hardware that one person owns has no users in a store.
 - **The app reminds the person.** FridgeFriend had no notifications. The answer of the app was visible only when the
   person opened it.
 - **The use-first list is the first screen.** We removed the Home screen with its greeting, its totals, and its list of
-  sessions.
+  sessions. ADR 0006 replaces this decision: Home is the first screen again, with the totals and the batches that need attention.
 
 ## Consequences
 

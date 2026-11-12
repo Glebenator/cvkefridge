@@ -2,7 +2,7 @@
 
 The shared terms of the Android app and the iOS app. This is the second draft, after the decisions of 10 November 2026
 in [the plan](docs/plan.md). The owner agrees the words in milestone 1. Household sharing is deferred, so its terms
-are not here.
+are not here. The terms Home, My Fridge, and Food are from 11 November 2026 (ADR 0006).
 
 ## Inventory
 
@@ -79,8 +79,23 @@ it each time. The app does not store it.
 _Avoid_: Status, condition
 
 **Use-first list**:
-The **batches** of the **inventory**, with the fewest **days left** first. It is the first screen of the app.
-_Avoid_: Home, dashboard
+The **batches** of the **inventory**, with the fewest **days left** first. **Home** shows the start of it.
+_Avoid_: Dashboard
+
+**Home**:
+The first screen of the app. It shows the totals of the **inventory**, and the first expired and expiring
+**batches**.
+_Avoid_: Dashboard, start screen
+
+**My Fridge**:
+The second screen of the app. It has one card for each **food** in each **storage area**. The name is the name of the
+screen in FridgeFriend.
+_Avoid_: All food, list
+
+**Food**:
+In the interface, a **product** with an active **batch**. The number of foods counts products, not batches. The text
+of **Home** says "items", because it is the text of FridgeFriend (ADR 0006).
+_Avoid_: Item, in code and in documents
 
 **Reminder**:
 A notification that the phone shows before a **batch** expires. The phone calculates it from its own copy of the

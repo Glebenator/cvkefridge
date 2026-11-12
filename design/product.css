@@ -1,13 +1,13 @@
-/* CVKE Fridge product identity, generated on 2026-11-10. Load after tokens.css. Do not edit by hand; rerun:
-   node my-design-language/scripts/product-css.mjs --name "CVKE Fridge" --accent "#0e7c86" --ground "#e9f1f0" --ground "#12343a" --frame "neutral" --out "design/product.css" --json "design/product.json" */
+/* CVKE Fridge product identity, generated on 2026-11-11. Load after tokens.css. Do not edit by hand; rerun:
+   node my-design-language/scripts/product-css.mjs --name "CVKE Fridge" --accent "#53d181" --ground "#e9f1f0" --ground "#12343a" --frame "neutral" --out "design/product.css" --json "design/product.json" */
 
 :root, [data-theme="light"] {
-  --accent: #0e7c86;
-  --accent-hover: #006972;
+  --accent: #008343;
+  --accent-hover: #006f38;
   --accent-ink: #ffffff;
-  --accent-subtle: #e0f9fc;
-  --gradient-end: #c68e67;
-  --wash-end: #ddedef;
+  --accent-subtle: #e4fdea;
+  --gradient-end: #c6904b;
+  --wash-end: #dbf0e0;
   --ground-1: #e9f1f0;
   --on-ground-1: #161a1f;
   --on-ground-1-muted: #656b6f;
@@ -18,12 +18,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --accent: #52aeb9;
-    --accent-hover: #66c2cc;
-    --accent-ink: #001518;
-    --accent-subtle: #0e3135;
-    --gradient-end: #d69d76;
-    --wash-end: #1c2c2e;
+    --accent: #53d181;
+    --accent-hover: #69e594;
+    --accent-ink: #001707;
+    --accent-subtle: #033519;
+    --gradient-end: #dba75e;
+    --wash-end: #192f1f;
     --ground-1: #1f2525;
     --on-ground-1: #e9edf1;
     --on-ground-1-muted: #898e90;
@@ -34,12 +34,12 @@
 }
 
 [data-theme="dark"] {
-  --accent: #52aeb9;
-  --accent-hover: #66c2cc;
-  --accent-ink: #001518;
-  --accent-subtle: #0e3135;
-  --gradient-end: #d69d76;
-  --wash-end: #1c2c2e;
+  --accent: #53d181;
+  --accent-hover: #69e594;
+  --accent-ink: #001707;
+  --accent-subtle: #033519;
+  --gradient-end: #dba75e;
+  --wash-end: #192f1f;
   --ground-1: #1f2525;
   --on-ground-1: #e9edf1;
   --on-ground-1-muted: #898e90;

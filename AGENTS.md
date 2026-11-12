@@ -20,7 +20,7 @@ task. The product has no fridge device. It has three repositories:
   device, an account, or a network connection to do its main task.
 - Household sharing is deferred. `docs/household-sharing.md` is a design note, not agreed scope. Do not build it.
 - `docs/legacy-fridgefriend.md` records the old app. It is a reference, not a specification. The rewrite does not copy
-  the old app.
+  the old app. The exception is the look of Home and My Fridge, which the owner said to copy (ADR 0006).
 - Commit and push only when the user asks.
 
 ## Shared rules for both apps

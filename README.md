@@ -12,7 +12,8 @@ This repository holds the product: the plan, the decisions, the glossary, and th
 
 ## Status
 
-Milestone 1 is complete. Each app has a start screen and the core rules, with no other screens. The CI of each app
+Milestone 1 is complete. Milestone 2 is in work: the Android app has the change log on the phone and its first two
+screens, Home and My Fridge. The iOS app has a start screen and the core rules. The CI of each app
 builds it and runs the shared test vectors in `spec/` through its core module.
 
 [![Android](https://github.com/Glebenator/cvkefridge-android/actions/workflows/android.yml/badge.svg)](https://github.com/Glebenator/cvkefridge-android/actions/workflows/android.yml)
@@ -28,6 +29,6 @@ builds it and runs the shared test vectors in `spec/` through its core module.
 - [spec/](spec/): the core rules, the test vectors that both apps run, and the table of foods.
 - [GLOSSARY.md](GLOSSARY.md): the shared terms. It is a draft.
 - [docs/adr/](docs/adr/): the decisions: three repositories (0001), no fridge device (0002), products and batches
-  (0003), shared test vectors (0004), and the replay of the change log (0005).
+  (0003), shared test vectors (0004), the replay of the change log (0005), and Home and My Fridge (0006).
 - [design/product.md](design/product.md): the product identity. It is a proposal.
 - [AGENTS.md](AGENTS.md): the rules for this repository and the shared rules for both apps.

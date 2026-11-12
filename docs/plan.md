@@ -1,7 +1,7 @@
 # Plan: two native apps for CVKE Fridge
 
-Date: 10 November 2026, fourth version. The owner agreed the scope in section 2 and the decisions in section 8.1 on
-10 November 2026. Section 8.2 lists the decisions that are open.
+Date: 11 November 2026, fifth version. The owner agreed the scope in section 2 and the decisions in section 8.1 on
+10 November 2026, and the two screens of ADR 0006 on 11 November 2026. Section 8.2 lists the decisions that are open.
 
 CVKE Fridge is the overhaul of FridgeFriend, a React Native app. The overhaul is a full rewrite as a native Android
 app and a native iOS app. [legacy-fridgefriend.md](legacy-fridgefriend.md) records what FridgeFriend does today.
@@ -27,7 +27,7 @@ for later.
 |---|---|---|---|
 | Quantity, unit, category, and storage area | One item with one expiry date becomes a product with batches. Each batch has its own quantity, date added, and expiry date. | A barcode scanner with the phone camera | The fridge device, sessions, detections, approval, and MQTT |
 | Freshness from the days left, calculated each time | An expiry date is printed or estimated. The app shows an estimate as an estimate. | Reminders before food expires | The seven card styles |
-| A suggested expiry date when the person adds food | The suggestion comes from a table of foods, not from eight categories. | Used and thrown away as the two ends of a batch, with a history | The Home screen with a greeting and totals. The use-first list is the first screen. |
+| A suggested expiry date when the person adds food | The suggestion comes from a table of foods, not from eight categories. | Used and thrown away as the two ends of a batch, with a history | The list of sessions of the old Home screen. Home is the first screen, with the greeting, the totals, and the batches that need attention (ADR 0006). |
 | Storage areas: Fridge, Freezer, and the areas that the person creates | An expiry date is a calendar date with no time zone. Today is the date in the device time zone. | A log of each change to the inventory | Sample items in the released app |
 | Product lookup from a barcode with Open Food Facts | A failed product lookup is not kept as a result. The category rules do not match parts of words. | | The screen and the controls that nothing uses |
 | The inventory on the phone, with no account | | | |
@@ -137,7 +137,7 @@ Each milestone is one parent issue with one sub-issue for each app. The order pu
 |---|---|---|
 | 0 | Scaffold | Three repositories, a start screen in each app, green CI. Done on 10 November 2026. |
 | 1 | Core rules | Products and batches, calendar dates, days left, freshness, the expiry estimate from the table of foods, the use-first order, and the change log. Vectors for each. `spec/` and `spec.ref`. No screens. Done on 10 November 2026: both core modules pass the 165 vector cases at the same commit of `spec/`. |
-| 2 | Inventory on one phone | Storage on the phone. The use-first list as the first screen. Create and edit by hand. Used and thrown away, with undo. Storage areas. Empty, loading, and error states. |
+| 2 | Inventory on one phone | Storage on the phone. Home as the first screen, and My Fridge as the second screen. Create and edit by hand. Used and thrown away, with undo. Storage areas. Empty, loading, and error states. Started on 11 November 2026: the Android app has the change log on the phone, Home, and My Fridge. |
 | 3 | Add with a barcode | The camera scanner, the product lookup with a cache on the phone, the entry of a printed or an estimated expiry date, and the failure states. |
 | 4 | Reminders | Local notifications before a batch expires, the explanation before the permission request, and the reminder settings. |
 | 5 | History | What was used and what was thrown away, add a product again, and the product photo. |
@@ -166,7 +166,7 @@ Each workflow runs for a push to `main`, for a pull request, and on request.
 | Stock is products and batches. | ADR 0003 |
 | An expiry date is printed or estimated, and the estimate comes from a table of foods. | ADR 0003 |
 | A batch ends as used or as thrown away, and the app keeps a history. | ADR 0003 |
-| The use-first list is the first screen. The app has no dashboard. | Section 2 |
+| Home is the first screen and My Fridge is the second screen. The two screens have the contents of FridgeFriend. The Android app shows them with Material 3 components and a colour scheme from the green of FridgeFriend. Agreed on 11 November 2026. This replaces the decision that the use-first list is the first screen. | [ADR 0006](adr/0006-put-home-first-and-list-all-food-on-a-second-screen.md) |
 | The app keeps a log of each change from the start. | ADR 0003, ADR 0005 |
 | Shared test vectors prove the same behaviour. Each app has a copy of `spec/`. | ADR 0004 |
 | The table of foods is the USDA FSIS FoodKeeper data (CC0 1.0). | ADR 0004 |
@@ -177,6 +177,6 @@ Each workflow runs for a push to `main`, for a pull request, and on request.
 | # | Decision | Recommendation |
 |---|---|---|
 | 1 | The product name in the stores and on the screen | "CVKE Fridge", as for CVKE GPS. |
-| 2 | The product identity in `design/product.md` (teal accent, the shelf line motif) | Agree or change it before milestone 2, the first milestone with real screens. |
+| 2 | The product identity in `design/product.md` (teal accent, the shelf line motif) | On 11 November 2026 the owner saw Home and All food with this identity and did not want them. Home and My Fridge now copy the look of FridgeFriend (ADR 0006). The identity is not used. Decide if it stays for other surfaces. |
 | 3 | The words in `GLOSSARY.md`, mainly "batch", "used", and "thrown away" | Agree in milestone 1. |
 | 4 | A progress report (`PROGRESS.html`) as in CVKE GPS | Start it with milestone 2, the first milestone with screens. |
