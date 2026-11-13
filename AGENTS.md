@@ -59,6 +59,20 @@ task. The product has no fridge device. It has three repositories:
   repository.
 - The parent issue closes when both sub-issues are closed and both CI runs are green.
 
+## Progress report
+
+- `PROGRESS.html` in this repository is the progress report for both apps. Keep it current after each completed
+  milestone, feature, fix, or change to the test results, in either app.
+- Do not mark planned or untested work as complete. A milestone is complete only when both apps have it.
+- Record the update date, the commit of each app, the completed scope, the test results, the known limits, and the
+  work that is not done.
+- Add a dated entry to the change history for each step of progress. Keep the earlier entries.
+- Use real screenshots of the apps. Put the selected images in `docs/progress/images/` with a date at the start of the
+  name, at not more than 540 pixels wide. Keep raw captures out of Git.
+- Give each image a caption with its date, the device, the app commit, and the state. Identify sample data.
+- Keep the report usable with no network connection and no build step. Use relative links to local files.
+- Check the layout and the local links after each change to the report. Check a narrow screen after a layout change.
+
 ## Agent skills
 
 ### Issue tracker

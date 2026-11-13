@@ -52,7 +52,7 @@ _Avoid_: Timestamp, created date
 
 **Expiry date**:
 The calendar date after which the **batch** is not good to eat. It has no time of day and no time zone. It is a
-**printed date** or an **estimated date**.
+**printed date**, an **estimated date**, or a **chosen date**.
 _Avoid_: Expiration, best before, use by, expires on
 
 **Printed date**:
@@ -62,6 +62,11 @@ _Avoid_: Real date, exact date
 **Estimated date**:
 An **expiry date** that the app suggested from the **expiry estimate**. The app shows it as an estimate.
 _Avoid_: Default date, guess
+
+**Chosen date**:
+A later **expiry date** that the person selected because the food is still good after its **printed date** or its
+**estimated date**. It is not from the package and not from the table of foods. The app shows it as "Your date".
+_Avoid_: Extended date, new date, override
 
 **Expiry estimate**:
 The number of days that a food stays good in a **storage kind**, from the table of foods. The app adds it to the

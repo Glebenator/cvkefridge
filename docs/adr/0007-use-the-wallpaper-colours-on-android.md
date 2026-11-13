@@ -19,7 +19,7 @@ agree with the other apps on the phone. The owner said to use the wallpaper colo
 - **The brand parts do not follow the wallpaper.** The signature gradient, the slice, and the app icon keep their
   colours.
 - **The app has no setting for this.** A person changes the colours with the wallpaper and the colour settings of the
-  phone.
+  phone. ADR 0008 replaced this decision on 13 November 2026: Settings has a switch for the wallpaper colours.
 
 This replaces one sentence of ADR 0006: "The app does not use the wallpaper colours of the phone, because the green is
 a part of the look." The other decisions of ADR 0006 stay.

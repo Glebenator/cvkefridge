@@ -1,7 +1,9 @@
 # Plan: two native apps for CVKE Fridge
 
-Date: 11 November 2026, fifth version. The owner agreed the scope in section 2 and the decisions in section 8.1 on
-10 November 2026, and the two screens of ADR 0006 on 11 November 2026. Section 8.2 lists the decisions that are open.
+Date: 13 November 2026, sixth version. The owner agreed the scope in section 2 and the decisions in section 8.1 on
+10 November 2026, the two screens of ADR 0006 on 11 November 2026, the wallpaper colours of ADR 0007 on 12 November
+2026, and the progress report, ADR 0008, and ADR 0009 on 13 November 2026. Section 8.2 lists the decisions that are open.
+[PROGRESS.html](../PROGRESS.html) records the progress of each milestone, with screenshots and test results.
 
 CVKE Fridge is the overhaul of FridgeFriend, a React Native app. The overhaul is a full rewrite as a native Android
 app and a native iOS app. [legacy-fridgefriend.md](legacy-fridgefriend.md) records what FridgeFriend does today.
@@ -44,7 +46,7 @@ CVKE GPS.
 | Repository | Contents | CI |
 |---|---|---|
 | [cvkefridge](https://github.com/Glebenator/cvkefridge) | The product: this plan, the glossary, the decisions, the product identity, the shared specification in `spec/`, and the legacy reference. No app code. | `spec.yml`: the test vectors agree with the reference model. |
-| [cvkefridge-android](https://github.com/Glebenator/cvkefridge-android) | The Android app: Kotlin, Jetpack Compose, Material 3. Application ID `com.cvke.fridge`. | `android.yml`: the copy of `spec/`, core tests with the vectors, debug and release builds, lint, and the device test on an emulator. |
+| [cvkefridge-android](https://github.com/Glebenator/cvkefridge-android) | The Android app: Kotlin, Jetpack Compose, Material 3. Application ID `com.cvke.fridge`. | `android.yml`: the copy of `spec/`, core tests with the vectors, debug and release builds, lint, the unit tests of the app, and the device tests on an emulator. |
 | [cvkefridge-ios](https://github.com/Glebenator/cvkefridge-ios) | The iOS app: Swift, SwiftUI, XcodeGen. | `ios.yml`: the copy of `spec/`, core tests with the vectors, the simulator build, and the UI test in light and dark appearance. |
 
 All repositories are public. GitHub Actions is then free, and that includes the macOS runners.
@@ -137,19 +139,45 @@ Each milestone is one parent issue with one sub-issue for each app. The order pu
 |---|---|---|
 | 0 | Scaffold | Three repositories, a start screen in each app, green CI. Done on 10 November 2026. |
 | 1 | Core rules | Products and batches, calendar dates, days left, freshness, the expiry estimate from the table of foods, the use-first order, and the change log. Vectors for each. `spec/` and `spec.ref`. No screens. Done on 10 November 2026: both core modules pass the 165 vector cases at the same commit of `spec/`. |
-| 2 | Inventory on one phone | Storage on the phone. Home as the first screen, and My Fridge as the second screen. Create and edit by hand. Used and thrown away, with undo. Storage areas. Empty, loading, and error states. Started on 11 November 2026: the Android app has the change log on the phone, Home, and My Fridge. |
-| 3 | Add with a barcode | The camera scanner, the product lookup with a cache on the phone, the entry of a printed or an estimated expiry date, and the failure states. |
-| 4 | Reminders | Local notifications before a batch expires, the explanation before the permission request, and the reminder settings. |
-| 5 | History | What was used and what was thrown away, add a product again, and the product photo. |
-| 6 | Release preparation | Large text, screen readers, rotation, store listings, privacy details, signing. |
+| 2 | Inventory on one phone | Storage on the phone. Home as the first screen, and My Fridge as the second screen. Create and edit by hand. Used and thrown away, with undo. Storage areas. Empty, loading, and error states. Android: done on 12 November 2026. iOS: not started. |
+| 3 | Add with a barcode | The camera scanner, the product lookup with a cache on the phone, the entry of a printed or an estimated expiry date, and the failure states. Android: done on 12 November 2026. iOS: not started. |
+| 4 | Reminders | Local notifications before a batch expires, the explanation before the permission request, and the reminder settings. Android: done on 12 November 2026. iOS: not started. |
+| 5 | History | What was used and what was thrown away, add a product again, and the product photo. Android: done on 12 November 2026. iOS: not started. |
+| 6 | Release preparation | Large text, screen readers, rotation, store listings, privacy details, signing. Not started. |
+
+A milestone is complete when both apps have it (section 4.4). On 13 November 2026, milestones 0 and 1 are complete.
+Milestones 2 to 5 are complete on Android only:
+
+- The Android work is on `main` of `cvkefridge-android` at commit `dce5b94`, and its CI run is green.
+- The iOS app has the core rules of milestone 1 and the start screen. It has no screens of milestones 2 to 5.
+- Milestones 2 to 5 have no parent issue in this repository and no sub-issue in the app repositories. Section 4.4
+  says that each milestone has them.
+
+### 6.1 Rules that are only in the Android app
+
+Milestones 3 to 5 added rules that are not in `spec/`. They are in plain Kotlin in the `app` module, with unit tests.
+Before the iOS app builds these milestones, move them into `spec/rules.md` and the vectors (section 4.5, step 1), and
+then into `:core` and `CVKEFridgeCore`.
+
+| Milestone | Rule | Android source |
+|---|---|---|
+| 3 | The one form of a barcode and its check digit | `lookup/Barcodes.kt` |
+| 3 | The name, the category, the food of the table of foods, and the package quantity of a looked-up product | `lookup/ProductMapping.kt` |
+| 3 | One barcode for one product | `inventory/InventoryAction.kt` |
+| 4 | Which batches are in the reminder of a date, and their order | `reminder/ReminderRules.kt` |
+| 4 | The lead times, their default, and the dates of the schedule | `reminder/ReminderSchedule.kt`, `reminder/ReminderSettings.kt` |
+| 4 | The text of the notification | `reminder/ReminderText.kt` |
+| 5 | The order, the day headers, the filter, the periods, the summary, and the most thrown-away foods of the history | `history/HistoryContent.kt` |
+| 5 | The values of "Add again" and the recent foods | `inventory/AddAgain.kt` |
+| 5 | The product photo. The `Product` of the core has no photo, and a photo is not in the change log. | `photo/PhotoFiles.kt` |
 
 ## 7. CI today
 
 | Workflow | Job | What it proves |
 |---|---|---|
 | `spec.yml` | `check` | Each test vector agrees with the reference model. The table of foods is valid. |
-| `android.yml` | `build` | The copy of `spec/` is exact. `:core` tests pass with each vector. The debug app, the device tests, the release APK, and the release bundle build. Lint has no warnings. |
-| `android.yml` | `device` | The start screen test passes on an Android 15 emulator. |
+| `android.yml` | `build` | The copy of `spec/` is exact. `:core` tests pass with each vector. The unit tests of the app pass. The debug app, the device tests, the release APK, and the release bundle build. Lint has no warnings. |
+| `android.yml` | `device` | The device tests pass on an Android 15 emulator: the screens of the inventory, the changes to the inventory, the scanner and the product lookup, the barcode reader, the reminder, and History. |
 | `ios.yml` | `core` | The copy of `spec/` is exact. `CVKEFridgeCore` tests pass with each vector. |
 | `ios.yml` | `app` | The app builds for the simulator. The start screen test passes in light and dark appearance. The screenshots are an artifact. |
 
@@ -167,6 +195,10 @@ Each workflow runs for a push to `main`, for a pull request, and on request.
 | An expiry date is printed or estimated, and the estimate comes from a table of foods. | ADR 0003 |
 | A batch ends as used or as thrown away, and the app keeps a history. | ADR 0003 |
 | Home is the first screen and My Fridge is the second screen. The two screens have the contents of FridgeFriend. The Android app shows them with Material 3 components and a colour scheme from the green of FridgeFriend. Agreed on 11 November 2026. This replaces the decision that the use-first list is the first screen. | [ADR 0006](adr/0006-put-home-first-and-list-all-food-on-a-second-screen.md) |
+| On Android 12 and later, the Android app takes its colour scheme from the wallpaper. The colours of fresh, expiring, and expired, and the brand parts, do not change. Agreed on 12 November 2026. This replaces the colour scheme from the green of FridgeFriend on these versions. | [ADR 0007](adr/0007-use-the-wallpaper-colours-on-android.md) |
+| The product has a progress report, `PROGRESS.html` in this repository, as in CVKE GPS. Agreed on 13 November 2026. | `AGENTS.md` |
+| An expiry date can be a chosen date: a later date that the person selected because the food is still good. The screen of a food has "+1 day", "+1 week", and "Other date" for a batch that is expiring or expired. Agreed on 13 November 2026. | [ADR 0009](adr/0009-let-the-person-choose-a-later-expiry-date.md) |
+| Settings is a destination of the navigation bar. A tap on My Fridge there shows the Fridge with no filter. The Android app has a switch for the wallpaper colours. A product photo comes from the camera or from the photos of the phone, also in the add form. Agreed on 13 November 2026. | [ADR 0008](adr/0008-put-settings-in-the-navigation-bar.md) |
 | The app keeps a log of each change from the start. | ADR 0003, ADR 0005 |
 | Shared test vectors prove the same behaviour. Each app has a copy of `spec/`. | ADR 0004 |
 | The table of foods is the USDA FSIS FoodKeeper data (CC0 1.0). | ADR 0004 |
@@ -179,4 +211,3 @@ Each workflow runs for a push to `main`, for a pull request, and on request.
 | 1 | The product name in the stores and on the screen | "CVKE Fridge", as for CVKE GPS. |
 | 2 | The product identity in `design/product.md` (teal accent, the shelf line motif) | On 11 November 2026 the owner saw Home and All food with this identity and did not want them. Home and My Fridge now copy the look of FridgeFriend (ADR 0006). The identity is not used. Decide if it stays for other surfaces. |
 | 3 | The words in `GLOSSARY.md`, mainly "batch", "used", and "thrown away" | Agree in milestone 1. |
-| 4 | A progress report (`PROGRESS.html`) as in CVKE GPS | Start it with milestone 2, the first milestone with screens. |
