@@ -21,6 +21,7 @@ FridgeFriend (the `basic_ff` repository): Home (`app/(tabs)/index.tsx`) and My F
   green as the primary container colour. The fresh green and the expiring amber of FridgeFriend are custom colours
   of the scheme, and expired has the error colours. Each pair of a text colour and its background has a contrast of
   4.5:1 or more. The app does not use the wallpaper colours of the phone, because the green is a part of the look.
+  ADR 0007 replaced this sentence on 12 November 2026: on Android 12 and later, the app uses the wallpaper colours.
   The apps follow the light and the dark appearance of the system.
 - **The text starts from the text of FridgeFriend.** On 11 November 2026 the owner asked for a check of the two
   screens, and these parts changed:

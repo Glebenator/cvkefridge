@@ -29,6 +29,6 @@ builds it and runs the shared test vectors in `spec/` through its core module.
 - [spec/](spec/): the core rules, the test vectors that both apps run, and the table of foods.
 - [GLOSSARY.md](GLOSSARY.md): the shared terms. It is a draft.
 - [docs/adr/](docs/adr/): the decisions: three repositories (0001), no fridge device (0002), products and batches
-  (0003), shared test vectors (0004), the replay of the change log (0005), and Home and My Fridge (0006).
+  (0003), shared test vectors (0004), the replay of the change log (0005), Home and My Fridge (0006), and the wallpaper colours on Android (0007).
 - [design/product.md](design/product.md): the product identity. It is a proposal.
 - [AGENTS.md](AGENTS.md): the rules for this repository and the shared rules for both apps.
