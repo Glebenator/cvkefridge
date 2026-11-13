@@ -44,6 +44,11 @@ How a **storage area** keeps food: pantry, fridge, or freezer. The **expiry esti
 each kind.
 _Avoid_: Temperature, type
 
+**Usual storage kind**:
+The **storage kind** where people usually keep a food of the table of foods when they bring it home. The add form uses
+it to select a **storage area** for the food.
+_Avoid_: Default location, home
+
 **Date added**:
 The calendar date on which the **batch** came into the **inventory**.
 _Avoid_: Timestamp, created date

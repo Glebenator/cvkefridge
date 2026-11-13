@@ -169,6 +169,7 @@ then into `:core` and `CVKEFridgeCore`.
 | 4 | The text of the notification | `reminder/ReminderText.kt` |
 | 5 | The order, the day headers, the filter, the periods, the summary, and the most thrown-away foods of the history | `history/HistoryContent.kt` |
 | 5 | The values of "Add again" and the recent foods | `inventory/AddAgain.kt` |
+| 3 | The storage area of the add form: the area that the person selected, the area of the newest batch of the product, an area of the usual storage kind of the food, and the start area | `inventory/AddFoodForm.kt` |
 | 5 | The product photo. The `Product` of the core has no photo, and a photo is not in the change log. | `photo/PhotoFiles.kt` |
 
 ## 7. CI today
