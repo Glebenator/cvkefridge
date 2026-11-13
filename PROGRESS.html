@@ -122,9 +122,9 @@
       <aside class="meta" aria-label="Report details">
         <dl>
           <div><dt>Report updated</dt><dd><time datetime="2026-11-13">13 November 2026</time></dd></div>
-          <div><dt>Android app</dt><dd><code>main</code> at <a href="https://github.com/Glebenator/cvkefridge-android/commit/dce5b94"><code>dce5b94</code></a></dd></div>
-          <div><dt>iOS app</dt><dd><code>main</code> at <a href="https://github.com/Glebenator/cvkefridge-ios/commit/e261021"><code>e261021</code></a></dd></div>
-          <div><dt>Shared specification</dt><dd><code>spec/</code> at <code>e1e8363</code> in both apps</dd></div>
+          <div><dt>Android app</dt><dd><code>main</code> at <a href="https://github.com/Glebenator/cvkefridge-android/commit/98b73e6"><code>98b73e6</code></a></dd></div>
+          <div><dt>iOS app</dt><dd><code>main</code> at <a href="https://github.com/Glebenator/cvkefridge-ios/commit/34aba67"><code>34aba67</code></a></dd></div>
+          <div><dt>Shared specification</dt><dd><code>spec/</code> at <code>b16177b</code> in both apps</dd></div>
           <div><dt>Publication status</dt><dd>Development builds</dd></div>
         </dl>
       </aside>
@@ -132,8 +132,8 @@
 
     <div class="metrics" aria-label="Last verified results">
       <div class="metric"><strong>2 of 6</strong><span>Milestones complete in both apps</span><span class="small">Milestones 2 to 5 are complete on Android only</span></div>
-      <div class="metric"><strong>165 / 165</strong><span>Shared vector cases pass in both core modules</span><span class="small">Same commit of <code>spec/</code>, 10 November 2026</span></div>
-      <div class="metric"><strong>Passed</strong><span>Android CI on <code>dce5b94</code>: unit tests, lint, builds, and 20 device tests</span><span class="small"><a href="https://github.com/Glebenator/cvkefridge-android/actions/runs/43376514209">Run 43376514209</a>, API 35 emulator</span></div>
+      <div class="metric"><strong>167 / 167</strong><span>Shared vector cases pass in both core modules</span><span class="small">Same commit of <code>spec/</code>, 13 November 2026</span></div>
+      <div class="metric"><strong>Passed</strong><span>Android CI on <code>98b73e6</code>: unit tests, lint, builds, and 25 device tests</span><span class="small"><a href="https://github.com/Glebenator/cvkefridge-android/actions/runs/43515844355">Run 43515844355</a>, API 35 emulator</span></div>
     </div>
 
     <nav class="nav" aria-label="Report sections">
@@ -409,8 +409,6 @@
         <div class="panel"><h3>Open decisions and work in progress</h3>
           <ul>
             <li>Open decisions 1 to 3 of the plan: the store name, the product identity, and the glossary words.</li>
-            <li>Android, not committed on 13 November 2026: the Add button in the centre of the navigation bar, the scan
-              card at the top of the add form, floating messages, and the work of ADR 0008.</li>
           </ul></div>
       </div>
     </section>
@@ -419,7 +417,8 @@
       <h2 id="history-heading">Change history</h2>
       <p class="section-intro">The newest entry is first. Keep the earlier entries.</p>
       <ol class="history">
-        <li><time datetime="2026-11-13">13 November 2026</time><span>Not committed: each food of the table of foods has a usual storage kind (<code>usualKind</code> in <code>spec/foods.json</code>), and both core modules read it. On Android, a food in the add form selects an area of that kind, unless the person selected an area. The iOS core change is not built yet: it has no local build and no CI run.</span></li>
+        <li><time datetime="2026-11-13">13 November 2026</time><span>Committed and pushed the work of 13 November: Settings in the bar, the later expiry date, photos from the camera, and the usual storage kind. <code>spec/</code> is at <code>b16177b</code> in both apps. Android CI is green on <code>98b73e6</code> with 25 device tests, after a fix that scrolls the suggestions of the add form into view on a small screen. iOS CI is green on <code>34aba67</code>: 17 core tests.</span></li>
+        <li><time datetime="2026-11-13">13 November 2026</time><span>Each food of the table of foods has a usual storage kind (<code>usualKind</code> in <code>spec/foods.json</code>), and both core modules read it. On Android, a food in the add form selects an area of that kind, unless the person selected an area.</span></li>
         <li><time datetime="2026-11-13">13 November 2026</time><span>Not committed: a later expiry date for food that is still good, with the new source <code>chosen</code> in the shared rules and in both core modules (ADR 0009).</span></li>
         <li><time datetime="2026-11-13">13 November 2026</time><span>Android, not committed: Settings in the navigation bar with a switch for the wallpaper colours, My Fridge from the bar shows the Fridge with no filter, and photos from the camera and in the add form (ADR 0008).</span></li>
         <li><time datetime="2026-11-13">13 November 2026</time><span>Start of this report. The plan records milestones 2 to 5 as done on Android and not started on iOS, and lists the rules that are only in the Android app.</span></li>
