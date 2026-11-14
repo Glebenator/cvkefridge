@@ -34,6 +34,7 @@ for later.
 | Product lookup from a barcode with Open Food Facts | A failed product lookup is not kept as a result. The category rules do not match parts of words. | | The screen and the controls that nothing uses |
 | The inventory on the phone, with no account | | | |
 | Undo after a delete | | | |
+| A note on a food (ADR 0010) | The note is on the product, not on one batch. | | |
 | Oldest batch first when food is used | | | |
 
 [ADR 0003](adr/0003-keep-stock-as-products-and-batches.md) records the product and batch model.
@@ -172,6 +173,7 @@ then into `:core` and `CVKEFridgeCore`.
 | 3 | The suggestions of the add form: how a text agrees with a name, an alias, a keyword, or a word with one wrong letter; the foods of the person and the common foods first; not more than 2 foods with the same name | `inventory/FoodSuggestions.kt` |
 | 3 | The storage area of the add form: the area that the person selected, the area of the newest batch of the product, an area of the usual storage kind of the food, and the start area | `inventory/AddFoodForm.kt` |
 | 5 | The product photo. The `Product` of the core has no photo, and a photo is not in the change log. | `photo/PhotoFiles.kt` |
+| 2 | The note that the app saves: no spaces at the start and at the end, and no note for an empty text. The note of the add form for a product that exists (ADR 0010). | `inventory/Notes.kt`, `inventory/AddFoodForm.kt` |
 
 ## 7. CI today
 
@@ -201,6 +203,7 @@ Each workflow runs for a push to `main`, for a pull request, and on request.
 | The product has a progress report, `PROGRESS.html` in this repository, as in CVKE GPS. Agreed on 13 November 2026. | `AGENTS.md` |
 | An expiry date can be a chosen date: a later date that the person selected because the food is still good. The screen of a food has "+1 day", "+1 week", and "Other date" for a batch that is expiring or expired. Agreed on 13 November 2026. | [ADR 0009](adr/0009-let-the-person-choose-a-later-expiry-date.md) |
 | Settings is a destination of the navigation bar. A tap on My Fridge there shows the Fridge with no filter. The Android app has a switch for the wallpaper colours. A product photo comes from the camera or from the photos of the phone, also in the add form. Agreed on 13 November 2026. | [ADR 0008](adr/0008-put-settings-in-the-navigation-bar.md) |
+| A product has an optional note: the text of the person about the food. The screen of the food shows it and edits it in place, the add form and the edit form have it, the card on My Fridge shows its first line, and the search of My Fridge finds it. Agreed on 14 November 2026. | [ADR 0010](adr/0010-put-a-note-on-the-product.md) |
 | The app keeps a log of each change from the start. | ADR 0003, ADR 0005 |
 | Shared test vectors prove the same behaviour. Each app has a copy of `spec/`. | ADR 0004 |
 | The table of foods is the USDA FSIS FoodKeeper data (CC0 1.0). | ADR 0004 |

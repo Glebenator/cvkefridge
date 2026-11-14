@@ -11,9 +11,14 @@ All the **batches** on the phone that are not ended.
 _Avoid_: Fridge (the Fridge is one **storage area**), list, stock
 
 **Product**:
-What a food is: its name, its **category**, and its optional **barcode** and photo. A product has no quantity and no
-date.
+What a food is: its name, its **category**, and its optional **barcode**, photo, and **note**. A product has no
+quantity and no date.
 _Avoid_: Item, food type
+
+**Note**:
+A text that the person writes about a **product**, for example "Opened on Sunday". A product has one note or no note.
+All **batches** of the product show the same note.
+_Avoid_: Comment, description, memo
 
 **Batch**:
 One purchase of a **product**: its **quantity**, its **storage area**, its **date added**, and its optional
