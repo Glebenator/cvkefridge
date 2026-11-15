@@ -121,10 +121,10 @@
       </div>
       <aside class="meta" aria-label="Report details">
         <dl>
-          <div><dt>Report updated</dt><dd><time datetime="2026-11-13">13 November 2026</time></dd></div>
-          <div><dt>Android app</dt><dd><code>main</code> at <a href="https://github.com/Glebenator/cvkefridge-android/commit/98b73e6"><code>98b73e6</code></a></dd></div>
-          <div><dt>iOS app</dt><dd><code>main</code> at <a href="https://github.com/Glebenator/cvkefridge-ios/commit/34aba67"><code>34aba67</code></a></dd></div>
-          <div><dt>Shared specification</dt><dd><code>spec/</code> at <code>b16177b</code> in both apps</dd></div>
+          <div><dt>Report updated</dt><dd><time datetime="2026-11-14">14 November 2026</time></dd></div>
+          <div><dt>Android app</dt><dd><code>main</code> at <a href="https://github.com/Glebenator/cvkefridge-android/commit/8ad4020"><code>8ad4020</code></a></dd></div>
+          <div><dt>iOS app</dt><dd><code>main</code> at <a href="https://github.com/Glebenator/cvkefridge-ios/commit/6c01512"><code>6c01512</code></a></dd></div>
+          <div><dt>Shared specification</dt><dd><code>spec/</code> at <code>c4e1d3f</code> in both apps</dd></div>
           <div><dt>Publication status</dt><dd>Development builds</dd></div>
         </dl>
       </aside>
@@ -132,12 +132,13 @@
 
     <div class="metrics" aria-label="Last verified results">
       <div class="metric"><strong>2 of 6</strong><span>Milestones complete in both apps</span><span class="small">Milestones 2 to 5 are complete on Android only</span></div>
-      <div class="metric"><strong>167 / 167</strong><span>Shared vector cases pass in both core modules</span><span class="small">Same commit of <code>spec/</code>, 13 November 2026</span></div>
-      <div class="metric"><strong>Passed</strong><span>Android CI on <code>98b73e6</code>: unit tests, lint, builds, and 25 device tests</span><span class="small"><a href="https://github.com/Glebenator/cvkefridge-android/actions/runs/43515844355">Run 43515844355</a>, API 35 emulator</span></div>
+      <div class="metric"><strong>243 / 243</strong><span>Shared vector cases</span><span class="small"><code>spec/</code> at <code>c4e1d3f</code>, 14 November 2026</span></div>
+      <div class="metric"><strong>Passed</strong><span>Android CI on <code>8ad4020</code>: 197 unit tests, lint, builds, and 27 device tests</span><span class="small"><a href="https://github.com/Glebenator/cvkefridge-android/actions/runs/43658834316">Run 43658834316</a>, second attempt, API 35 emulator</span></div>
     </div>
 
     <nav class="nav" aria-label="Report sections">
       <a href="#milestones">Milestones</a>
+      <a href="#storage-and-add-form">Storage tips and add form · 14 Nov</a>
       <a href="#later-expiry">Still good? · 13 Nov</a>
       <a href="#settings-tab">Settings tab and camera · 13 Nov</a>
       <a href="#wallpaper-colours">Wallpaper colours · 12 Nov</a>
@@ -171,6 +172,44 @@
       <p class="note"><strong>The iOS app cannot start milestones 3 to 5 yet.</strong> Their rules are in the Android
         <code>app</code> module only, not in <code>spec/</code>. Section 6.1 of the plan lists them. Move them into
         <code>spec/</code> first.</p>
+    </section>
+
+    <section id="storage-and-add-form" aria-labelledby="storage-and-add-form-heading">
+      <h2 id="storage-and-add-form-heading">Storage tips, one item left, search, and Recent · Android and the shared rules, 14 November 2026</h2>
+      <p class="section-intro">A scanned product gets a storage hint from the text on its package and its category tags,
+        and the add form selects an area of that storage kind
+        (<a href="docs/adr/0011-take-the-storage-kind-of-a-scanned-product-from-its-storage-text-and-its-tags.md">ADR 0011</a>).
+        The product keeps the text of its package, and the screen of a food shows storage tips: that text with a check
+        mark, and the general advice of the FoodKeeper data
+        (<a href="docs/adr/0012-show-storage-tips-and-mark-the-text-of-the-package.md">ADR 0012</a>). On Android, with
+        only one item left, "Used" and "Thrown away" record it with no dialog for a quantity. In the suggestions of the
+        add form, a name that starts with the text comes before an alias, and a suggestion that agrees only by an alias
+        shows that alias. Recent shows the foods that were added, used, or thrown away last, also the foods in the
+        inventory, and a button with a cross removes a food from the list until its next add, use, or throw away.</p>
+      <div class="screens">
+        <figure class="shot"><a href="docs/progress/images/2026-11-14-one-left-used.png"><img src="docs/progress/images/2026-11-14-one-left-used.png" alt="My Fridge after Used on Orange juice, which had 1 bottle: no dialog opened, and the message 1 bottle of Orange juice used has Undo." loading="lazy"></a>
+          <figcaption><strong>One item left: no dialog</strong>14 Nov 2026 · Android emulator, API 37 · Android 8ad4020 · sample data</figcaption></figure>
+        <figure class="shot"><a href="docs/progress/images/2026-11-14-recent-foods.png"><img src="docs/progress/images/2026-11-14-recent-foods.png" alt="The add form with an empty name: Recent lists Orange juice, Greek yoghurt, Bananas, Strawberries, and Whole milk, each with a cross button. Foods in the inventory say In your inventory." loading="lazy"></a>
+          <figcaption><strong>Recent, with remove buttons</strong>14 Nov 2026 · Android emulator, API 37 · Android 8ad4020 · sample data</figcaption></figure>
+        <figure class="shot"><a href="docs/progress/images/2026-11-14-alias-suggestion.png"><img src="docs/progress/images/2026-11-14-alias-suggestion.png" alt="The add form with the name camem: the suggestion Cheese · Camembert, with soft such as brie, bel paese, goat below it." loading="lazy"></a>
+          <figcaption><strong>The alias that agrees</strong>14 Nov 2026 · Android emulator, API 37 · Android 8ad4020 · sample data</figcaption></figure>
+      </div>
+      <div class="grid verify">
+        <div class="panel"><h3>Verification</h3>
+          <ul>
+            <li><code>spec/tools/vectors.py</code>: 243 cases, 0 failures.</li>
+            <li>Android, local: lint, all unit tests, and 24 of 27 device tests at 640 × 1280 and density 320. <code>aSwipeRecordsTheOldestBatchAsUsedAndUndoBringsItBack</code> fails only on this computer. Two other tests failed while the system of the emulator restarted; they passed after a reboot.</li>
+            <li>Android CI on <code>8ad4020</code>: <a href="https://github.com/Glebenator/cvkefridge-android/actions/runs/43658834316">Run 43658834316</a> passed on its second attempt, with 197 unit tests, lint, the builds, and 27 device tests on the API 35 emulator. On the first attempt, <code>aFrozenProductGetsTheFreezerFromItsStorageHintAndKeepsItsStorageText</code> waited 10 s for Home after "Save" and failed. The same test passed on this computer and on the second attempt.</li>
+            <li>iOS CI on <code>6c01512</code>: <a href="https://github.com/Glebenator/cvkefridge-ios/actions/runs/43658843544">Run 43658843544</a> passed, with 24 core tests and the app build.</li>
+            <li>Installed on the Pixel 7 Pro of the owner.</li>
+          </ul></div>
+        <div class="panel"><h3>Known limits</h3>
+          <ul>
+            <li>iOS has only the core part of the storage hint. It has no add form, so none of the screen changes.</li>
+            <li>The list of foods that the person removed from Recent is on the phone only. It is not in the change log.</li>
+            <li>The device test of the frozen pizza failed one time in CI with no clear cause. Watch it in the next runs.</li>
+          </ul></div>
+      </div>
     </section>
 
     <section id="later-expiry" aria-labelledby="later-expiry-heading">
@@ -417,6 +456,7 @@
       <h2 id="history-heading">Change history</h2>
       <p class="section-intro">The newest entry is first. Keep the earlier entries.</p>
       <ol class="history">
+        <li><time datetime="2026-11-14">14 November 2026</time><span>Committed and pushed: the storage hint of a scanned product (ADR 0011) and the storage tips (ADR 0012), with rule 8 and <code>spec/storage-hints.json</code> in the shared rules (243 vector cases). On Android, also: with one item left, "Used" and "Thrown away" need no dialog; a name match comes before an alias match in the suggestions, which show the alias; Recent shows the foods that were added, used, or thrown away last, with a button that removes one. <code>spec/</code> is at <code>c4e1d3f</code> in both apps. Android is at <code>8ad4020</code> and iOS at <code>6c01512</code>. Both CI runs are green; Android needed a second attempt because one device test timed out. Installed on the phone of the owner.</span></li>
         <li><time datetime="2026-11-14">14 November 2026</time><span>A note on a food (ADR 0010). A product has one optional note, in the <code>productSaved</code> change of the shared rules, with 2 new vector cases. Both core modules read a change with no <code>note</code> key. On Android, the screen of the food shows the note and edits it in place, the add form and the edit form have a note field, the card on My Fridge shows its first line, and the search finds it. Committed and pushed: spec/ is at <code>d37c5d7</code> in both apps. Android is at <code>25bcae3</code> and iOS at <code>5d9714c</code>, and the CI runs of both are green. The first CI run of Android found that the keyboard covered the buttons of the note editor on a small screen; <code>25bcae3</code> corrects it. iOS has only the core part of the note.</span></li>
         <li><time datetime="2026-11-13">13 November 2026</time><span>Better suggestions in the add form (cvkefridge <code>99ece94</code>, Android <code>ba3604c</code>, iOS <code>3245885</code>). <code>spec/foods.json</code> marks 142 common foods and has 285 aliases (other names such as yoghurt, mince, courgette, and prawns) from the new file <code>spec/tools/food-extras.json</code>. Both core modules read them. On Android, the suggestions show the foods of the person and the common foods first, show not more than 2 foods with the same name, and find a name with one wrong letter. iOS CI has not run on this change.</span></li>
         <li><time datetime="2026-11-13">13 November 2026</time><span>Committed and pushed the work of 13 November: Settings in the bar, the later expiry date, photos from the camera, and the usual storage kind. <code>spec/</code> is at <code>b16177b</code> in both apps. Android CI is green on <code>98b73e6</code> with 25 device tests, after a fix that scrolls the suggestions of the add form into view on a small screen. iOS CI is green on <code>34aba67</code>: 17 core tests.</span></li>
