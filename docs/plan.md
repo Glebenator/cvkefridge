@@ -171,8 +171,11 @@ then into `:core` and `CVKEFridgeCore`.
 | 5 | The order, the day headers, the filter, the periods, the summary, and the most thrown-away foods of the history | `history/HistoryContent.kt` |
 | 5 | The values of "Add again" and the recent foods | `inventory/AddAgain.kt` |
 | 3 | The suggestions of the add form: how a text agrees with a name, an alias, a keyword, or a word with one wrong letter; the foods of the person and the common foods first; not more than 2 foods with the same name | `inventory/FoodSuggestions.kt` |
-| 3 | The storage area of the add form: the area that the person selected, the area of the newest batch of the product, an area of the usual storage kind of the food, and the start area | `inventory/AddFoodForm.kt` |
+| 3 | The storage area of the add form: the area that the person selected, the area of the newest batch of the product, an area of the storage kind of the storage hint of the scan (the hint is rule 8 of `spec/rules.md`, ADR 0011), an area of the usual storage kind of the food, and the start area | `inventory/AddFoodForm.kt` |
+| 3 | The fields of the product lookup that give the storage text: the language of the device, the main language of the product, and English | `lookup/OpenFoodFacts.kt` |
 | 5 | The product photo. The `Product` of the core has no photo, and a photo is not in the change log. | `photo/PhotoFiles.kt` |
+| 3 | The storage text that the app saves: one space between words, no spaces at the ends, and not more than 500 characters. The product that gets the storage text of an add (ADR 0012). | `inventory/StorageAdvice.kt`, `inventory/InventoryAction.kt` |
+| 3 | The storage tips: the storage text of the scan or of the product, and the general advice for the food (the usual storage kind, and for each storage kind the time in the largest unit that gives a whole number, and the tip) | `inventory/StorageAdvice.kt` |
 | 2 | The note that the app saves: no spaces at the start and at the end, and no note for an empty text. The note of the add form for a product that exists (ADR 0010). | `inventory/Notes.kt`, `inventory/AddFoodForm.kt` |
 
 ## 7. CI today

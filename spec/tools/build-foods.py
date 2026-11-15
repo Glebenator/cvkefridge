@@ -21,6 +21,10 @@ The rules of the conversion:
   time: a number, "Package use-by date", "When Ripe", or "Indefinitely". All the groups of the kind count, also
   "after opening" and "after thawing". "Not Recommended" and a tip with no time do not count. A food of the
   FoodKeeper category "Food Purchased Frozen" has the usual kind freezer. A food with no time has no usual kind.
+- The tip for a storage kind ("tips") is the text of the source about how to keep the food in that kind: the tip of
+  the "date of purchase" group (DOP_Pantry_tips, DOP_Refrigerate_tips, DOP_Freeze_Tips), and if the food has none, the
+  tip of the general group (Pantry_tips, Refrigerate_tips, Freeze_Tips). The text is as in the source, with one space
+  between words, and with the spelling mistakes in TIP_REPAIRS corrected. A food with no tip has no "tips" key.
 - "common" (true) and "aliases" come from spec/tools/food-extras.json, which is edited by hand. An alias is in lowercase.
   An alias that is the name of the food, or that is two times in the list, is not added. A food that is not common has
   no "common" key, and a food with no alias has no "aliases" key.
@@ -73,6 +77,21 @@ USUAL_GROUPS = {
 # The FoodKeeper Category_ID "Food Purchased Frozen".
 PURCHASED_FROZEN = 8
 
+# The source groups with the tip for each storage kind, the preferred group first. The source writes "Freeze_Tips"
+# with a capital letter.
+TIP_GROUPS = {
+    "pantry": ["DOP_Pantry_tips", "Pantry_tips"],
+    "fridge": ["DOP_Refrigerate_tips", "Refrigerate_tips"],
+    "freezer": ["DOP_Freeze_Tips", "Freeze_Tips"],
+}
+
+# Spelling mistakes of the source in the tips.
+TIP_REPAIRS = {
+    "Nnot necessary.": "Not necessary.",
+    "It is not recommend freezing cranberry sauce, as after thawing, it may become too watery.":
+        "Freezing cranberry sauce is not recommended, as after thawing, it may become too watery.",
+}
+
 # The metrics with no number that still give a time to keep the food.
 TIME_WORDS = {"package use-by date", "when ripe", "indefinitely"}
 
@@ -111,6 +130,15 @@ def usual_kind(row):
     return next((kind for kind, groups in USUAL_GROUPS.items() if any(has_time(row, g) for g in groups)), None)
 
 
+def tips_of(row):
+    tips = {}
+    for kind, groups in TIP_GROUPS.items():
+        tip = next((text for text in (clean(row.get(group)) for group in groups) if text), None)
+        if tip:
+            tips[kind] = TIP_REPAIRS.get(tip, tip)
+    return tips
+
+
 def main():
     if len(sys.argv) != 3:
         print(__doc__)
@@ -144,6 +172,9 @@ def main():
         usual = usual_kind(row)
         if usual:
             food["usualKind"] = usual
+        tips = tips_of(row)
+        if tips:
+            food["tips"] = tips
         foods.append(food)
     foods.sort(key=lambda food: int(food["id"][3:]))
 

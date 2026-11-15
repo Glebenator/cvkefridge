@@ -11,13 +11,14 @@ that does not agree with it has a defect.
 | [tools/vectors.py](tools/vectors.py) | The reference model. It calculates the expected results of the vectors. |
 | [tools/build-foods.py](tools/build-foods.py) | Makes `foods.json` from the USDA FSIS FoodKeeper data |
 | [tools/food-extras.json](tools/food-extras.json) | The common foods and the aliases, edited by hand. `build-foods.py` adds them to `foods.json`. |
+| [storage-hints.json](storage-hints.json) | The table for the storage hint of a looked-up product (rule 8), edited by hand |
 
 ## How an app uses this folder
 
 - Each app repository has a copy of this folder at `spec/`, and a file `spec.ref` with the commit of this repository
   from which the copy comes. The copy is exact. Do not edit it in an app repository.
 - The core tests of each app read the vectors from `spec/vectors/` and run each case through the core module.
-- The app puts `spec/foods.json` in its build as a resource.
+- The app puts `spec/foods.json` and `spec/storage-hints.json` in its build as resources.
 - The CI of each app gets this folder at the commit in `spec.ref` and compares it with the copy. A difference fails
   the build.
 - To get a new version, run `python scripts/update-spec.py <commit>` in the app repository. It replaces the copy and
@@ -44,7 +45,9 @@ Each case is a JSON object. Its `expect` value is the expected result. All other
 | `use-first.json` | 5 | |
 | `plan-use.json` | 6 | |
 | `change-log.json` | 7 | Each case is a full log and the result of its replay |
-| `food-table.json` | 4 | Facts about `foods.json`: the count, the usual storage kinds, and some foods. It proves that an app reads the whole table. |
+| `food-table.json` | 4 | Facts about `foods.json`: the count, the usual storage kinds, the tips, and some foods. It proves that an app reads the whole table. |
+| `storage-hint.json` | 8 | Sections `temperatures` and `cases`. It has its own small table of hints in `hints`, so that a change to `storage-hints.json` does not change it. |
+| `storage-hints-table.json` | 8 | Section `facts`: the sizes of `storage-hints.json`. Section `cases`: the storage hints of real products with that table. A change to the table can change them. |
 
 Dates are text in the form `YYYY-MM-DD`. Quantities are whole thousandths. Instants are whole milliseconds from
 1970-01-01T00:00:00Z. A value of `null` means that there is no value.
@@ -54,4 +57,11 @@ Dates are text in the form `YYYY-MM-DD`. Quantities are whole thousandths. Insta
 `foods.json` comes from "FSIS - FoodKeeper Data" of the United States Department of Agriculture, Food Safety and
 Inspection Service: <https://catalog.data.gov/dataset/fsis-foodkeeper-data>. The catalog gives the licence as CC0 1.0.
 `tools/build-foods.py` has the rules of the conversion. A food can have no days for a storage kind, for example when
-the source says "Package use-by date". The app then makes no estimate.
+the source says "Package use-by date". The app then makes no estimate. A food can have tips: the text of the source
+about how to keep the food in a storage kind. The app shows them as general advice (ADR 0012).
+
+## The table of storage hints
+
+`storage-hints.json` is edited by hand. ADR 0011 says how its tags were selected. The storage texts and the tags in
+`vectors/storage-hints-table.json` are from Open Food Facts, <https://world.openfoodfacts.org>, under the Open Database
+Licence.

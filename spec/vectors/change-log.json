@@ -71,7 +71,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -149,7 +150,8 @@
             "unit": null,
             "barcode": null,
             "foodId": null,
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -249,7 +251,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -355,7 +358,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -464,7 +468,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -592,7 +597,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -772,7 +778,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -995,7 +1002,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -1235,7 +1243,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -1372,7 +1381,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -1481,7 +1491,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -1575,7 +1586,8 @@
             "unit": "l",
             "barcode": null,
             "foodId": null,
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -1756,7 +1768,8 @@
             "unit": "pcs",
             "barcode": null,
             "foodId": "fk-18",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -1896,7 +1909,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -2092,7 +2106,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -2252,7 +2267,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -2376,7 +2392,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -2490,7 +2507,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -2605,7 +2623,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -2712,7 +2731,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -2824,7 +2844,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -2933,7 +2954,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -3039,7 +3061,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -3151,7 +3174,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -3249,7 +3273,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -3358,7 +3383,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -3474,7 +3500,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -3607,7 +3634,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -3760,7 +3788,8 @@
             "unit": "pcs",
             "barcode": null,
             "foodId": "fk-18",
-            "note": null
+            "note": null,
+            "storageText": null
           },
           {
             "id": "p-milk",
@@ -3769,7 +3798,8 @@
             "unit": "bottle",
             "barcode": "5449000000996",
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -3895,7 +3925,8 @@
             "unit": "l",
             "barcode": null,
             "foodId": "fk-27",
-            "note": null
+            "note": null,
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -3990,7 +4021,8 @@
             "unit": "pcs",
             "barcode": null,
             "foodId": null,
-            "note": null
+            "note": null,
+            "storageText": null
           },
           {
             "id": "p-ham",
@@ -3999,7 +4031,8 @@
             "unit": "pcs",
             "barcode": null,
             "foodId": null,
-            "note": null
+            "note": null,
+            "storageText": null
           },
           {
             "id": "p-jam",
@@ -4008,7 +4041,8 @@
             "unit": "pcs",
             "barcode": null,
             "foodId": null,
-            "note": "Opened on Sunday.\nKeep it for the cake."
+            "note": "Opened on Sunday.\nKeep it for the cake.",
+            "storageText": null
           }
         ],
         "storageAreas": [
@@ -4094,7 +4128,8 @@
             "unit": "pcs",
             "barcode": null,
             "foodId": null,
-            "note": "  For the cake  "
+            "note": "  For the cake  ",
+            "storageText": null
           },
           {
             "id": "p-jam",
@@ -4103,7 +4138,214 @@
             "unit": "pcs",
             "barcode": null,
             "foodId": null,
-            "note": null
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "a product with a storage text, and a product with no storage text key",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794297600000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-pizza",
+              "name": "Pizza",
+              "category": "other",
+              "unit": "pcs",
+              "barcode": "4006381333931",
+              "foodId": null,
+              "note": null,
+              "storageText": "Bei -18 °C mindestens haltbar bis:\nsiehe Seitenlasche. "
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794297660000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pcs",
+              "barcode": null,
+              "foodId": null,
+              "note": "For Sunday",
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794297720000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-egg",
+              "name": "Eggs",
+              "category": "dairy",
+              "unit": "pcs",
+              "barcode": null,
+              "foodId": null,
+              "note": null
+            }
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794297780000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-jam",
+              "name": "Jam",
+              "category": "condiment",
+              "unit": "pcs",
+              "barcode": null,
+              "foodId": null
+            }
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-egg",
+            "name": "Eggs",
+            "category": "dairy",
+            "unit": "pcs",
+            "barcode": null,
+            "foodId": null,
+            "note": null,
+            "storageText": null
+          },
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pcs",
+            "barcode": null,
+            "foodId": null,
+            "note": "For Sunday",
+            "storageText": null
+          },
+          {
+            "id": "p-jam",
+            "name": "Jam",
+            "category": "condiment",
+            "unit": "pcs",
+            "barcode": null,
+            "foodId": null,
+            "note": null,
+            "storageText": null
+          },
+          {
+            "id": "p-pizza",
+            "name": "Pizza",
+            "category": "other",
+            "unit": "pcs",
+            "barcode": "4006381333931",
+            "foodId": null,
+            "note": null,
+            "storageText": "Bei -18 °C mindestens haltbar bis:\nsiehe Seitenlasche. "
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "a storage text is removed when the product is saved with no storage text",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794297600000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-pizza",
+              "name": "Pizza",
+              "category": "other",
+              "unit": "pcs",
+              "barcode": null,
+              "foodId": null,
+              "note": null,
+              "storageText": "Store at -18°C."
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794297660000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-pizza",
+              "name": "Pizza",
+              "category": "other",
+              "unit": "pcs",
+              "barcode": null,
+              "foodId": null,
+              "note": "For Friday"
+            }
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-pizza",
+            "name": "Pizza",
+            "category": "other",
+            "unit": "pcs",
+            "barcode": null,
+            "foodId": null,
+            "note": "For Friday",
+            "storageText": null
           }
         ],
         "storageAreas": [

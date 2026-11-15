@@ -11,8 +11,8 @@ All the **batches** on the phone that are not ended.
 _Avoid_: Fridge (the Fridge is one **storage area**), list, stock
 
 **Product**:
-What a food is: its name, its **category**, and its optional **barcode**, photo, and **note**. A product has no
-quantity and no date.
+What a food is: its name, its **category**, and its optional **barcode**, photo, **note**, and **storage text**. A
+product has no quantity and no date.
 _Avoid_: Item, food type
 
 **Note**:
@@ -146,8 +146,29 @@ To read a **barcode** with the phone camera.
 _Avoid_: Capture, detect
 
 **Product lookup**:
-The request that gets a product name and a **category** for a **barcode** from Open Food Facts.
+The request that gets a product name, a **category**, and a **storage hint** for a **barcode** from Open Food Facts.
 _Avoid_: Search, barcode fetch
+
+**Storage text**:
+The text on the package about how to keep the product, for example "Store at -18°C". The **product lookup** gets it
+from Open Food Facts, and the **product** keeps it. The person does not write it.
+_Avoid_: Conservation conditions, storage instructions
+
+**Storage tips**:
+What the app shows about how to keep a food: the **storage text** of the product, with a check mark and the words
+"From the package", and the **general advice** for the food.
+_Avoid_: Storage guide, recommendations
+
+**General advice**:
+The part of the **storage tips** that comes from the table of foods: the **usual storage kind**, the time that the
+food keeps in each **storage kind**, and the tip of the table for a storage kind. It is about the food in general, not
+about one **product**.
+_Avoid_: Generic tip, default advice
+
+**Storage hint**:
+The **storage kind** that the **product lookup** gives for a product, from its **storage text** or from its category
+tags. The add form uses it before the **usual storage kind** to select a **storage area**.
+_Avoid_: Storage guess, default storage
 
 ## Change log
 

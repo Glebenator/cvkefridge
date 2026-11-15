@@ -14,6 +14,11 @@
     },
     "common": 142,
     "aliases": 285,
+    "withTips": {
+      "pantry": 71,
+      "fridge": 68,
+      "freezer": 51
+    },
     "samples": [
       {
         "foodId": "fk-1",
@@ -25,7 +30,10 @@
         },
         "usualKind": "fridge",
         "common": true,
-        "aliases": []
+        "aliases": [],
+        "tips": {
+          "pantry": "May be left at room temperature for 1 - 2 days."
+        }
       },
       {
         "foodId": "fk-58",
@@ -37,7 +45,8 @@
         },
         "usualKind": "fridge",
         "common": false,
-        "aliases": []
+        "aliases": [],
+        "tips": {}
       },
       {
         "foodId": "fk-119",
@@ -49,7 +58,8 @@
         },
         "usualKind": "fridge",
         "common": false,
-        "aliases": []
+        "aliases": [],
+        "tips": {}
       },
       {
         "foodId": "fk-179",
@@ -58,7 +68,8 @@
         "days": {},
         "usualKind": "fridge",
         "common": false,
-        "aliases": []
+        "aliases": [],
+        "tips": {}
       },
       {
         "foodId": "fk-237",
@@ -69,7 +80,8 @@
         },
         "usualKind": "pantry",
         "common": false,
-        "aliases": []
+        "aliases": [],
+        "tips": {}
       },
       {
         "foodId": "fk-293",
@@ -82,7 +94,10 @@
         },
         "usualKind": "pantry",
         "common": false,
-        "aliases": []
+        "aliases": [],
+        "tips": {
+          "pantry": "Highly perishable when stored in the pantry."
+        }
       },
       {
         "foodId": "fk-350",
@@ -95,7 +110,10 @@
         "common": true,
         "aliases": [
           "mayo"
-        ]
+        ],
+        "tips": {
+          "pantry": "Refrigeration ensures that commercial sauces and condiments stay fresh for a longer period of time. Shelf-stable commercial mayonnaise is safe when stored at room temperature after opening. Quality, not safety, is the reason the labels on these products suggest that they be refrigerated after opening."
+        }
       },
       {
         "foodId": "fk-406",
@@ -106,7 +124,8 @@
         },
         "usualKind": "pantry",
         "common": false,
-        "aliases": []
+        "aliases": [],
+        "tips": {}
       },
       {
         "foodId": "fk-463",
@@ -122,7 +141,10 @@
           "sparkling wine",
           "prosecco",
           "champagne"
-        ]
+        ],
+        "tips": {
+          "pantry": "Dark, away from direct heat or sunlight."
+        }
       },
       {
         "foodId": "fk-518",
@@ -134,7 +156,8 @@
         },
         "usualKind": "fridge",
         "common": false,
-        "aliases": []
+        "aliases": [],
+        "tips": {}
       },
       {
         "foodId": "fk-574",
@@ -146,7 +169,10 @@
         },
         "usualKind": "pantry",
         "common": false,
-        "aliases": []
+        "aliases": [],
+        "tips": {
+          "pantry": "May have shorter shelf life due to lack of preservatives."
+        }
       },
       {
         "foodId": "fk-629",
@@ -158,7 +184,8 @@
         },
         "usualKind": "fridge",
         "common": false,
-        "aliases": []
+        "aliases": [],
+        "tips": {}
       },
       {
         "foodId": "fk-684",
@@ -170,7 +197,60 @@
         },
         "usualKind": "pantry",
         "common": false,
-        "aliases": []
+        "aliases": [],
+        "tips": {}
+      },
+      {
+        "foodId": "fk-251",
+        "name": "Bananas",
+        "category": "produce",
+        "days": {
+          "fridge": 3,
+          "freezer": 60
+        },
+        "usualKind": "pantry",
+        "common": true,
+        "aliases": [
+          "banana"
+        ],
+        "tips": {
+          "pantry": "Ripe is when this item is tender, fully developed and ready to eat.",
+          "fridge": "Timeline for refrigerator applies to ripe fruit; skin will blacken."
+        }
+      },
+      {
+        "foodId": "fk-306",
+        "name": "Tomatoes",
+        "category": "produce",
+        "days": {
+          "freezer": 60
+        },
+        "usualKind": "pantry",
+        "common": true,
+        "aliases": [
+          "tomato"
+        ],
+        "tips": {
+          "pantry": "Until Ripe, then 7 days. Ripe is when this item is tender, fully developed and ready to eat. Refrigeration may affect flavor; USDA recommends pantry storage."
+        }
+      },
+      {
+        "foodId": "fk-571",
+        "name": "Pizza",
+        "category": "other",
+        "days": {
+          "fridge": 3,
+          "freezer": 360
+        },
+        "usualKind": "freezer",
+        "common": true,
+        "aliases": [
+          "frozen pizza"
+        ],
+        "tips": {
+          "fridge": "Recommendation is for storage after cooking.",
+          "freezer": "Keep frozen. For safety, cook as directed."
+        }
       }
     ]
   }

@@ -144,6 +144,7 @@ def replay(changes):
         if kind == "productSaved":
             product = dict(body["product"])
             product.setdefault("note", None)
+            product.setdefault("storageText", None)
             products[product["id"]] = product
         elif kind == "productDeleted":
             if body["productId"] not in products:
@@ -271,7 +272,7 @@ def check_change(change, where):
             raise ValueError("%s: bad category or unit" % where)
         if not isinstance(product["name"], str):
             raise ValueError("%s: the name is not text" % where)
-        for field in ("barcode", "foodId", "note"):
+        for field in ("barcode", "foodId", "note", "storageText"):
             if product.get(field) is not None and not isinstance(product[field], str):
                 raise ValueError("%s: %s is not text" % (where, field))
     elif kind == "storageAreaSaved":
@@ -313,9 +314,115 @@ def check_foods(table, where):
             raise ValueError("%s: bad usual storage kind for %s" % (where, food["id"]))
         if food.get("common", True) is not True:
             raise ValueError("%s: common must be true or absent for %s" % (where, food["id"]))
+        tips = food.get("tips", {"fridge": "a"})
+        if not tips or any(kind not in STORAGE_KINDS or not isinstance(tip, str) or not tip or tip != " ".join(tip.split())
+                           for kind, tip in tips.items()):
+            raise ValueError("%s: bad tips for %s" % (where, food["id"]))
         aliases = food.get("aliases", ["a"])
         if not aliases or any(not isinstance(a, str) or not a or a != a.strip().lower() for a in aliases):
             raise ValueError("%s: bad aliases for %s" % (where, food["id"]))
+
+
+# ---- 8. The storage hint of a looked-up product
+
+SPACES = "   "
+DIGITS = "0123456789"
+MINUS_SIGNS = "-−–"
+DEGREE = "°"
+FROZEN_MAX = -6
+FRIDGE_MAX = 10
+HINT_KINDS = ["freezer", "fridge", "pantry"]
+
+
+def skip_spaces_back(text, end):
+    """The position after the last character before `end` that is not a space."""
+    while end > 0 and text[end - 1] in SPACES:
+        end -= 1
+    return end
+
+
+def digits_back(text, end):
+    """The start of the digits that end at `end`."""
+    start = end
+    while start > 0 and text[start - 1] in DIGITS:
+        start -= 1
+    return start
+
+
+def temperatures(text):
+    """The Celsius temperatures of a lowercase text, in the order of their degree signs (rule 8.1)."""
+    found = []
+    for at, char in enumerate(text):
+        if char != DEGREE:
+            continue
+        after = at + 1
+        while after < len(text) and text[after] in SPACES:
+            after += 1
+        if after < len(text) and text[after] == "f" and not (after + 1 < len(text) and "a" <= text[after + 1] <= "z"):
+            continue
+        end = skip_spaces_back(text, at)
+        start = digits_back(text, end)
+        if start == end:
+            continue
+        if start >= 2 and text[start - 1] in ".," and text[start - 2] in DIGITS:
+            end = start - 1
+            start = digits_back(text, end)
+        if end - start > 3:
+            continue
+        value = int(text[start:end])
+        sign = skip_spaces_back(text, start)
+        if sign > 0 and text[sign - 1] in MINUS_SIGNS:
+            before = skip_spaces_back(text, sign - 1)
+            previous = text[before - 1] if before > 0 else None
+            of_range = previous is not None and (
+                previous in DIGITS or previous == DEGREE
+                or (previous == "c" and skip_spaces_back(text, before - 1) > 0
+                    and text[skip_spaces_back(text, before - 1) - 1] == DEGREE))
+            if not of_range:
+                value = -value
+        found.append(value)
+    return found
+
+
+def kind_of_storage_text(hints, text):
+    """The storage kind of a storage text, or None (rule 8.2)."""
+    text = text.lower()
+    starts = [position for position in (text.find(phrase) for phrase in hints["afterOpening"]) if position >= 0]
+    found = temperatures(text[:min(starts)] if starts else text)
+    frozen = [value for value in found if value <= FROZEN_MAX]
+    if not found or (frozen and len(frozen) != len(found)):
+        return None
+    if frozen:
+        return "freezer"
+    return "fridge" if max(found) <= FRIDGE_MAX else "pantry"
+
+
+def kind_of_tags(hints, tags):
+    """The storage kind of the category tags, or None (rule 8.3)."""
+    return next((kind for kind in HINT_KINDS if any(tag in hints["tags"].get(kind, []) for tag in tags)), None)
+
+
+def storage_hint(hints, storage_text, tags):
+    """The storage hint as it is in the vectors (rule 8.4)."""
+    kind = None if storage_text is None else kind_of_storage_text(hints, storage_text)
+    if kind is not None:
+        return {"kind": kind, "source": "storageText"}
+    kind = kind_of_tags(hints, tags)
+    return {"kind": kind, "source": None if kind is None else "tags"}
+
+
+def check_hints(hints, where):
+    phrases = hints["afterOpening"]
+    if any(not isinstance(p, str) or not p or p != p.strip().lower() for p in phrases) or len(set(phrases)) != len(phrases):
+        raise ValueError("%s: an afterOpening phrase is empty, not in lowercase, or two times in the list" % where)
+    if any(kind not in STORAGE_KINDS for kind in hints["tags"]):
+        raise ValueError("%s: a key of tags is not a storage kind" % where)
+    seen = set()
+    for kind, tags in hints["tags"].items():
+        for tag in tags:
+            if not isinstance(tag, str) or not tag or tag != tag.strip().lower() or tag in seen:
+                raise ValueError("%s: bad tag %r for %s, or the tag is two times in the table" % (where, tag, kind))
+            seen.add(tag)
 
 
 # ---- The expected values of each vector file
@@ -371,22 +478,47 @@ def expect_change_log(data):
         yield case, replay(case["changes"])
 
 
+# Foods with tips that are always in the samples of food-table.json: bananas, tomatoes, and frozen pizza.
+TIP_SAMPLES = {"fk-251", "fk-306", "fk-571"}
+
+
 def expect_food_table(data):
     """Facts about spec/foods.json. They prove that an app reads the whole table."""
     table = json.loads((SPEC / "foods.json").read_text(encoding="utf-8"))
     check_foods(table, "foods.json")
     foods = table["foods"]
     step = max(1, len(foods) // 12)
+    sampled = foods[::step] + [food for food in foods if food["id"] in TIP_SAMPLES and food not in foods[::step]]
     samples = [{"foodId": food["id"], "name": food["name"], "category": food["category"], "days": food["days"],
                 "usualKind": food.get("usualKind"), "common": food.get("common", False),
-                "aliases": food.get("aliases", [])}
-               for food in foods[::step]]
+                "aliases": food.get("aliases", []), "tips": food.get("tips", {})}
+               for food in sampled]
     with_days = {kind: sum(1 for food in foods if kind in food["days"]) for kind in STORAGE_KINDS}
     usual = {kind: sum(1 for food in foods if food.get("usualKind") == kind) for kind in STORAGE_KINDS}
     common = sum(1 for food in foods if food.get("common"))
     aliases = sum(len(food.get("aliases", [])) for food in foods)
+    with_tips = {kind: sum(1 for food in foods if kind in food.get("tips", {})) for kind in STORAGE_KINDS}
     yield data, {"count": len(foods), "withDays": with_days, "withUsualKind": usual, "common": common,
-                 "aliases": aliases, "samples": samples}
+                 "aliases": aliases, "withTips": with_tips, "samples": samples}
+
+
+def expect_storage_hint(data):
+    check_hints(data["hints"], "storage-hint.json")
+    for case in data["temperatures"]:
+        yield case, {"celsius": temperatures(case["text"].lower())}
+    for case in data["cases"]:
+        yield case, storage_hint(data["hints"], case["storageText"], case["tags"])
+
+
+def expect_storage_hints_table(data):
+    """Facts about spec/storage-hints.json, and the hints of real products. They prove that an app reads the table."""
+    hints = json.loads((SPEC / "storage-hints.json").read_text(encoding="utf-8"))
+    check_hints(hints, "storage-hints.json")
+    for case in data["facts"]:
+        yield case, {"afterOpening": len(hints["afterOpening"]),
+                     "tags": {kind: len(hints["tags"].get(kind, [])) for kind in STORAGE_KINDS}}
+    for case in data["cases"]:
+        yield case, storage_hint(hints, case["storageText"], case["tags"])
 
 
 FILES = {
@@ -397,6 +529,8 @@ FILES = {
     "plan-use.json": expect_plan_use,
     "change-log.json": expect_change_log,
     "food-table.json": expect_food_table,
+    "storage-hint.json": expect_storage_hint,
+    "storage-hints-table.json": expect_storage_hints_table,
 }
 
 

@@ -1,0 +1,564 @@
+{
+  "description": "Rule 8: the temperatures of a text, and the storage hint of a looked-up product. The file has its own small table of hints, so that a change to storage-hints.json does not change it. No text has a character whose lowercase form depends on the platform.",
+  "hints": {
+    "afterOpening": [
+      "after opening",
+      "nach anbruch",
+      "après ouverture"
+    ],
+    "tags": {
+      "freezer": [
+        "en:frozen-pizzas",
+        "en:ice-creams"
+      ],
+      "fridge": [
+        "en:yogurts",
+        "en:cheeses"
+      ],
+      "pantry": [
+        "en:canned-foods",
+        "en:chocolates"
+      ]
+    }
+  },
+  "temperatures": [
+    {
+      "name": "no degree sign",
+      "text": "Keep in a cool, dry place for 18 months",
+      "expect": {
+        "celsius": []
+      }
+    },
+    {
+      "name": "a negative temperature",
+      "text": "Store at -18°C",
+      "expect": {
+        "celsius": [
+          -18
+        ]
+      }
+    },
+    {
+      "name": "the degree sign with no letter",
+      "text": "Entre 0° et +4°",
+      "expect": {
+        "celsius": [
+          0,
+          4
+        ]
+      }
+    },
+    {
+      "name": "spaces before the number and before the degree sign",
+      "text": "(- 18 °C)",
+      "expect": {
+        "celsius": [
+          -18
+        ]
+      }
+    },
+    {
+      "name": "a no-break space and a narrow no-break space",
+      "text": "max. 7 °C",
+      "expect": {
+        "celsius": [
+          7
+        ]
+      }
+    },
+    {
+      "name": "the minus sign U+2212 and the dash U+2013 as a sign",
+      "text": "−18°C or –20°C",
+      "expect": {
+        "celsius": [
+          -18,
+          -20
+        ]
+      }
+    },
+    {
+      "name": "a minus sign at the start of the text",
+      "text": "-18°C",
+      "expect": {
+        "celsius": [
+          -18
+        ]
+      }
+    },
+    {
+      "name": "a range with a minus sign after a digit",
+      "text": "2-5°C",
+      "expect": {
+        "celsius": [
+          5
+        ]
+      }
+    },
+    {
+      "name": "a range with spaces and a dash",
+      "text": "2 – 5 °C",
+      "expect": {
+        "celsius": [
+          5
+        ]
+      }
+    },
+    {
+      "name": "a range between two temperatures with the letter",
+      "text": "0°C - 4°C",
+      "expect": {
+        "celsius": [
+          0,
+          4
+        ]
+      }
+    },
+    {
+      "name": "a range between two temperatures with spaces before the letter",
+      "text": "0 ° C - 4 ° C",
+      "expect": {
+        "celsius": [
+          0,
+          4
+        ]
+      }
+    },
+    {
+      "name": "a range between two degree signs",
+      "text": "0° - 4°",
+      "expect": {
+        "celsius": [
+          0,
+          4
+        ]
+      }
+    },
+    {
+      "name": "a word that ends with c before the minus sign",
+      "text": "avec -18°C",
+      "expect": {
+        "celsius": [
+          -18
+        ]
+      }
+    },
+    {
+      "name": "two negative temperatures",
+      "text": "entre -25°C et -18°C",
+      "expect": {
+        "celsius": [
+          -25,
+          -18
+        ]
+      }
+    },
+    {
+      "name": "a negative temperature after a plus temperature",
+      "text": "+4°C / -18°C",
+      "expect": {
+        "celsius": [
+          4,
+          -18
+        ]
+      }
+    },
+    {
+      "name": "a decimal part with a point and with a comma",
+      "text": "entre 0.0°C et 4,5°C",
+      "expect": {
+        "celsius": [
+          0,
+          4
+        ]
+      }
+    },
+    {
+      "name": "a negative temperature with a decimal part",
+      "text": "-18.5 °C",
+      "expect": {
+        "celsius": [
+          -18
+        ]
+      }
+    },
+    {
+      "name": "a sign before the decimal sign is not a decimal part",
+      "text": "max .5°C",
+      "expect": {
+        "celsius": [
+          5
+        ]
+      }
+    },
+    {
+      "name": "capital letters",
+      "text": "MAX. 7 °C",
+      "expect": {
+        "celsius": [
+          7
+        ]
+      }
+    },
+    {
+      "name": "three digits",
+      "text": "not above 100°C",
+      "expect": {
+        "celsius": [
+          100
+        ]
+      }
+    },
+    {
+      "name": "four digits give no temperature",
+      "text": "1000°C",
+      "expect": {
+        "celsius": []
+      }
+    },
+    {
+      "name": "Fahrenheit is not used",
+      "text": "Keep frozen at 0°F (-18°C)",
+      "expect": {
+        "celsius": [
+          -18
+        ]
+      }
+    },
+    {
+      "name": "Fahrenheit with a space and at the end of the text",
+      "text": "below 40 °F",
+      "expect": {
+        "celsius": []
+      }
+    },
+    {
+      "name": "a word that starts with f is not Fahrenheit",
+      "text": "à 4° frais",
+      "expect": {
+        "celsius": [
+          4
+        ]
+      }
+    },
+    {
+      "name": "a degree sign with no number",
+      "text": "température ° ambiante",
+      "expect": {
+        "celsius": []
+      }
+    },
+    {
+      "name": "the freezer stars",
+      "text": "*** -18°C ** -12°C * -6°C",
+      "expect": {
+        "celsius": [
+          -18,
+          -12,
+          -6
+        ]
+      }
+    },
+    {
+      "name": "only the last number of a list has the degree sign",
+      "text": "between 15 and 25°C",
+      "expect": {
+        "celsius": [
+          25
+        ]
+      }
+    },
+    {
+      "name": "an empty text",
+      "text": "",
+      "expect": {
+        "celsius": []
+      }
+    }
+  ],
+  "cases": [
+    {
+      "name": "no storage text and no tags",
+      "storageText": null,
+      "tags": [],
+      "expect": {
+        "kind": null,
+        "source": null
+      }
+    },
+    {
+      "name": "a storage text with no temperature and no tags",
+      "storageText": "Keep in a cool, dry place.",
+      "tags": [],
+      "expect": {
+        "kind": null,
+        "source": null
+      }
+    },
+    {
+      "name": "a frozen temperature gives the freezer",
+      "storageText": "Store at -18°C",
+      "tags": [],
+      "expect": {
+        "kind": "freezer",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "-6 is frozen",
+      "storageText": "Store at -6°C",
+      "tags": [],
+      "expect": {
+        "kind": "freezer",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "-5 is not frozen",
+      "storageText": "Store at -5°C",
+      "tags": [],
+      "expect": {
+        "kind": "fridge",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "all temperatures are frozen",
+      "storageText": "*** -18°C ** -12°C * -6°C",
+      "tags": [],
+      "expect": {
+        "kind": "freezer",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "0 gives the fridge",
+      "storageText": "Keep at 0°C",
+      "tags": [],
+      "expect": {
+        "kind": "fridge",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "the highest temperature is 10",
+      "storageText": "Keep between +2°C and +10°C",
+      "tags": [],
+      "expect": {
+        "kind": "fridge",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "the highest temperature is 11",
+      "storageText": "Keep between +2°C and +11°C",
+      "tags": [],
+      "expect": {
+        "kind": "pantry",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "a range that ends at room temperature gives the pantry",
+      "storageText": "À conserver entre 2°C et 25°C",
+      "tags": [],
+      "expect": {
+        "kind": "pantry",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "a fridge temperature and a frozen temperature give no kind from the text",
+      "storageText": "Keep at 0°C to +4°C. Can be frozen at -18°C.",
+      "tags": [],
+      "expect": {
+        "kind": null,
+        "source": null
+      }
+    },
+    {
+      "name": "a fridge temperature and a frozen temperature, and the tags give the kind",
+      "storageText": "Fridge (+5°C): 1 day. Freezer (-18°C): see the date.",
+      "tags": [
+        "en:frozen-pizzas"
+      ],
+      "expect": {
+        "kind": "freezer",
+        "source": "tags"
+      }
+    },
+    {
+      "name": "the text after the phrase for an opened package is not used",
+      "storageText": "Best before: see the top. After opening keep at max. 7°C and use in 3 days.",
+      "tags": [],
+      "expect": {
+        "kind": null,
+        "source": null
+      }
+    },
+    {
+      "name": "the text before the phrase is used",
+      "storageText": "Keep at max. 7°C. After opening use in 3 days.",
+      "tags": [],
+      "expect": {
+        "kind": "fridge",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "the phrase in capital letters",
+      "storageText": "NACH ANBRUCH 5 Tage im Kühlschrank haltbar (+1°C bis +7°C).",
+      "tags": [],
+      "expect": {
+        "kind": null,
+        "source": null
+      }
+    },
+    {
+      "name": "the first phrase in the text decides, not the first phrase in the table",
+      "storageText": "Keep at 5°C. Après ouverture: 20°C. After opening: -18°C.",
+      "tags": [],
+      "expect": {
+        "kind": "fridge",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "an opened package and tags: the tags give the kind",
+      "storageText": "After opening keep at max. 7°C.",
+      "tags": [
+        "en:canned-foods"
+      ],
+      "expect": {
+        "kind": "pantry",
+        "source": "tags"
+      }
+    },
+    {
+      "name": "Fahrenheit only gives no kind from the text",
+      "storageText": "Keep frozen at 0°F",
+      "tags": [],
+      "expect": {
+        "kind": null,
+        "source": null
+      }
+    },
+    {
+      "name": "a freezer tag",
+      "storageText": null,
+      "tags": [
+        "en:meals",
+        "en:frozen-pizzas"
+      ],
+      "expect": {
+        "kind": "freezer",
+        "source": "tags"
+      }
+    },
+    {
+      "name": "a fridge tag",
+      "storageText": null,
+      "tags": [
+        "en:dairies",
+        "en:yogurts"
+      ],
+      "expect": {
+        "kind": "fridge",
+        "source": "tags"
+      }
+    },
+    {
+      "name": "a pantry tag",
+      "storageText": null,
+      "tags": [
+        "en:canned-foods"
+      ],
+      "expect": {
+        "kind": "pantry",
+        "source": "tags"
+      }
+    },
+    {
+      "name": "a tag that is not in the table",
+      "storageText": null,
+      "tags": [
+        "en:frozen-foods",
+        "en:beverages"
+      ],
+      "expect": {
+        "kind": null,
+        "source": null
+      }
+    },
+    {
+      "name": "the freezer comes before the fridge",
+      "storageText": null,
+      "tags": [
+        "en:yogurts",
+        "en:ice-creams"
+      ],
+      "expect": {
+        "kind": "freezer",
+        "source": "tags"
+      }
+    },
+    {
+      "name": "the fridge comes before the pantry",
+      "storageText": null,
+      "tags": [
+        "en:chocolates",
+        "en:cheeses"
+      ],
+      "expect": {
+        "kind": "fridge",
+        "source": "tags"
+      }
+    },
+    {
+      "name": "a tag is compared character by character",
+      "storageText": null,
+      "tags": [
+        "en:Yogurts",
+        "en:yogurts ",
+        "yogurts",
+        "en:frozen-pizzas-and-pies"
+      ],
+      "expect": {
+        "kind": null,
+        "source": null
+      }
+    },
+    {
+      "name": "the storage text comes before the tags",
+      "storageText": "À conserver à +4°C",
+      "tags": [
+        "en:frozen-pizzas"
+      ],
+      "expect": {
+        "kind": "fridge",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "a storage text with no temperature, and the tags give the kind",
+      "storageText": "Keep in a cool, dry place.",
+      "tags": [
+        "en:chocolates"
+      ],
+      "expect": {
+        "kind": "pantry",
+        "source": "tags"
+      }
+    },
+    {
+      "name": "an empty storage text",
+      "storageText": "",
+      "tags": [
+        "en:cheeses"
+      ],
+      "expect": {
+        "kind": "fridge",
+        "source": "tags"
+      }
+    }
+  ]
+}

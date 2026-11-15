@@ -1,0 +1,315 @@
+{
+  "description": "Facts about spec/storage-hints.json: the number of phrases and the number of tags for each storage kind. Then the storage hints of real products with that table. The storage texts and the tags are from Open Food Facts (Open Database Licence), read on 14 November 2026. An app that reads the table must find the same.",
+  "facts": [
+    {
+      "name": "the size of the table",
+      "expect": {
+        "afterOpening": 22,
+        "tags": {
+          "pantry": 10,
+          "fridge": 12,
+          "freezer": 14
+        }
+      }
+    }
+  ],
+  "cases": [
+    {
+      "name": "a frozen pizza with no storage text",
+      "storageText": null,
+      "tags": [
+        "en:frozen-foods",
+        "en:meals",
+        "en:pizzas-pies-and-quiches",
+        "en:pizzas",
+        "en:frozen-pizzas-and-pies",
+        "en:vegetarian-pizzas",
+        "en:frozen-pizzas",
+        "en:vegetable-pizza"
+      ],
+      "expect": {
+        "kind": "freezer",
+        "source": "tags"
+      }
+    },
+    {
+      "name": "a frozen pizza with the freezer stars in German",
+      "storageText": "*** - Fach (- 18 °C) mindestens haltbar bis: s. Prägung Seitenlasche ** - Fach (- 12 °C) 2 Wochen * - Fach (- 6 °C) 1 Woche Nach dem Auftauen nicht wieder einfrieren!; Bei - 18 °C mindestens haltbar bis: siehe Prägung Seitenlasche",
+      "tags": [
+        "en:frozen-foods",
+        "en:meals",
+        "en:pizzas-pies-and-quiches",
+        "en:pizzas",
+        "en:frozen-pizzas-and-pies",
+        "en:vegetarian-pizzas",
+        "en:frozen-pizzas",
+        "en:vegetable-pizza"
+      ],
+      "expect": {
+        "kind": "freezer",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "frozen fries with the freezer stars in French",
+      "storageText": "Conservation : Au congélateur ou dans le compartiment freezer du réfrigérateur selon symbole : - 6°C * : 1 semaine -12°C ** = 1 mois -18°C *** : jusqu'à Date figurant sur emballage Attention : Ne pas recongeler le produit après décongélation",
+      "tags": [
+        "en:plant-based-foods-and-beverages",
+        "en:plant-based-foods",
+        "en:cereals-and-potatoes",
+        "en:frozen-foods",
+        "en:chips-and-fries",
+        "en:potatoes-and-their-products",
+        "en:fries",
+        "en:frozen-fried-potatoes",
+        "en:potato-fries",
+        "en:frozen-potato-fries",
+        "en:frozen-french-fries-to-roast"
+      ],
+      "expect": {
+        "kind": "freezer",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "an ice cream with no storage text",
+      "storageText": null,
+      "tags": [
+        "en:desserts",
+        "en:frozen-foods",
+        "en:frozen-desserts",
+        "en:ice-creams-and-sorbets",
+        "en:ice-creams",
+        "en:ice-cream-tubs"
+      ],
+      "expect": {
+        "kind": "freezer",
+        "source": "tags"
+      }
+    },
+    {
+      "name": "a cola with the tag en:frozen-foods, which is wrong",
+      "storageText": null,
+      "tags": [
+        "en:beverages-and-beverages-preparations",
+        "en:beverages",
+        "en:frozen-foods",
+        "en:non-alcoholic-beverages",
+        "en:soft-drinks",
+        "en:carbonated-drinks",
+        "en:flavoured-soft-drinks",
+        "en:sodas",
+        "en:colas",
+        "en:sweetened-beverages",
+        "en:cola's"
+      ],
+      "expect": {
+        "kind": null,
+        "source": null
+      }
+    },
+    {
+      "name": "a sliced bread with the tag en:frozen-breads, which is wrong",
+      "storageText": "A conserver à température ambiante et à distance de toute source de chaleur. Pour préserver le moelleux, refermez bien le sachet après utilisation.",
+      "tags": [
+        "en:plant-based-foods-and-beverages",
+        "en:plant-based-foods",
+        "en:frozen-foods",
+        "en:cereals-and-potatoes",
+        "en:cereals-and-their-products",
+        "en:breads",
+        "en:frozen-breads",
+        "en:sliced-breads"
+      ],
+      "expect": {
+        "kind": null,
+        "source": null
+      }
+    },
+    {
+      "name": "a chilled dough with a frozen tag and a fridge temperature",
+      "storageText": "À conserver à +4°C",
+      "tags": [
+        "en:plant-based-foods-and-beverages",
+        "en:plant-based-foods",
+        "en:cereals-and-potatoes",
+        "en:frozen-foods",
+        "en:cereals-and-their-products",
+        "en:cooking-helpers",
+        "en:pie-dough",
+        "en:baking-mixes",
+        "en:puff-pastry-sheets",
+        "en:frozen-baking-mixes",
+        "en:puff-pastry-with-vegetable-fat",
+        "en:refrigerated-baking-mixes"
+      ],
+      "expect": {
+        "kind": "fridge",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "an almond drink that goes into the fridge only after opening",
+      "storageText": "Mindestens haltbar bis: siehe Oberseite. Nach Anbruch 5 Tage im Kühlschrank haltbar (+1°C bis +7°C).",
+      "tags": [
+        "en:beverages-and-beverages-preparations",
+        "en:plant-based-foods-and-beverages",
+        "en:beverages",
+        "en:plant-based-foods",
+        "en:dairy-substitutes",
+        "en:milk-substitutes",
+        "en:nuts-and-their-products",
+        "en:plant-based-beverages",
+        "en:plant-based-milk-alternatives",
+        "en:nut-based-drinks",
+        "en:almond-based-drinks"
+      ],
+      "expect": {
+        "kind": null,
+        "source": null
+      }
+    },
+    {
+      "name": "a soy yogurt that is kept cold before and after opening",
+      "storageText": "Gekühlt aufbewahren bei max. 7°C. - Nach Anbruch 5 Tage im Kühlschrank haltbar.",
+      "tags": [
+        "en:plant-based-foods-and-beverages",
+        "en:fermented-foods",
+        "en:desserts",
+        "en:dairy-substitutes",
+        "en:vegan-products",
+        "en:non-dairy-desserts",
+        "en:non-dairy-fermented-foods",
+        "en:non-dairy-yogurts",
+        "en:soy-milk-yogurts"
+      ],
+      "expect": {
+        "kind": "fridge",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "a kefir with no storage text and the tag en:frozen-foods, which is wrong",
+      "storageText": null,
+      "tags": [
+        "en:beverages-and-beverages-preparations",
+        "en:beverages",
+        "en:dairies",
+        "en:fermented-foods",
+        "en:desserts",
+        "en:fermented-milk-products",
+        "en:frozen-foods",
+        "en:dairy-desserts",
+        "en:dairy-drinks",
+        "en:fermented-dairy-desserts",
+        "en:fermented-drinks",
+        "en:fermented-milk-drinks",
+        "en:yogurts",
+        "en:soured-milks",
+        "en:kefir"
+      ],
+      "expect": {
+        "kind": "fridge",
+        "source": "tags"
+      }
+    },
+    {
+      "name": "a canned ratatouille that goes into the fridge only after opening",
+      "storageText": "Après ouverture, conservez à 4°C maximum et consommez dans les 48h.",
+      "tags": [
+        "en:plant-based-foods-and-beverages",
+        "en:plant-based-foods",
+        "en:fruits-and-vegetables-based-foods",
+        "en:vegetable-based-foods-and-beverages",
+        "en:canned-foods",
+        "en:meals",
+        "en:vegetables-based-foods",
+        "en:canned-plant-based-foods",
+        "en:processed-vegetables",
+        "en:canned-vegetables",
+        "en:canned-meals",
+        "en:prepared-vegetables",
+        "en:plant-based-meals",
+        "en:ratatouille",
+        "en:Vegetables - Prepared/Processed (Shelf Stable)"
+      ],
+      "expect": {
+        "kind": "pantry",
+        "source": "tags"
+      }
+    },
+    {
+      "name": "a salad dressing for 2 to 25 degrees",
+      "storageText": "À conserver entre 2°C et 25°C",
+      "tags": [
+        "en:condiments",
+        "en:sauces",
+        "en:dips",
+        "en:salad-dressings",
+        "en:vinaigrettes",
+        "en:dressings-and-dips-shelf-stable",
+        "en:low-fat-vinaigrette-dressings",
+        "en:Groceries",
+        "fr:Vinaigrettes au sésame"
+      ],
+      "expect": {
+        "kind": "pantry",
+        "source": "storageText"
+      }
+    },
+    {
+      "name": "a hazelnut spread with a storage text that has no temperature",
+      "storageText": "A conserver au sec et à l'abri de la chaleur. Ne pas mettre au réfrigérateur.",
+      "tags": [
+        "en:breakfasts",
+        "en:spreads",
+        "en:sweet-spreads",
+        "fr:pates-a-tartiner",
+        "en:hazelnut-spreads",
+        "en:confectionary-based-spreads",
+        "fr:Nutella"
+      ],
+      "expect": {
+        "kind": "pantry",
+        "source": "tags"
+      }
+    },
+    {
+      "name": "a breakfast cereal with no storage text",
+      "storageText": null,
+      "tags": [
+        "en:plant-based-foods-and-beverages",
+        "en:plant-based-foods",
+        "en:breakfasts",
+        "en:cereals-and-potatoes",
+        "en:cereals-and-their-products",
+        "en:breakfast-cereals",
+        "en:chocolate-cereals",
+        "en:breakfast-cereals-rich-in-fibre",
+        "en:crunchy-cereal-clusters",
+        "en:cereal-clusters-with-chocolate"
+      ],
+      "expect": {
+        "kind": "pantry",
+        "source": "tags"
+      }
+    },
+    {
+      "name": "a mineral water: no tag of the table",
+      "storageText": null,
+      "tags": [
+        "en:beverages-and-beverages-preparations",
+        "en:beverages",
+        "en:waters",
+        "en:spring-waters",
+        "en:mineral-waters",
+        "en:unsweetened-beverages",
+        "en:natural-mineral-waters"
+      ],
+      "expect": {
+        "kind": null,
+        "source": null
+      }
+    }
+  ]
+}

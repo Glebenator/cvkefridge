@@ -16,6 +16,8 @@ that is a defect in this folder. Correct it here first.
   All batches of a product have the same unit.
 - **Note.** A text that the person writes about a product, or none. The core keeps the text as it is. It does not
   remove spaces and it has no maximum length. The app saves none in place of an empty text.
+- **Storage text.** The text on the package about how to keep a product, or none. The core keeps the text as it is.
+  The app gets it from the product lookup, and the person does not write it.
 - **Category.** `produce`, `dairy`, `meat`, `condiment`, `beverage`, `bakery`, `leftovers`, or `other`.
 - **Storage kind.** `pantry`, `fridge`, or `freezer`. Each storage area has one kind.
 
@@ -56,6 +58,9 @@ that is a defect in this folder. Correct it here first.
 - A food can have a **usual storage kind**: the storage kind where people usually keep the food when they bring it home.
   It can be absent. It can be a kind for which the food has no days, for example milk that keeps until the date on the
   package. `tools/build-foods.py` has the rule that sets it. The usual storage kind gives no estimate.
+- A food can have **tips**: for a storage kind, a short text of the source about how to keep the food in that kind.
+  A food can have a tip for a kind for which it has no days. `tools/build-foods.py` has the rule that sets them. The
+  tips give no estimate.
 - A food can be **common**: a food that people add often. A food can have **aliases**: other names for the food, in
   lowercase. `tools/food-extras.json` has them. They are for the suggestions of the add form, and they give no
   estimate.
@@ -104,7 +109,7 @@ that made it, and a body with a type.
 
 | Type | Fields | Effect | Rejected when |
 |---|---|---|---|
-| `productSaved` | `product` (identifier, name, category, unit, barcode, food, note) | Adds the product, or replaces the product with the same identifier. A product with no `note` key has no note: changes from before the note have no `note` key. | Never |
+| `productSaved` | `product` (identifier, name, category, unit, barcode, food, note, storage text) | Adds the product, or replaces the product with the same identifier. A product with no `note` key has no note, and a product with no `storageText` key has no storage text: changes from before these values do not have the keys. | Never |
 | `productDeleted` | `productId` | Removes the product, its batches, and the history of those batches. | `unknownProduct` |
 | `storageAreaSaved` | `area` (identifier, name, kind) | Adds the storage area, or replaces the one with the same identifier. | `fixedStorageArea`: the identifier is `fridge` or `freezer` |
 | `storageAreaDeleted` | `storageAreaId` | Removes the storage area. | `fixedStorageArea`, `unknownStorageArea`, or `storageAreaInUse`: an active batch is in it. The checks are in this order. |
@@ -130,3 +135,60 @@ The history is in the order of the replay.
 The result of a replay has the products, the storage areas (each with `fixed`: true or false), all batches (active
 and ended), the history, and the rejected changes. In the vectors, the products, the storage areas, and the batches
 are in the order of their identifiers.
+
+## 8. The storage hint of a looked-up product
+
+A product lookup can give two values that show where the product is kept: the **storage text**, which is the text on
+the package about how to keep the product, and the category tags of Open Food Facts. The **storage hint** is the
+storage kind that these values give, with its source. It can be absent. The table for this rule is
+`storage-hints.json`. It has the phrases that start the instructions for an opened package (`afterOpening`), and a
+list of category tags for each storage kind (`tags`). ADR 0011 has the reasons.
+
+### 8.1 The temperatures of a text
+
+The rule reads the characters of the text as Unicode code points, after the text is made lowercase.
+
+- A **space** is U+0020, U+00A0, or U+202F. A **digit** is `0` to `9`.
+- Each degree sign `°` (U+00B0) can end one temperature. Go back from the degree sign:
+  1. Skip the spaces.
+  2. Take the digits. With no digit, the degree sign gives no temperature.
+  3. If a `.` or a `,` is before these digits, and a digit is before that sign, these digits are a decimal part. They
+     have no effect. Take the digits before the sign in their place.
+  4. With more than 3 digits, the degree sign gives no temperature. In other cases the digits are the value.
+  5. Skip the spaces. If the character there is a minus sign (`-`, U+2212, or U+2013), look at the character before
+     it, after the spaces are skipped. The minus sign is the line between the two ends of a range when that character
+     is a digit, a degree sign, or a `c` with a degree sign before it (spaces skipped). The value then stays positive.
+     In each other case, also at the start of the text, the value is negative.
+- A temperature in Fahrenheit is not used: after the degree sign and its spaces there is an `f`, and the character
+  after the `f` is not a letter from `a` to `z`.
+- The temperatures of the text are in the order of their degree signs.
+
+### 8.2 The storage kind of a storage text
+
+1. Make the text lowercase.
+2. Find the first position at which a phrase of `afterOpening` starts. Use only the text before it. With no phrase,
+   use all the text. The text after it is about the opened package.
+3. Find the temperatures of this text (8.1). A temperature is **frozen** when it is −6 or lower.
+
+| Temperatures | Storage kind |
+|---|---|
+| None | None |
+| All are frozen | `freezer` |
+| Some are frozen, but not all | None. The text names two ways to keep the product. |
+| None is frozen, and the highest is 10 or lower | `fridge` |
+| None is frozen, and the highest is above 10 | `pantry` |
+
+### 8.3 The storage kind of the category tags
+
+The result is the first storage kind, in the order `freezer`, `fridge`, `pantry`, for which the list in `tags` has a
+tag of the product. A tag is compared character by character. With no such kind, there is no result.
+
+### 8.4 The storage hint
+
+1. If the product has a storage text and 8.2 gives a storage kind for it, the hint is that kind with the source
+   `storageText`.
+2. If not, and 8.3 gives a storage kind, the hint is that kind with the source `tags`.
+3. If not, there is no hint.
+
+The storage text comes before the tags because it is about this one product. A tag can be wrong, and a tag is about a
+group of products.

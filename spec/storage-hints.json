@@ -1,0 +1,71 @@
+{
+  "note": "The table for rule 8 of rules.md, edited by hand. ADR 0011 says how the tags were selected. A tag is a category tag of Open Food Facts. A phrase and a tag are in lowercase.",
+  "afterOpening": [
+    "after opening",
+    "once opened",
+    "once open",
+    "après ouverture",
+    "apres ouverture",
+    "après l'ouverture",
+    "une fois ouvert",
+    "nach dem öffnen",
+    "nach öffnung",
+    "nach anbruch",
+    "nach dem anbruch",
+    "na opening",
+    "na openen",
+    "na het openen",
+    "después de abrir",
+    "despues de abrir",
+    "una vez abierto",
+    "dopo l'apertura",
+    "una volta aperto",
+    "após abertura",
+    "depois de aberto",
+    "po otwarciu"
+  ],
+  "tags": {
+    "freezer": [
+      "en:frozen-desserts",
+      "en:ice-creams-and-sorbets",
+      "en:ice-creams",
+      "en:sorbets",
+      "en:frozen-pizzas-and-pies",
+      "en:frozen-pizzas",
+      "en:frozen-ready-made-meals",
+      "en:frozen-plant-based-foods",
+      "en:frozen-vegetables",
+      "en:frozen-fried-potatoes",
+      "en:frozen-seafood",
+      "en:frozen-fishes",
+      "en:frozen-meats",
+      "en:frozen-soups"
+    ],
+    "fridge": [
+      "en:refrigerated-foods",
+      "en:refrigerated-baking-mixes",
+      "en:fresh-foods",
+      "en:fresh-meals",
+      "en:fresh-pasta",
+      "en:fermented-milk-products",
+      "en:cheeses",
+      "en:yogurts",
+      "en:butters",
+      "en:margarines",
+      "en:cooked-charcuterie",
+      "en:hams"
+    ],
+    "pantry": [
+      "en:canned-foods",
+      "en:dried-products",
+      "en:dry-pastas",
+      "en:breakfast-cereals",
+      "en:biscuits-and-crackers",
+      "en:chocolates",
+      "en:confectioneries",
+      "en:salty-snacks",
+      "en:sweet-spreads",
+      "en:uht-milks"
+    ]
+  }
+}
