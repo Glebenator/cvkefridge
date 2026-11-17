@@ -35,6 +35,10 @@ The rules of the conversion:
   by hand: the class of the FoodKeeper category of the food, or the other class when the file lists the food. A food
   of a category that is not in the file is strict. Each food has the key. The names of the categories in the file must
   agree with the source.
+- The category ("category") is the category of the FoodKeeper category of the food (CATEGORY), or the category that
+  spec/tools/food-categories.json gives the food. That file is edited by hand. It lists the foods of a FoodKeeper
+  category that has foods of more than one category of this product, for example "Shelf Stable Foods" and "Food
+  Purchased Frozen". Frozen food has the category of what it is. ADR 0017 has the reasons.
 """
 import json
 import sys
@@ -43,29 +47,35 @@ from pathlib import Path
 SPEC = Path(__file__).resolve().parent.parent
 EXTRAS = SPEC / "tools" / "food-extras.json"
 CLASSES = SPEC / "tools" / "food-classes.json"
+CATEGORIES_FILE = SPEC / "tools" / "food-categories.json"
 AFTER_DATE_CLASSES = ["strict", "check"]
+
+# The categories of this product (rule 1 of spec/rules.md).
+CATEGORIES = ["produce", "dairy", "meat", "condiment", "beverage", "bakery", "leftovers", "other",
+              "grains", "canned", "baking", "snacks", "meals"]
 
 DAYS_PER = {"days": 1, "weeks": 7, "months": 30, "year": 365, "years": 365}
 
-# FoodKeeper Category_ID to the category of this product.
+# FoodKeeper Category_ID to the category of this product. spec/tools/food-categories.json gives a different category
+# to single foods. For a category with foods of more than one category, the map has the category of most of them.
 CATEGORY = {
     1: "other",       # Baby Food
     2: "bakery",      # Baked Goods: Bakery
-    3: "other",       # Baked Goods: Baking and Cooking
+    3: "baking",      # Baked Goods: Baking and Cooking
     4: "bakery",      # Baked Goods: Refrigerated Dough
     5: "beverage",    # Beverages
     6: "condiment",   # Condiments, Sauces & Canned Goods
     7: "dairy",       # Dairy Products & Eggs
-    8: "other",       # Food Purchased Frozen
-    9: "other",       # Grains, Beans & Pasta
+    8: "meat",        # Food Purchased Frozen
+    9: "grains",      # Grains, Beans & Pasta
     10: "meat", 11: "meat", 12: "meat", 13: "meat",   # Meat
     14: "meat", 15: "meat", 16: "meat", 17: "meat",   # Poultry
     18: "produce",    # Produce: Fresh Fruits
     19: "produce",    # Produce: Fresh Vegetables
     20: "meat", 21: "meat", 22: "meat",               # Seafood
-    23: "other",      # Shelf Stable Foods
+    23: "snacks",     # Shelf Stable Foods
     24: "other",      # Vegetarian Proteins
-    25: "leftovers",  # Deli & Prepared Foods
+    25: "meals",      # Deli & Prepared Foods
 }
 
 # The source groups for each storage kind, the preferred group first.
@@ -189,12 +199,26 @@ def after_date_classes(source):
     return by_category, by_food, problems
 
 
+def food_categories():
+    """The category of each food that spec/tools/food-categories.json lists."""
+    listed = json.loads(CATEGORIES_FILE.read_text(encoding="utf-8"))["foods"]
+    problems = ["'foods' has a key that is not a category: %s" % key for key in listed if key not in CATEGORIES]
+    by_food = {}
+    for name, food_ids in listed.items():
+        for food_id in food_ids:
+            if food_id in by_food:
+                problems.append("%s is in 'foods' two times" % food_id)
+            by_food[food_id] = name
+    return by_food, problems
+
+
 def main():
     if len(sys.argv) != 3:
         print(__doc__)
         return 2
     source = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
     class_of_category, class_of_food, problems = after_date_classes(source)
+    category_of_food, category_problems = food_categories()
     foods = []
     for row in rows_of(source, "Product"):
         days = {}
@@ -242,6 +266,16 @@ def main():
     if problems:
         print("food-classes.json: %s" % "; ".join(problems))
         return 1
+    for food_id, name in category_of_food.items():
+        if food_id not in by_id:
+            category_problems.append("%s is not in the source" % food_id)
+        elif by_id[food_id]["category"] == name:
+            category_problems.append("%s has the category of its FoodKeeper category; remove it from 'foods'" % food_id)
+        else:
+            by_id[food_id]["category"] = name
+    if category_problems:
+        print("food-categories.json: %s" % "; ".join(category_problems))
+        return 1
     unknown = [food_id for food_id in list(extras["common"]) + list(extras["aliases"]) if food_id not in by_id]
     if unknown:
         print("food-extras.json has foods that are not in the source: %s" % ", ".join(unknown))
@@ -283,6 +317,7 @@ def main():
     print("with opened days: %s; with one or more: %d" % (
         {kind: sum(1 for food in foods if kind in food.get("openedDays", {})) for kind in OPENED_GROUPS},
         sum(1 for food in foods if "openedDays" in food)))
+    print("category: %s" % {name: sum(1 for food in foods if food["category"] == name) for name in CATEGORIES})
     print("after-date class: %s" % {
         name: sum(1 for food in foods if food["afterDate"] == name) for name in AFTER_DATE_CLASSES})
     return 0

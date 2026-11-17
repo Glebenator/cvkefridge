@@ -188,6 +188,162 @@
       }
     },
     {
+      "name": "a product of each category that ADR 0017 added",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794297600000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-grains",
+              "name": "Spaghetti",
+              "category": "grains",
+              "unit": null,
+              "barcode": null,
+              "foodId": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794297660000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-canned",
+              "name": "Chickpeas",
+              "category": "canned",
+              "unit": null,
+              "barcode": null,
+              "foodId": null
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794297720000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-baking",
+              "name": "Flour",
+              "category": "baking",
+              "unit": null,
+              "barcode": null,
+              "foodId": null
+            }
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794297780000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-snacks",
+              "name": "Salted peanuts",
+              "category": "snacks",
+              "unit": null,
+              "barcode": null,
+              "foodId": null
+            }
+          }
+        },
+        {
+          "id": "c-05",
+          "at": 1794297840000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-meals",
+              "name": "Frozen pizza",
+              "category": "meals",
+              "unit": null,
+              "barcode": null,
+              "foodId": null
+            }
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-baking",
+            "name": "Flour",
+            "category": "baking",
+            "unit": null,
+            "barcode": null,
+            "foodId": null,
+            "note": null,
+            "storageText": null
+          },
+          {
+            "id": "p-canned",
+            "name": "Chickpeas",
+            "category": "canned",
+            "unit": null,
+            "barcode": null,
+            "foodId": null,
+            "note": null,
+            "storageText": null
+          },
+          {
+            "id": "p-grains",
+            "name": "Spaghetti",
+            "category": "grains",
+            "unit": null,
+            "barcode": null,
+            "foodId": null,
+            "note": null,
+            "storageText": null
+          },
+          {
+            "id": "p-meals",
+            "name": "Frozen pizza",
+            "category": "meals",
+            "unit": null,
+            "barcode": null,
+            "foodId": null,
+            "note": null,
+            "storageText": null
+          },
+          {
+            "id": "p-snacks",
+            "name": "Salted peanuts",
+            "category": "snacks",
+            "unit": null,
+            "barcode": null,
+            "foodId": null,
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
       "name": "use a part, and then the remainder",
       "changes": [
         {

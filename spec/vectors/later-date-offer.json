@@ -279,6 +279,86 @@
       "expect": {
         "afterDate": "strict"
       }
+    },
+    {
+      "name": "no food, category grains",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "grains",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "check"
+      }
+    },
+    {
+      "name": "no food, category canned",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "canned",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "check"
+      }
+    },
+    {
+      "name": "no food, category baking",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "baking",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "check"
+      }
+    },
+    {
+      "name": "no food, category snacks",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "snacks",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "check"
+      }
+    },
+    {
+      "name": "no food, category meals",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "meals",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "strict"
+      }
     }
   ],
   "cases": [

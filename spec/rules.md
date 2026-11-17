@@ -18,7 +18,8 @@ that is a defect in this folder. Correct it here first.
   remove spaces and it has no maximum length. The app saves none in place of an empty text.
 - **Storage text.** The text on the package about how to keep a product, or none. The core keeps the text as it is.
   The app gets it from the product lookup, and the person does not write it.
-- **Category.** `produce`, `dairy`, `meat`, `condiment`, `beverage`, `bakery`, `leftovers`, or `other`.
+- **Category.** `produce`, `dairy`, `meat`, `condiment`, `beverage`, `bakery`, `leftovers`, `other`, `grains`,
+  `canned`, `baking`, `snacks`, or `meals`. ADR 0017 has the reasons for the last five.
 - **Storage kind.** `pantry`, `fridge`, or `freezer`. Each storage area has one kind.
 - **Date type.** `useBy`, `bestBefore`, or none. It is what the words on the package say about a printed expiry date.
   None means that the app does not know the type.
@@ -248,8 +249,8 @@ This rule says if the app can show the offer. ADR 0014 has the reasons.
 
 | Category | After-date class |
 |---|---|
-| `condiment`, `beverage`, `bakery` | `check` |
-| `produce`, `dairy`, `meat`, `leftovers`, `other` | `strict` |
+| `condiment`, `beverage`, `bakery`, `grains`, `canned`, `baking`, `snacks` | `check` |
+| `produce`, `dairy`, `meat`, `leftovers`, `other`, `meals` | `strict` |
 
 ### 9.2 The offer
 

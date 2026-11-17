@@ -1,0 +1,68 @@
+{
+  "note": "Edited by hand. build-foods.py gives each food the category of its FoodKeeper category (the map CATEGORY in build-foods.py). 'foods' lists the foods that get a different category, by category. A food can be in one list only, and a food must not be in the list of the category that the map already gives it. Frozen food gets the category of what it is. ADR 0017 has the reasons and the order of the scan rules, which this file agrees with.",
+  "foods": {
+    "produce": [
+      "fk-379", "fk-385",
+      "fk-313", "fk-315", "fk-331", "fk-641",
+      "fk-179",
+      "fk-679",
+      "fk-664"
+    ],
+    "dairy": [
+      "fk-383", "fk-644", "fk-659",
+      "fk-310"
+    ],
+    "meat": [
+      "fk-184", "fk-188", "fk-192", "fk-514", "fk-515", "fk-516", "fk-517", "fk-518", "fk-519"
+    ],
+    "condiment": [
+      "fk-371", "fk-387", "fk-466", "fk-467", "fk-488", "fk-489", "fk-502", "fk-614", "fk-615",
+      "fk-180", "fk-187", "fk-572", "fk-645",
+      "fk-169"
+    ],
+    "beverage": [
+      "fk-651", "fk-652",
+      "fk-319"
+    ],
+    "bakery": [
+      "fk-682",
+      "fk-309", "fk-321",
+      "fk-635",
+      "fk-196", "fk-460", "fk-461", "fk-553"
+    ],
+    "leftovers": [
+      "fk-484",
+      "fk-173", "fk-174", "fk-175", "fk-177", "fk-178", "fk-194", "fk-629", "fk-667",
+      "fk-426"
+    ],
+    "other": [
+      "fk-326", "fk-327", "fk-328"
+    ],
+    "grains": [
+      "fk-374", "fk-375", "fk-393", "fk-464", "fk-503", "fk-504", "fk-555", "fk-573", "fk-613", "fk-627", "fk-656",
+      "fk-657"
+    ],
+    "canned": [
+      "fk-370", "fk-372", "fk-373", "fk-397", "fk-432", "fk-458", "fk-501", "fk-601", "fk-602", "fk-617", "fk-618",
+      "fk-619", "fk-633",
+      "fk-485", "fk-486", "fk-487", "fk-673",
+      "fk-108", "fk-111", "fk-142",
+      "fk-499"
+    ],
+    "baking": [
+      "fk-376", "fk-384", "fk-388", "fk-395", "fk-396", "fk-398", "fk-454", "fk-468", "fk-469", "fk-470", "fk-471",
+      "fk-472", "fk-473", "fk-474", "fk-475", "fk-476", "fk-520", "fk-521", "fk-522", "fk-523", "fk-533", "fk-534",
+      "fk-612", "fk-643", "fk-650", "fk-668", "fk-672", "fk-684",
+      "fk-345", "fk-524", "fk-525", "fk-526",
+      "fk-170"
+    ],
+    "snacks": [
+      "fk-216",
+      "fk-314", "fk-317", "fk-318", "fk-324",
+      "fk-498"
+    ],
+    "meals": [
+      "fk-330", "fk-571", "fk-666"
+    ]
+  }
+}

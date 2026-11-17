@@ -1,5 +1,5 @@
 {
-  "description": "Facts about spec/foods.json: the number of foods, the number with days for each storage kind, the number with each usual storage kind, the number of common foods, the number of aliases, the number with a tip and with opened days for each storage kind, the number in each after-date class, and some foods. An app that reads the table must find the same.",
+  "description": "Facts about spec/foods.json: the number of foods, the number with days for each storage kind, the number with each usual storage kind, the number of common foods, the number of aliases, the number with a tip and with opened days for each storage kind, the number in each after-date class, the number in each category, and some foods. An app that reads the table must find the same.",
   "expect": {
     "count": 661,
     "withDays": {
@@ -27,6 +27,21 @@
     "afterDate": {
       "strict": 262,
       "check": 399
+    },
+    "category": {
+      "produce": 110,
+      "dairy": 50,
+      "meat": 151,
+      "condiment": 57,
+      "beverage": 36,
+      "bakery": 38,
+      "leftovers": 10,
+      "other": 13,
+      "grains": 34,
+      "canned": 21,
+      "baking": 83,
+      "snacks": 41,
+      "meals": 17
     },
     "samples": [
       {
@@ -79,7 +94,7 @@
       {
         "foodId": "fk-179",
         "name": "Fruit, cut",
-        "category": "leftovers",
+        "category": "produce",
         "days": {},
         "usualKind": "fridge",
         "common": false,
@@ -93,7 +108,7 @@
       {
         "foodId": "fk-237",
         "name": "Spice/spices",
-        "category": "other",
+        "category": "baking",
         "days": {
           "pantry": 1095
         },
@@ -184,7 +199,7 @@
       {
         "foodId": "fk-518",
         "name": "Canadian bacon",
-        "category": "leftovers",
+        "category": "meat",
         "days": {
           "fridge": 14,
           "freezer": 60
@@ -231,7 +246,7 @@
       {
         "foodId": "fk-684",
         "name": "Mustard",
-        "category": "other",
+        "category": "baking",
         "days": {
           "pantry": 180,
           "freezer": 365
@@ -346,7 +361,7 @@
       {
         "foodId": "fk-387",
         "name": "Peanut butter",
-        "category": "other",
+        "category": "condiment",
         "days": {
           "pantry": 180
         },
@@ -362,7 +377,7 @@
       {
         "foodId": "fk-571",
         "name": "Pizza",
-        "category": "other",
+        "category": "meals",
         "days": {
           "fridge": 3,
           "freezer": 360

@@ -37,8 +37,11 @@ The measure of the **quantities** of a **product**: pcs, g, kg, ml, l, pack, bot
 **batches** of a product have the same unit.
 
 **Category**:
-The food group of a **product**: produce, dairy, meat, condiment, beverage, bakery, leftovers, or other. It is for
-groups and filters. It does not give the **expiry estimate**.
+The food group of a **product**. There are 13: produce; dairy & eggs; meat & fish; condiment; beverage; bakery;
+pasta, rice & grains; canned & jarred; baking & spices; snacks & sweets; ready meals & deli; leftovers; and other.
+Leftovers is food that the person cooked at home. Frozen is not a category: it is a **storage kind**. The category is
+for groups and filters. It gives the **after-date class** of a product that has no food of the table. It does not give
+the **expiry estimate**.
 _Avoid_: Type, tag
 
 **Storage area**:

@@ -12,6 +12,7 @@ that does not agree with it has a defect.
 | [tools/build-foods.py](tools/build-foods.py) | Makes `foods.json` from the USDA FSIS FoodKeeper data |
 | [tools/food-extras.json](tools/food-extras.json) | The common foods and the aliases, edited by hand. `build-foods.py` adds them to `foods.json`. |
 | [tools/food-classes.json](tools/food-classes.json) | The after-date class of each FoodKeeper category and of single foods, edited by hand. `build-foods.py` adds the classes to `foods.json`. |
+| [tools/food-categories.json](tools/food-categories.json) | The category of single foods that do not have the category of their FoodKeeper category, edited by hand. `build-foods.py` adds the categories to `foods.json`. |
 | [storage-hints.json](storage-hints.json) | The table for the storage hint of a looked-up product (rule 8), edited by hand |
 | [before-date-tips.json](before-date-tips.json) | The table of the before-date tips and their sources (rule 10), edited by hand |
 
@@ -48,7 +49,7 @@ Each case is a JSON object. Its `expect` value is the expected result. All other
 | `use-first.json` | 5 | The batches have no opened date, so the good-until date is the expiry date |
 | `plan-use.json` | 6 | |
 | `change-log.json` | 7 | Each case is a full log and the result of its replay |
-| `food-table.json` | 4 | Facts about `foods.json`: the count, the usual storage kinds, the tips, the opened days, the after-date classes, and some foods. It proves that an app reads the whole table. |
+| `food-table.json` | 4 | Facts about `foods.json`: the count, the usual storage kinds, the tips, the opened days, the after-date classes, the categories, and some foods. It proves that an app reads the whole table. |
 | `storage-hint.json` | 8 | Sections `temperatures` and `cases`. It has its own small table of hints in `hints`, so that a change to `storage-hints.json` does not change it. |
 | `storage-hints-table.json` | 8 | Section `facts`: the sizes of `storage-hints.json`. Section `cases`: the storage hints of real products with that table. A change to the table can change them. |
 | `good-until.json` | 3, 5.2, 5.3, 6 | Section `cases`: the good-until date of a batch and its source, with the days left and the freshness. Section `order`: the use-first order with opened batches. Section `plan`: the plan of a use with opened batches. It has its own small table of foods. |

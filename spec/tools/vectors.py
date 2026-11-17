@@ -16,14 +16,15 @@ from pathlib import Path
 SPEC = Path(__file__).resolve().parent.parent
 VECTORS = SPEC / "vectors"
 
-CATEGORIES = ["produce", "dairy", "meat", "condiment", "beverage", "bakery", "leftovers", "other"]
+CATEGORIES = ["produce", "dairy", "meat", "condiment", "beverage", "bakery", "leftovers", "other",
+              "grains", "canned", "baking", "snacks", "meals"]
 UNITS = ["pcs", "g", "kg", "ml", "l", "pack", "bottle", "slice", "cup"]
 STORAGE_KINDS = ["pantry", "fridge", "freezer"]
 EXPIRY_SOURCES = ["printed", "estimated", "chosen"]
 DATE_TYPES = ["useBy", "bestBefore"]
 AFTER_DATE_CLASSES = ["strict", "check"]
 # The categories that give the after-date class `check` to a product with no food of the table (rule 9.1).
-CHECK_CATEGORIES = ["condiment", "beverage", "bakery"]
+CHECK_CATEGORIES = ["condiment", "beverage", "bakery", "grains", "canned", "baking", "snacks"]
 TIP_KINDS = ["freeze", "cook", "useUp"]
 ID_CHARACTERS = set("abcdefghijklmnopqrstuvwxyz0123456789-")
 EPOCH = datetime.date(1970, 1, 1)
@@ -645,9 +646,10 @@ def expect_food_table(data):
     with_tips = {kind: sum(1 for food in foods if kind in food.get("tips", {})) for kind in STORAGE_KINDS}
     with_opened = {kind: sum(1 for food in foods if kind in food.get("openedDays", {})) for kind in STORAGE_KINDS}
     classes = {name: sum(1 for food in foods if food["afterDate"] == name) for name in AFTER_DATE_CLASSES}
+    categories = {name: sum(1 for food in foods if food["category"] == name) for name in CATEGORIES}
     yield data, {"count": len(foods), "withDays": with_days, "withUsualKind": usual, "common": common,
                  "aliases": aliases, "withTips": with_tips, "withOpenedDays": with_opened, "afterDate": classes,
-                 "samples": samples}
+                 "category": categories, "samples": samples}
 
 
 def expect_storage_hint(data):

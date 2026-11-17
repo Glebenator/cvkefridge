@@ -667,10 +667,12 @@ the image shows when the values do not fit on the screen.
 The owner doubts rows that scroll sideways. This section answers: how do apps show a long list of categories without
 such a row, do users comment on it, and which control fits My Fridge?
 
-**What CVKE Fridge has.** The glossary has 8 fixed categories (produce, dairy, meat, condiment, beverage, bakery,
-leftovers, other). The person cannot add more. My Fridge shows only the categories that have food, plus "All". So the
-row has 2 to 9 chips. On a phone 360 dp wide, about 3 or 4 chips fit, so the row scrolls when there is a varied
-inventory. Storage areas are Fridge and Freezer plus the areas that the person creates, so their number has no limit.
+**What CVKE Fridge has.** When this research was done, the glossary had 8 fixed categories (produce, dairy, meat,
+condiment, beverage, bakery, leftovers, other). Since 17 November 2026 it has 13: ADR 0017 adds grains, canned,
+baking, snacks, and meals. The person cannot add more. My Fridge shows only the categories that have food, plus "All".
+So the row had 2 to 9 chips, and it can now have 2 to 14. On a phone 360 dp wide, about 3 or 4 chips fit, so the row
+scrolls when there is a varied inventory. Storage areas are Fridge and Freezer plus the areas that the person creates,
+so their number has no limit.
 
 **What other apps do, with the evidence.**
 
@@ -703,11 +705,14 @@ small secondary choices.
   count. Put it in one row that does not scroll, with two freshness chips: "Expiring" and "Expired". Three chips fit in
   360 dp. Reasons: the category is the second filter, there are only 8 fixed values, the row never hides a value off
   the screen, and the label always shows the active choice. The cost is one extra tap to change the category.
+  (Update, 17 November 2026: ADR 0017 makes 13 fixed values. The menu still fits, because it scrolls down, not
+  sideways.)
   (Evidence: Grocy, FridgeWise, NoWaste, Smantry use a dropdown or sheet for a secondary filter; users want freshness
   filters. Judgement: the exact control and row.)
 - **Second choice: wrapped chips.** Show "All" and the categories with food as a chip group that wraps to a second or
   third line. All values are visible and one tap away, with no sideways scroll, and it is the Material default. The
-  cost is height: up to 3 lines (about 130 dp) above the first card when the inventory has all 8 categories. Choose
+  cost is height: up to 3 lines (about 130 dp) above the first card when the inventory has all 8 categories, and more
+  with the 13 categories of ADR 0017. Choose
   this if the owner wants every category visible at once. (Evidence: Material default; KitchenPal add screen.
   Judgement: the height estimate.)
 - **Not recommended as the main control:** a filter sheet (hides the choices and the state; better when there are
