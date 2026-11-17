@@ -207,6 +207,11 @@ _Avoid_: Capture, detect
 The request that gets a product name, a **category**, and a **storage hint** for a **barcode** from Open Food Facts.
 _Avoid_: Search, barcode fetch
 
+**Lookup pause**:
+The 5 minutes after a failure of Open Food Facts in which the app sends no **product lookup** by itself. A **scan**
+then opens the add form at once, with the **barcode** and no values from Open Food Facts.
+_Avoid_: Offline mode, cooldown, circuit breaker
+
 **Storage text**:
 The text on the package about how to keep the product, for example "Store at -18°C". The **product lookup** gets it
 from Open Food Facts, and the **product** keeps it. The person does not write it.
