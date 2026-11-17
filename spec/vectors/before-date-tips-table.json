@@ -1,0 +1,231 @@
+{
+  "description": "Facts about spec/before-date-tips.json (section 'facts'): the number of sources, of tips, of tips of each kind, and of foods with a tip. Section 'cases': the before-date tips of batches with that table and spec/foods.json. A change to one of the two tables can change them. An app that reads the tables must find the same.",
+  "facts": [
+    {
+      "expect": {
+        "sources": 3,
+        "tips": 4,
+        "kinds": {
+          "freeze": 2,
+          "cook": 1,
+          "useUp": 1
+        },
+        "foods": 19
+      }
+    }
+  ],
+  "cases": [
+    {
+      "name": "chicken breast in the fridge, expiring",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken breast",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "fk-117",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-18",
+        "expirySource": "printed",
+        "dateType": "useBy",
+        "openedDate": null
+      },
+      "expect": {
+        "tips": [
+          "freeze-by-the-date",
+          "cook-by-the-date"
+        ]
+      }
+    },
+    {
+      "name": "chicken breast in the freezer, expiring",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken breast",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "fk-117",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-18",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": [
+          "cook-by-the-date"
+        ]
+      }
+    },
+    {
+      "name": "chicken breast, expired",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken breast",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "fk-117",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-16",
+        "expirySource": "printed",
+        "dateType": "useBy",
+        "openedDate": null
+      },
+      "expect": {
+        "tips": []
+      }
+    },
+    {
+      "name": "bananas in a pantry, expiring",
+      "today": "2026-11-17",
+      "storageKind": "pantry",
+      "product": {
+        "id": "p-1",
+        "name": "Bananas",
+        "category": "produce",
+        "unit": null,
+        "barcode": null,
+        "foodId": "fk-251",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "a-pantry",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-19",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": [
+          "use-overripe-fruit"
+        ]
+      }
+    },
+    {
+      "name": "potatoes in a pantry, expiring",
+      "today": "2026-11-17",
+      "storageKind": "pantry",
+      "product": {
+        "id": "p-1",
+        "name": "Potatoes",
+        "category": "produce",
+        "unit": null,
+        "barcode": null,
+        "foodId": "fk-297",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "a-pantry",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-17",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": [
+          "freeze-cooked-potatoes"
+        ]
+      }
+    },
+    {
+      "name": "eggs, expiring: the table has no tip for eggs",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Eggs",
+        "category": "dairy",
+        "unit": null,
+        "barcode": null,
+        "foodId": "fk-21",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-18",
+        "expirySource": "printed",
+        "dateType": "bestBefore",
+        "openedDate": null
+      },
+      "expect": {
+        "tips": []
+      }
+    },
+    {
+      "name": "hot dogs, expiring because of the opened rule: the table has no tip for hot dogs",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Hot dogs",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "fk-98",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-12-01",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": "2026-11-11"
+      },
+      "expect": {
+        "tips": []
+      }
+    }
+  ]
+}

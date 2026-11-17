@@ -97,7 +97,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -176,7 +178,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-10",
             "expiryDate": null,
-            "expirySource": null
+            "expirySource": null,
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -277,7 +281,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [
@@ -384,7 +390,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [
@@ -494,7 +502,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [
@@ -623,7 +633,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [
@@ -804,7 +816,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -1028,7 +1042,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -1269,7 +1285,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [
@@ -1407,7 +1425,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -1517,7 +1537,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-10",
             "expiryDate": null,
-            "expirySource": null
+            "expirySource": null,
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -1612,7 +1634,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -1794,7 +1818,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-09",
             "expiryDate": "2026-11-30",
-            "expirySource": "estimated"
+            "expirySource": "estimated",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [
@@ -1935,7 +1961,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-10",
             "expiryDate": "2026-11-20",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [
@@ -2138,7 +2166,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           },
           {
             "id": "b-milk-2",
@@ -2147,7 +2177,9 @@
             "storageAreaId": "shelf-1",
             "dateAdded": "2026-11-10",
             "expiryDate": null,
-            "expirySource": null
+            "expirySource": null,
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -2293,7 +2325,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           },
           {
             "id": "b-milk-2",
@@ -2302,7 +2336,9 @@
             "storageAreaId": "shelf-1",
             "dateAdded": "2026-11-10",
             "expiryDate": null,
-            "expirySource": null
+            "expirySource": null,
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [
@@ -2418,7 +2454,9 @@
             "storageAreaId": "freezer",
             "dateAdded": "2026-11-07",
             "expiryDate": null,
-            "expirySource": null
+            "expirySource": null,
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -2533,7 +2571,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [
@@ -2649,7 +2689,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -2757,7 +2799,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [
@@ -2870,7 +2914,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -3087,7 +3133,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -3200,7 +3248,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -3299,7 +3349,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -3409,7 +3461,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -3526,7 +3580,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [
@@ -3660,7 +3716,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [
@@ -3824,7 +3882,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-09",
             "expiryDate": "2026-11-30",
-            "expirySource": "estimated"
+            "expirySource": "estimated",
+            "dateType": null,
+            "openedDate": null
           },
           {
             "id": "b-milk-1",
@@ -3833,7 +3893,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-08",
             "expiryDate": "2026-11-14",
-            "expirySource": "printed"
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [
@@ -3951,7 +4013,9 @@
             "storageAreaId": "fridge",
             "dateAdded": "2026-11-01",
             "expiryDate": "2026-11-12",
-            "expirySource": "chosen"
+            "expirySource": "chosen",
+            "dateType": null,
+            "openedDate": null
           }
         ],
         "history": [],
@@ -4363,6 +4427,1289 @@
           }
         ],
         "batches": [],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "a batch is opened",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchOpened",
+            "batchId": "b-ham-1",
+            "date": "2026-11-16"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": "2026-11-16"
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "a second opened change replaces the opened date",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchOpened",
+            "batchId": "b-ham-1",
+            "date": "2026-11-16"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchOpened",
+            "batchId": "b-ham-1",
+            "date": "2026-11-14"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": "2026-11-14"
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "the opened date can be before the date added",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchOpened",
+            "batchId": "b-ham-1",
+            "date": "2026-11-09"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": "2026-11-09"
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "an opened change for an unknown batch or for an ended batch is rejected",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchOpened",
+            "batchId": "b-none",
+            "date": "2026-11-16"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchUsed",
+            "batchId": "b-ham-1",
+            "quantity": 1000,
+            "date": "2026-11-16"
+          }
+        },
+        {
+          "id": "c-05",
+          "at": 1794902700000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchOpened",
+            "batchId": "b-ham-1",
+            "date": "2026-11-16"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 0,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
+          }
+        ],
+        "history": [
+          {
+            "changeId": "c-04",
+            "batchId": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "outcome": "used",
+            "date": "2026-11-16"
+          }
+        ],
+        "rejected": [
+          {
+            "changeId": "c-03",
+            "reason": "unknownBatch"
+          },
+          {
+            "changeId": "c-05",
+            "reason": "batchEnded"
+          }
+        ]
+      }
+    },
+    {
+      "name": "undo an opened change",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchOpened",
+            "batchId": "b-ham-1",
+            "date": "2026-11-16"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "changeUndone",
+            "changeId": "c-03"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "undo the second opened change: the first opened date is back",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchOpened",
+            "batchId": "b-ham-1",
+            "date": "2026-11-14"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchOpened",
+            "batchId": "b-ham-1",
+            "date": "2026-11-16"
+          }
+        },
+        {
+          "id": "c-05",
+          "at": 1794902700000,
+          "origin": "phone-a",
+          "body": {
+            "type": "changeUndone",
+            "changeId": "c-04"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": "2026-11-14"
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "an added batch with a date type and an opened date, and an added batch with no keys for them",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-10"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-2",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed"
+            }
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-10"
+          },
+          {
+            "id": "b-ham-2",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "an edit with the opened date and the date type keeps them",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "bestBefore"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchOpened",
+            "batchId": "b-ham-1",
+            "date": "2026-11-16"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchEdited",
+            "batchId": "b-ham-1",
+            "quantity": 500,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "bestBefore",
+            "openedDate": "2026-11-16"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 500,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "bestBefore",
+            "openedDate": "2026-11-16"
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "an edit with no keys for the opened date and the date type removes them",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchOpened",
+            "batchId": "b-ham-1",
+            "date": "2026-11-16"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchEdited",
+            "batchId": "b-ham-1",
+            "quantity": 500,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 500,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": null
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "an edit gives a batch a date type and an opened date",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchEdited",
+            "batchId": "b-ham-1",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-15"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-15"
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "an edit to a chosen date has no date type, and it keeps the opened date",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-jam",
+              "name": "Jam",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-347",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-jam-1",
+              "productId": "p-jam",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "bestBefore",
+              "openedDate": "2026-11-13"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchEdited",
+            "batchId": "b-jam-1",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-12-05",
+            "expirySource": "chosen",
+            "dateType": null,
+            "openedDate": "2026-11-13"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-jam",
+            "name": "Jam",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-347",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-jam-1",
+            "productId": "p-jam",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-12-05",
+            "expirySource": "chosen",
+            "dateType": null,
+            "openedDate": "2026-11-13"
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "an undone opened change, and a later edit that has the opened date",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchOpened",
+            "batchId": "b-ham-1",
+            "date": "2026-11-16"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchEdited",
+            "batchId": "b-ham-1",
+            "quantity": 500,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "openedDate": "2026-11-16"
+          }
+        },
+        {
+          "id": "c-05",
+          "at": 1794902700000,
+          "origin": "phone-a",
+          "body": {
+            "type": "changeUndone",
+            "changeId": "c-03"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 500,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": null,
+            "openedDate": "2026-11-16"
+          }
+        ],
         "history": [],
         "rejected": []
       }

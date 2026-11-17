@@ -20,6 +20,11 @@ CATEGORIES = ["produce", "dairy", "meat", "condiment", "beverage", "bakery", "le
 UNITS = ["pcs", "g", "kg", "ml", "l", "pack", "bottle", "slice", "cup"]
 STORAGE_KINDS = ["pantry", "fridge", "freezer"]
 EXPIRY_SOURCES = ["printed", "estimated", "chosen"]
+DATE_TYPES = ["useBy", "bestBefore"]
+AFTER_DATE_CLASSES = ["strict", "check"]
+# The categories that give the after-date class `check` to a product with no food of the table (rule 9.1).
+CHECK_CATEGORIES = ["condiment", "beverage", "bakery"]
+TIP_KINDS = ["freeze", "cook", "useUp"]
 ID_CHARACTERS = set("abcdefghijklmnopqrstuvwxyz0123456789-")
 EPOCH = datetime.date(1970, 1, 1)
 
@@ -78,28 +83,139 @@ def estimate(foods, food_id, storage_kind, date_added):
     return None
 
 
-# ---- 5. and 6. Use-first order and the plan of a use
+# ---- 5. and 6. The good-until date, the use-first order, and the plan of a use
 
-def use_first(batches):
+def food_of(foods, food_id):
+    return next((food for food in foods if food["id"] == food_id), None)
+
+
+def opened_days(foods, food_id, storage_kind):
+    """The opened days of a food for a storage kind, or None (rule 4)."""
+    food = food_of(foods, food_id)
+    return None if food is None else food.get("openedDays", {}).get(storage_kind)
+
+
+def good_until(batch, days_opened):
+    """The good-until date of a batch and its source (rule 5.2). `days_opened` is the opened days of the food of the
+    batch for the storage kind of its storage area, or None."""
+    expiry = None if batch["expiryDate"] is None else parse_date(batch["expiryDate"])
+    opened = None if batch.get("openedDate") is None else parse_date(batch["openedDate"])
+    after_opening = None if opened is None or days_opened is None else plus_days(opened, days_opened)
+    if after_opening is not None and (expiry is None or after_opening < expiry):
+        return {"date": format_date(after_opening), "source": "opened"}
+    return {"date": batch["expiryDate"], "source": batch["expirySource"]}
+
+
+def good_until_in(foods, products, areas, batch):
+    """The good-until date of a batch of an inventory. A batch with no product, no food, or no storage area in the
+    lists has no opened days."""
+    product = next((p for p in products if p["id"] == batch["productId"]), None)
+    area = next((a for a in areas if a["id"] == batch["storageAreaId"]), None)
+    days = None if product is None or area is None else opened_days(foods, product.get("foodId"), area["kind"])
+    return good_until(batch, days)
+
+
+def use_first(batches, date_of=lambda batch: batch["expiryDate"]):
+    """The active batches in the use-first order (rule 5.3). `date_of` gives the good-until date of a batch as text.
+    For a batch with no opened date, that is its expiry date."""
     active = [b for b in batches if b["quantity"] > 0]
     return sorted(active, key=lambda b: (
-        0 if b["expiryDate"] else 1,
-        b["expiryDate"] or "",  # The text form of a date sorts in date order.
+        0 if date_of(b) else 1,
+        date_of(b) or "",  # The text form of a date sorts in date order.
         b["dateAdded"],
         b["id"],
     ))
 
 
-def plan_use(batches, product_id, quantity):
+def plan_use(batches, product_id, quantity, date_of=lambda batch: batch["expiryDate"]):
     takes = []
     left = max(quantity, 0)
-    for batch in use_first([b for b in batches if b["productId"] == product_id]):
+    for batch in use_first([b for b in batches if b["productId"] == product_id], date_of):
         if left == 0:
             break
         taken = min(left, batch["quantity"])
         takes.append({"batchId": batch["id"], "quantity": taken})
         left -= taken
     return {"takes": takes, "shortfall": left}
+
+
+# ---- 9. The later-date offer
+
+def after_date_class(foods, product):
+    """The after-date class of a product (rule 9.1)."""
+    food = food_of(foods, product.get("foodId"))
+    if food is not None:
+        return food.get("afterDate", "strict")
+    return "check" if product["category"] in CHECK_CATEGORIES else "strict"
+
+
+def later_date_offer(foods, product, batch, storage_kind, today):
+    """If the app can offer a later date for a batch, and the reason when it cannot (rule 9.2)."""
+    until = good_until(batch, opened_days(foods, product.get("foodId"), storage_kind))
+    state = freshness(days_left(today, None if until["date"] is None else parse_date(until["date"])))
+    if state not in ("expiring", "expired"):
+        reason = "notDue"
+    elif until["source"] == "printed" and batch.get("dateType") == "useBy":
+        reason = "useByDate"
+    elif after_date_class(foods, product) == "strict":
+        reason = "strictFood"
+    elif until["source"] == "opened":
+        reason = "opened"
+    else:
+        reason = None
+    return {"offer": reason is None, "reason": reason}
+
+
+# ---- 10. The before-date tips
+
+def before_date_tips(table, foods, product, batch, storage_kind, today):
+    """The identifiers of the before-date tips that a batch shows, in the order of the table (rule 10)."""
+    food = food_of(foods, product.get("foodId"))
+    if food is None:
+        return []
+    until = good_until(batch, food.get("openedDays", {}).get(storage_kind))
+    if freshness(days_left(today, None if until["date"] is None else parse_date(until["date"]))) != "expiring":
+        return []
+    shown = []
+    for tip in table["tips"]:
+        if food["id"] not in tip["foods"]:
+            continue
+        if tip["kind"] == "freeze" and (storage_kind == "freezer" or "freezer" not in food["days"]):
+            continue
+        shown.append(tip["id"])
+    return shown
+
+
+def check_tips(table, where, foods=None, freezer_days=False):
+    """Finds a mistake in a table of before-date tips. With `foods`, each food of a tip must be in that table. With
+    `freezer_days`, each food of a freeze tip must have days for the freezer: the tip is not shown without them."""
+    for key, source in table["sources"].items():
+        check_id(key, where)
+        if any(not isinstance(source.get(field), str) or not source[field] for field in ("name", "url", "licence")):
+            raise ValueError("%s: the source %s must have a name, a url, and a licence" % (where, key))
+        if not source["url"].startswith("https://"):
+            raise ValueError("%s: the url of the source %s does not start with https://" % (where, key))
+    ids = set()
+    by_id = None if foods is None else {food["id"]: food for food in foods}
+    for tip in table["tips"]:
+        check_id(tip["id"], where)
+        if tip["id"] in ids:
+            raise ValueError("%s: the tip %s is in the table two times" % (where, tip["id"]))
+        ids.add(tip["id"])
+        if tip["kind"] not in TIP_KINDS or tip["source"] not in table["sources"]:
+            raise ValueError("%s: bad kind or source for the tip %s" % (where, tip["id"]))
+        if not isinstance(tip["text"], str) or not tip["text"] or tip["text"] != " ".join(tip["text"].split()):
+            raise ValueError("%s: bad text for the tip %s" % (where, tip["id"]))
+        if not tip["foods"] or len(set(tip["foods"])) != len(tip["foods"]):
+            raise ValueError("%s: the tip %s has no food, or a food two times" % (where, tip["id"]))
+        for food_id in tip["foods"]:
+            check_id(food_id, where)
+            if by_id is not None and food_id not in by_id:
+                raise ValueError("%s: the food %s of the tip %s is not in the table of foods"
+                                 % (where, food_id, tip["id"]))
+            if freezer_days and tip["kind"] == "freeze" and "freezer" not in by_id[food_id]["days"]:
+                raise ValueError("%s: the food %s of the freeze tip %s has no days for the freezer"
+                                 % (where, food_id, tip["id"]))
 
 
 # ---- 7. The change log
@@ -177,7 +293,10 @@ def replay(changes):
                 return "unknownStorageArea"
             if batch["quantity"] <= 0:
                 return "invalidQuantity"
-            batches[batch["id"]] = dict(batch)
+            batch = dict(batch)
+            batch.setdefault("dateType", None)
+            batch.setdefault("openedDate", None)
+            batches[batch["id"]] = batch
         elif kind == "batchEdited":
             batch = batches.get(body["batchId"])
             if batch is None:
@@ -188,6 +307,15 @@ def replay(changes):
                 return "invalidQuantity"
             for field in ("quantity", "storageAreaId", "dateAdded", "expiryDate", "expirySource"):
                 batch[field] = body[field]
+            for field in ("dateType", "openedDate"):
+                batch[field] = body.get(field)
+        elif kind == "batchOpened":
+            batch = batches.get(body["batchId"])
+            if batch is None:
+                return "unknownBatch"
+            if batch["quantity"] == 0:
+                return "batchEnded"
+            batch["openedDate"] = body["date"]
         elif kind in ("batchUsed", "batchThrownAway"):
             batch = batches.get(body["batchId"])
             if batch is None:
@@ -256,6 +384,22 @@ def check_expiry(record, where):
         raise ValueError("%s: expiryDate and expirySource must both have a value, or both be null" % where)
     if date is not None and (parse_date(date) is None or source not in EXPIRY_SOURCES):
         raise ValueError("%s: bad expiry date or source" % where)
+    date_type = record.get("dateType")
+    if date_type is not None and (date_type not in DATE_TYPES or source != "printed"):
+        raise ValueError("%s: bad date type, or a date type for a date that is not printed" % where)
+    if record.get("openedDate") is not None and parse_date(record["openedDate"]) is None:
+        raise ValueError("%s: openedDate is not a date" % where)
+
+
+def check_product(product, where):
+    check_id(product["id"], where)
+    if product["category"] not in CATEGORIES or product["unit"] not in UNITS + [None]:
+        raise ValueError("%s: bad category or unit" % where)
+    if not isinstance(product["name"], str):
+        raise ValueError("%s: the name is not text" % where)
+    for field in ("barcode", "foodId", "note", "storageText"):
+        if product.get(field) is not None and not isinstance(product[field], str):
+            raise ValueError("%s: %s is not text" % (where, field))
 
 
 def check_change(change, where):
@@ -266,15 +410,7 @@ def check_change(change, where):
     body = change["body"]
     kind = body["type"]
     if kind == "productSaved":
-        product = body["product"]
-        check_id(product["id"], where)
-        if product["category"] not in CATEGORIES or product["unit"] not in UNITS + [None]:
-            raise ValueError("%s: bad category or unit" % where)
-        if not isinstance(product["name"], str):
-            raise ValueError("%s: the name is not text" % where)
-        for field in ("barcode", "foodId", "note", "storageText"):
-            if product.get(field) is not None and not isinstance(product[field], str):
-                raise ValueError("%s: %s is not text" % (where, field))
+        check_product(body["product"], where)
     elif kind == "storageAreaSaved":
         check_id(body["area"]["id"], where)
         if body["area"]["kind"] not in STORAGE_KINDS:
@@ -285,7 +421,7 @@ def check_change(change, where):
         check_id(body["batchId"], where)
         check_id(body["storageAreaId"], where)
         check_expiry(body, where)
-    elif kind in ("batchUsed", "batchThrownAway"):
+    elif kind in ("batchUsed", "batchThrownAway", "batchOpened"):
         check_id(body["batchId"], where)
         if parse_date(body["date"]) is None:
             raise ValueError("%s: bad date" % where)
@@ -296,7 +432,8 @@ def check_change(change, where):
         raise ValueError("%s: unknown change type %r" % (where, kind))
 
 
-def check_foods(table, where):
+def check_foods(table, where, with_class=False):
+    """Finds a mistake in a table of foods. With `with_class`, each food must have an after-date class."""
     ids = set()
     for food in table["foods"]:
         check_id(food["id"], where)
@@ -310,6 +447,12 @@ def check_foods(table, where):
         for kind, days in food["days"].items():
             if kind not in STORAGE_KINDS or not isinstance(days, int) or days < 1:
                 raise ValueError("%s: bad days for %s" % (where, food["id"]))
+        opened = food.get("openedDays", {"fridge": 1})
+        if not opened or any(kind not in STORAGE_KINDS or not isinstance(days, int) or days < 1
+                             for kind, days in opened.items()):
+            raise ValueError("%s: bad opened days for %s" % (where, food["id"]))
+        if food.get("afterDate", None if with_class else "strict") not in AFTER_DATE_CLASSES:
+            raise ValueError("%s: bad or no after-date class for %s" % (where, food["id"]))
         if food.get("usualKind", "fridge") not in STORAGE_KINDS:
             raise ValueError("%s: bad usual storage kind for %s" % (where, food["id"]))
         if food.get("common", True) is not True:
@@ -478,28 +621,33 @@ def expect_change_log(data):
         yield case, replay(case["changes"])
 
 
-# Foods with tips that are always in the samples of food-table.json: bananas, tomatoes, and frozen pizza.
-TIP_SAMPLES = {"fk-251", "fk-306", "fk-571"}
+# Foods that are always in the samples of food-table.json. With tips: bananas, tomatoes, and frozen pizza. With
+# opened days: hard cheese, hot dogs, ketchup, and peanut butter.
+TIP_SAMPLES = {"fk-251", "fk-306", "fk-571", "fk-3", "fk-98", "fk-348", "fk-387"}
 
 
 def expect_food_table(data):
     """Facts about spec/foods.json. They prove that an app reads the whole table."""
     table = json.loads((SPEC / "foods.json").read_text(encoding="utf-8"))
-    check_foods(table, "foods.json")
+    check_foods(table, "foods.json", with_class=True)
     foods = table["foods"]
     step = max(1, len(foods) // 12)
     sampled = foods[::step] + [food for food in foods if food["id"] in TIP_SAMPLES and food not in foods[::step]]
     samples = [{"foodId": food["id"], "name": food["name"], "category": food["category"], "days": food["days"],
                 "usualKind": food.get("usualKind"), "common": food.get("common", False),
-                "aliases": food.get("aliases", []), "tips": food.get("tips", {})}
+                "aliases": food.get("aliases", []), "tips": food.get("tips", {}),
+                "openedDays": food.get("openedDays", {}), "afterDate": food["afterDate"]}
                for food in sampled]
     with_days = {kind: sum(1 for food in foods if kind in food["days"]) for kind in STORAGE_KINDS}
     usual = {kind: sum(1 for food in foods if food.get("usualKind") == kind) for kind in STORAGE_KINDS}
     common = sum(1 for food in foods if food.get("common"))
     aliases = sum(len(food.get("aliases", [])) for food in foods)
     with_tips = {kind: sum(1 for food in foods if kind in food.get("tips", {})) for kind in STORAGE_KINDS}
+    with_opened = {kind: sum(1 for food in foods if kind in food.get("openedDays", {})) for kind in STORAGE_KINDS}
+    classes = {name: sum(1 for food in foods if food["afterDate"] == name) for name in AFTER_DATE_CLASSES}
     yield data, {"count": len(foods), "withDays": with_days, "withUsualKind": usual, "common": common,
-                 "aliases": aliases, "withTips": with_tips, "samples": samples}
+                 "aliases": aliases, "withTips": with_tips, "withOpenedDays": with_opened, "afterDate": classes,
+                 "samples": samples}
 
 
 def expect_storage_hint(data):
@@ -521,6 +669,77 @@ def expect_storage_hints_table(data):
         yield case, storage_hint(hints, case["storageText"], case["tags"])
 
 
+def check_case(case, where):
+    """Checks the product and the batch of a case of rules 5.2, 9, and 10."""
+    check_product(case["product"], where)
+    check_batch(case["batch"], where)
+    if case["storageKind"] not in STORAGE_KINDS or parse_date(case["today"]) is None:
+        raise ValueError("%s: bad storage kind or bad date for today" % where)
+
+
+def expect_good_until(data):
+    check_foods(data, "good-until.json")
+    foods = data["foods"]
+    for case in data["cases"]:
+        check_case(case, "good-until.json " + case["name"])
+        until = good_until(case["batch"], opened_days(foods, case["product"].get("foodId"), case["storageKind"]))
+        left = days_left(parse_date(case["today"]), None if until["date"] is None else parse_date(until["date"]))
+        yield case, {"date": until["date"], "source": until["source"], "daysLeft": left, "freshness": freshness(left)}
+    for section in ("order", "plan"):
+        for case in data[section]:
+            where = "good-until.json " + case["name"]
+            for product in case["products"]:
+                check_product(product, where)
+            for area in case["storageAreas"]:
+                check_id(area["id"], where)
+                if area["kind"] not in STORAGE_KINDS:
+                    raise ValueError("%s: bad storage kind" % where)
+            for batch in case["batches"]:
+                check_batch(batch, where)
+
+            def date_of(batch, case=case):
+                return good_until_in(foods, case["products"], case["storageAreas"], batch)["date"]
+            if section == "order":
+                yield case, {"order": [batch["id"] for batch in use_first(case["batches"], date_of)]}
+            else:
+                yield case, plan_use(case["batches"], case["productId"], case["quantity"], date_of)
+
+
+def expect_later_date_offer(data):
+    check_foods(data, "later-date-offer.json")
+    for case in data["classes"]:
+        check_product(case["product"], "later-date-offer.json " + case["name"])
+        yield case, {"afterDate": after_date_class(data["foods"], case["product"])}
+    for case in data["cases"]:
+        check_case(case, "later-date-offer.json " + case["name"])
+        yield case, later_date_offer(data["foods"], case["product"], case["batch"], case["storageKind"],
+                                     parse_date(case["today"]))
+
+
+def expect_before_date_tips(data):
+    check_foods(data, "before-date-tips.json")
+    check_tips(data["table"], "vectors/before-date-tips.json", data["foods"])
+    for case in data["cases"]:
+        check_case(case, "before-date-tips.json " + case["name"])
+        yield case, {"tips": before_date_tips(data["table"], data["foods"], case["product"], case["batch"],
+                                              case["storageKind"], parse_date(case["today"]))}
+
+
+def expect_before_date_tips_table(data):
+    """Facts about spec/before-date-tips.json, and the tips of batches with that table and spec/foods.json."""
+    foods = json.loads((SPEC / "foods.json").read_text(encoding="utf-8"))["foods"]
+    table = json.loads((SPEC / "before-date-tips.json").read_text(encoding="utf-8"))
+    check_tips(table, "before-date-tips.json", foods, freezer_days=True)
+    for case in data["facts"]:
+        yield case, {"sources": len(table["sources"]), "tips": len(table["tips"]),
+                     "kinds": {kind: sum(1 for tip in table["tips"] if tip["kind"] == kind) for kind in TIP_KINDS},
+                     "foods": len({food_id for tip in table["tips"] for food_id in tip["foods"]})}
+    for case in data["cases"]:
+        check_case(case, "before-date-tips-table.json " + case["name"])
+        yield case, {"tips": before_date_tips(table, foods, case["product"], case["batch"], case["storageKind"],
+                                              parse_date(case["today"]))}
+
+
 FILES = {
     "calendar-date.json": expect_calendar_date,
     "freshness.json": expect_freshness,
@@ -531,6 +750,10 @@ FILES = {
     "food-table.json": expect_food_table,
     "storage-hint.json": expect_storage_hint,
     "storage-hints-table.json": expect_storage_hints_table,
+    "good-until.json": expect_good_until,
+    "later-date-offer.json": expect_later_date_offer,
+    "before-date-tips.json": expect_before_date_tips,
+    "before-date-tips-table.json": expect_before_date_tips_table,
 }
 
 

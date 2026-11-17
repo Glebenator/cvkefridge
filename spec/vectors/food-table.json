@@ -1,5 +1,5 @@
 {
-  "description": "Facts about spec/foods.json: the number of foods, the number with days for each storage kind, the number with each usual storage kind, the number of common foods, the number of aliases, and some foods. An app that reads the table must find the same.",
+  "description": "Facts about spec/foods.json: the number of foods, the number with days for each storage kind, the number with each usual storage kind, the number of common foods, the number of aliases, the number with a tip and with opened days for each storage kind, the number in each after-date class, and some foods. An app that reads the table must find the same.",
   "expect": {
     "count": 661,
     "withDays": {
@@ -19,6 +19,15 @@
       "fridge": 68,
       "freezer": 51
     },
+    "withOpenedDays": {
+      "pantry": 74,
+      "fridge": 145,
+      "freezer": 0
+    },
+    "afterDate": {
+      "strict": 262,
+      "check": 399
+    },
     "samples": [
       {
         "foodId": "fk-1",
@@ -33,7 +42,9 @@
         "aliases": [],
         "tips": {
           "pantry": "May be left at room temperature for 1 - 2 days."
-        }
+        },
+        "openedDays": {},
+        "afterDate": "check"
       },
       {
         "foodId": "fk-58",
@@ -46,7 +57,9 @@
         "usualKind": "fridge",
         "common": false,
         "aliases": [],
-        "tips": {}
+        "tips": {},
+        "openedDays": {},
+        "afterDate": "strict"
       },
       {
         "foodId": "fk-119",
@@ -59,7 +72,9 @@
         "usualKind": "fridge",
         "common": false,
         "aliases": [],
-        "tips": {}
+        "tips": {},
+        "openedDays": {},
+        "afterDate": "strict"
       },
       {
         "foodId": "fk-179",
@@ -69,7 +84,11 @@
         "usualKind": "fridge",
         "common": false,
         "aliases": [],
-        "tips": {}
+        "tips": {},
+        "openedDays": {
+          "fridge": 4
+        },
+        "afterDate": "strict"
       },
       {
         "foodId": "fk-237",
@@ -81,7 +100,11 @@
         "usualKind": "pantry",
         "common": false,
         "aliases": [],
-        "tips": {}
+        "tips": {},
+        "openedDays": {
+          "pantry": 1095
+        },
+        "afterDate": "check"
       },
       {
         "foodId": "fk-293",
@@ -97,7 +120,9 @@
         "aliases": [],
         "tips": {
           "pantry": "Highly perishable when stored in the pantry."
-        }
+        },
+        "openedDays": {},
+        "afterDate": "check"
       },
       {
         "foodId": "fk-350",
@@ -113,7 +138,11 @@
         ],
         "tips": {
           "pantry": "Refrigeration ensures that commercial sauces and condiments stay fresh for a longer period of time. Shelf-stable commercial mayonnaise is safe when stored at room temperature after opening. Quality, not safety, is the reason the labels on these products suggest that they be refrigerated after opening."
-        }
+        },
+        "openedDays": {
+          "fridge": 60
+        },
+        "afterDate": "check"
       },
       {
         "foodId": "fk-406",
@@ -125,7 +154,9 @@
         "usualKind": "pantry",
         "common": false,
         "aliases": [],
-        "tips": {}
+        "tips": {},
+        "openedDays": {},
+        "afterDate": "check"
       },
       {
         "foodId": "fk-463",
@@ -144,7 +175,11 @@
         ],
         "tips": {
           "pantry": "Dark, away from direct heat or sunlight."
-        }
+        },
+        "openedDays": {
+          "fridge": 1
+        },
+        "afterDate": "check"
       },
       {
         "foodId": "fk-518",
@@ -157,7 +192,9 @@
         "usualKind": "fridge",
         "common": false,
         "aliases": [],
-        "tips": {}
+        "tips": {},
+        "openedDays": {},
+        "afterDate": "strict"
       },
       {
         "foodId": "fk-574",
@@ -172,7 +209,9 @@
         "aliases": [],
         "tips": {
           "pantry": "May have shorter shelf life due to lack of preservatives."
-        }
+        },
+        "openedDays": {},
+        "afterDate": "check"
       },
       {
         "foodId": "fk-629",
@@ -185,7 +224,9 @@
         "usualKind": "fridge",
         "common": false,
         "aliases": [],
-        "tips": {}
+        "tips": {},
+        "openedDays": {},
+        "afterDate": "strict"
       },
       {
         "foodId": "fk-684",
@@ -198,7 +239,53 @@
         "usualKind": "pantry",
         "common": false,
         "aliases": [],
-        "tips": {}
+        "tips": {},
+        "openedDays": {},
+        "afterDate": "check"
+      },
+      {
+        "foodId": "fk-3",
+        "name": "Cheese",
+        "category": "dairy",
+        "days": {
+          "fridge": 180,
+          "freezer": 180
+        },
+        "usualKind": "fridge",
+        "common": true,
+        "aliases": [
+          "cheddar",
+          "parmesan",
+          "gouda",
+          "emmental",
+          "hard cheese"
+        ],
+        "tips": {},
+        "openedDays": {
+          "fridge": 21
+        },
+        "afterDate": "check"
+      },
+      {
+        "foodId": "fk-98",
+        "name": "Hot dogs",
+        "category": "meat",
+        "days": {
+          "fridge": 14,
+          "freezer": 30
+        },
+        "usualKind": "fridge",
+        "common": true,
+        "aliases": [
+          "frankfurters",
+          "wieners",
+          "franks"
+        ],
+        "tips": {},
+        "openedDays": {
+          "fridge": 7
+        },
+        "afterDate": "strict"
       },
       {
         "foodId": "fk-251",
@@ -216,7 +303,9 @@
         "tips": {
           "pantry": "Ripe is when this item is tender, fully developed and ready to eat.",
           "fridge": "Timeline for refrigerator applies to ripe fruit; skin will blacken."
-        }
+        },
+        "openedDays": {},
+        "afterDate": "check"
       },
       {
         "foodId": "fk-306",
@@ -232,7 +321,43 @@
         ],
         "tips": {
           "pantry": "Until Ripe, then 7 days. Ripe is when this item is tender, fully developed and ready to eat. Refrigeration may affect flavor; USDA recommends pantry storage."
-        }
+        },
+        "openedDays": {},
+        "afterDate": "check"
+      },
+      {
+        "foodId": "fk-348",
+        "name": "Ketchup, cocktail, or chili sauce",
+        "category": "condiment",
+        "days": {
+          "pantry": 365
+        },
+        "usualKind": "pantry",
+        "common": true,
+        "aliases": [],
+        "tips": {
+          "pantry": "Refrigeration ensures that commercial sauces and condiments stay fresh for a longer period of time. Shelf-stable commercial ketchup, cocktail sauce, and chili sauce are safe when stored at room temperature after opening. Quality, not safety, is the reason the labels on these products suggest that they be refrigerated after opening."
+        },
+        "openedDays": {
+          "fridge": 180
+        },
+        "afterDate": "check"
+      },
+      {
+        "foodId": "fk-387",
+        "name": "Peanut butter",
+        "category": "other",
+        "days": {
+          "pantry": 180
+        },
+        "usualKind": "pantry",
+        "common": true,
+        "aliases": [],
+        "tips": {},
+        "openedDays": {
+          "pantry": 60
+        },
+        "afterDate": "check"
       },
       {
         "foodId": "fk-571",
@@ -250,7 +375,9 @@
         "tips": {
           "fridge": "Recommendation is for storage after cooking.",
           "freezer": "Keep frozen. For safety, cook as directed."
-        }
+        },
+        "openedDays": {},
+        "afterDate": "strict"
       }
     ]
   }

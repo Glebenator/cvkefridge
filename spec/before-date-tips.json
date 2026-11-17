@@ -1,0 +1,58 @@
+{
+  "note": "The table for rule 10 of rules.md, edited by hand. ADR 0015 says how the tips were selected. Each text has the words of its source. Only the capital letter at the start and the full stop at the end can be different. No text is from a language model. 'foods' has the foods of spec/foods.json that show the tip. A food of a freeze tip must have days for the freezer.",
+  "opened": "2026-11-17",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0.",
+  "sources": {
+    "govuk-dates": {
+      "name": "GOV.UK: Understanding food labelling, Best before and use-by dates",
+      "url": "https://www.gov.uk/understanding-food-labelling/best-before-and-use-by-dates",
+      "licence": "Open Government Licence v3.0"
+    },
+    "fsa-chilling": {
+      "name": "Food Standards Agency: How to chill, freeze and defrost food safely",
+      "url": "https://www.gov.uk/government/publications/how-to-chill-freeze-and-defrost-food-safely/how-to-chill-freeze-and-defrost-food-safely",
+      "licence": "Open Government Licence v3.0"
+    },
+    "fsa-fact-checker": {
+      "name": "Food Standards Agency: Home food fact checker",
+      "url": "https://www.gov.uk/government/publications/home-food-fact-checker/home-food-fact-checker",
+      "licence": "Open Government Licence v3.0"
+    }
+  },
+  "tips": [
+    {
+      "id": "freeze-by-the-date",
+      "kind": "freeze",
+      "foods": [
+        "fk-40", "fk-41", "fk-43", "fk-50", "fk-64", "fk-67", "fk-73", "fk-102",
+        "fk-113", "fk-115", "fk-117", "fk-118", "fk-144", "fk-146", "fk-151"
+      ],
+      "text": "You can freeze food right up until midnight on the ‘use by’ date printed on the label.",
+      "source": "fsa-chilling"
+    },
+    {
+      "id": "cook-by-the-date",
+      "kind": "cook",
+      "foods": [
+        "fk-40", "fk-41", "fk-43", "fk-50", "fk-64", "fk-67", "fk-73", "fk-102",
+        "fk-113", "fk-115", "fk-117", "fk-118", "fk-144", "fk-146", "fk-151"
+      ],
+      "text": "If you cook food before the use-by date, you should then cool it and keep it in the fridge. You must then eat it within 48 hours or freeze it to eat at a later date.",
+      "source": "govuk-dates"
+    },
+    {
+      "id": "use-overripe-fruit",
+      "kind": "useUp",
+      "foods": ["fk-248", "fk-251", "fk-481"],
+      "text": "Overripe fruit is great for cooking, baking and made into smoothies.",
+      "source": "fsa-fact-checker"
+    },
+    {
+      "id": "freeze-cooked-potatoes",
+      "kind": "freeze",
+      "foods": ["fk-297"],
+      "text": "You can freeze cooked or parboiled potatoes which have been boiled for 5 minutes.",
+      "source": "fsa-fact-checker"
+    }
+  ]
+}

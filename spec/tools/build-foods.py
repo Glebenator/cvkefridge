@@ -10,8 +10,11 @@ with the licence CC0 1.0. The source file is not in this repository.
 The rules of the conversion:
 - A food gets the identifier "fk-" plus the FoodKeeper ID.
 - The days for a storage kind come from the "date of purchase" values (DOP_Pantry, DOP_Refrigerate, DOP_Freeze). If a
-  food has none, they come from the general values (Pantry, Refrigerate, Freeze). Values for "after opening" and
-  "after thawing" are not used.
+  food has none, they come from the general values (Pantry, Refrigerate, Freeze). Values for "after thawing" are not
+  used.
+- The opened days ("openedDays") for a storage kind come from the "after opening" values (Pantry_After_Opening,
+  Refrigerate_After_Opening). The source has none for the freezer. The rules of the next three lines apply to them
+  also. A food with no opened days has no "openedDays" key.
 - The days are the minimum of the range, which is the careful value. If only the maximum has a value, that is used.
 - Weeks are 7 days, months are 30 days, and years are 365 days. A value in hours, and a value below 1 day, gives no
   days.
@@ -28,6 +31,10 @@ The rules of the conversion:
 - "common" (true) and "aliases" come from spec/tools/food-extras.json, which is edited by hand. An alias is in lowercase.
   An alias that is the name of the food, or that is two times in the list, is not added. A food that is not common has
   no "common" key, and a food with no alias has no "aliases" key.
+- The after-date class ("afterDate") is "strict" or "check". It comes from spec/tools/food-classes.json, which is edited
+  by hand: the class of the FoodKeeper category of the food, or the other class when the file lists the food. A food
+  of a category that is not in the file is strict. Each food has the key. The names of the categories in the file must
+  agree with the source.
 """
 import json
 import sys
@@ -35,6 +42,8 @@ from pathlib import Path
 
 SPEC = Path(__file__).resolve().parent.parent
 EXTRAS = SPEC / "tools" / "food-extras.json"
+CLASSES = SPEC / "tools" / "food-classes.json"
+AFTER_DATE_CLASSES = ["strict", "check"]
 
 DAYS_PER = {"days": 1, "weeks": 7, "months": 30, "year": 365, "years": 365}
 
@@ -64,6 +73,12 @@ GROUPS = {
     "pantry": ["DOP_Pantry", "Pantry"],
     "fridge": ["DOP_Refrigerate", "Refrigerate"],
     "freezer": ["DOP_Freeze", "Freeze"],
+}
+
+# The source group with the days after the package is opened, for each storage kind that has one.
+OPENED_GROUPS = {
+    "pantry": "Pantry_After_Opening",
+    "fridge": "Refrigerate_After_Opening",
 }
 
 # The source groups that show that a food can be kept in a storage kind, for the usual storage kind. The order of the
@@ -139,17 +154,49 @@ def tips_of(row):
     return tips
 
 
+def rows_of(source, name):
+    """The rows of a sheet of the source, each as one dictionary."""
+    sheet = next(s for s in source["sheets"] if s["name"] == name)
+    for cells in sheet["data"]:
+        row = {}
+        for cell in cells:
+            row.update(cell)
+        yield row
+
+
+def after_date_classes(source):
+    """The after-date class of each FoodKeeper category, and of the foods that the file lists."""
+    classes = json.loads(CLASSES.read_text(encoding="utf-8"))
+    names = {}
+    for row in rows_of(source, "Category"):
+        sub = clean(row.get("Subcategory_Name"))
+        names[str(int(row["ID"]))] = clean(row["Category_Name"]) + (": " + sub if sub else "")
+    problems = []
+    for key, category in classes["categories"].items():
+        if names.get(key) != category["name"]:
+            problems.append("category %s is %r in the source" % (key, names.get(key)))
+        if category["afterDate"] not in AFTER_DATE_CLASSES:
+            problems.append("category %s has a bad class" % key)
+    by_category = {int(key): category["afterDate"] for key, category in classes["categories"].items()}
+    if set(classes["foods"]) - set(AFTER_DATE_CLASSES):
+        problems.append("'foods' has a key that is not a class")
+    by_food = {}
+    for name in AFTER_DATE_CLASSES:
+        for food_id in classes["foods"].get(name, []):
+            if food_id in by_food:
+                problems.append("%s is in 'foods' two times" % food_id)
+            by_food[food_id] = name
+    return by_category, by_food, problems
+
+
 def main():
     if len(sys.argv) != 3:
         print(__doc__)
         return 2
     source = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
-    sheet = next(s for s in source["sheets"] if s["name"] == "Product")
+    class_of_category, class_of_food, problems = after_date_classes(source)
     foods = []
-    for cells in sheet["data"]:
-        row = {}
-        for cell in cells:
-            row.update(cell)
+    for row in rows_of(source, "Product"):
         days = {}
         for kind, groups in GROUPS.items():
             for group in groups:
@@ -169,17 +216,32 @@ def main():
                 keywords.append(word)
         food["keywords"] = keywords
         food["days"] = days
+        opened = {kind: value for kind, value in ((kind, days_of(row, group)) for kind, group in OPENED_GROUPS.items())
+                  if value is not None}
+        if opened:
+            food["openedDays"] = opened
         usual = usual_kind(row)
         if usual:
             food["usualKind"] = usual
         tips = tips_of(row)
         if tips:
             food["tips"] = tips
+        food["afterDate"] = class_of_category.get(int(row["Category_ID"]), "strict")
         foods.append(food)
     foods.sort(key=lambda food: int(food["id"][3:]))
 
     extras = json.loads(EXTRAS.read_text(encoding="utf-8"))
     by_id = {food["id"]: food for food in foods}
+    for food_id, name in class_of_food.items():
+        if food_id not in by_id:
+            problems.append("%s is not in the source" % food_id)
+        elif by_id[food_id]["afterDate"] == name:
+            problems.append("%s has the class of its category; remove it from 'foods'" % food_id)
+        else:
+            by_id[food_id]["afterDate"] = name
+    if problems:
+        print("food-classes.json: %s" % "; ".join(problems))
+        return 1
     unknown = [food_id for food_id in list(extras["common"]) + list(extras["aliases"]) if food_id not in by_id]
     if unknown:
         print("food-extras.json has foods that are not in the source: %s" % ", ".join(unknown))
@@ -218,6 +280,11 @@ def main():
     (SPEC / "foods.json").write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
     print("%d foods; with days: %s" % (len(foods), {
         kind: sum(1 for food in foods if kind in food["days"]) for kind in GROUPS}))
+    print("with opened days: %s; with one or more: %d" % (
+        {kind: sum(1 for food in foods if kind in food.get("openedDays", {})) for kind in OPENED_GROUPS},
+        sum(1 for food in foods if "openedDays" in food)))
+    print("after-date class: %s" % {
+        name: sum(1 for food in foods if food["afterDate"] == name) for name in AFTER_DATE_CLASSES})
     return 0
 
 

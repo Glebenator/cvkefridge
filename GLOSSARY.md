@@ -2,7 +2,9 @@
 
 The shared terms of the Android app and the iOS app. This is the second draft, after the decisions of 10 November 2026
 in [the plan](docs/plan.md). The owner agrees the words in milestone 1. Household sharing is deferred, so its terms
-are not here. The terms Home, My Fridge, and Food are from 11 November 2026 (ADR 0006).
+are not here. The terms Home, My Fridge, and Food are from 11 November 2026 (ADR 0006). The terms for opened food,
+for the date type, for the food after its date, and for the before-date tips are from 17 November 2026 (ADR 0013,
+ADR 0014, ADR 0015).
 
 ## Inventory
 
@@ -22,8 +24,8 @@ _Avoid_: Comment, description, memo
 
 **Batch**:
 One purchase of a **product**: its **quantity**, its **storage area**, its **date added**, and its optional
-**expiry date**. One **product** can have more than one batch. A batch is active while its quantity is above 0. After
-that it is ended.
+**expiry date** and **opened date**. One **product** can have more than one batch. A batch is active while its
+quantity is above 0. After that it is ended.
 _Avoid_: Item, fridge item, entry, lot
 
 **Quantity**:
@@ -61,13 +63,49 @@ _Avoid_: Timestamp, created date
 ## Freshness
 
 **Expiry date**:
-The calendar date after which the **batch** is not good to eat. It has no time of day and no time zone. It is a
-**printed date**, an **estimated date**, or a **chosen date**.
-_Avoid_: Expiration, best before, use by, expires on
+The calendar date after which the **batch** is not good to eat, while its package is not opened. It has no time of
+day and no time zone. It is a **printed date**, an **estimated date**, or a **chosen date**.
+_Avoid_: Expiration, expires on. "Use by" and "best before" are **date types**, not other words for the expiry date.
 
 **Printed date**:
-An **expiry date** from the package, which the person entered.
+An **expiry date** from the package, which the person entered. It can have a **date type**.
 _Avoid_: Real date, exact date
+
+**Date type**:
+What the words on the package say about a **printed date**: use by, or best before. A printed date with no date type
+has a type that the app does not know. An **estimated date** and a **chosen date** have no date type.
+_Avoid_: Label type, date kind, date label
+
+**Use-by date**:
+A **printed date** with the **date type** use by. It is about safety: after it, the food is not safe to eat, and the
+person cannot see, smell, or taste the danger. The "expiration date" on infant formula and on meal replacements is
+also a use-by date.
+_Avoid_: Safety date, expiry (for the label)
+
+**Best-before date**:
+A **printed date** with the **date type** best before. It is about quality: after it, the food can be less good, and
+many foods are still good to eat.
+_Avoid_: Quality date, sell by, display until, BBE
+
+**Opened date**:
+The calendar date on which the person opened the package of a **batch**. A batch has one opened date or none.
+_Avoid_: Open date, date opened, opening date
+
+**Opened days**:
+The number of days that a food stays good after its package is opened, in a **storage kind**, from the table of
+foods. A food can have no opened days.
+_Avoid_: Open life, period after opening, time after opening
+
+**After-opening date**:
+The **opened date** of a **batch** plus the **opened days** of its food for the **storage kind** of its **storage
+area**. The app shows it as an estimate.
+_Avoid_: Opened expiry, open date
+
+**Good-until date**:
+The calendar date that the app uses for the **days left**, the **freshness**, and the **use-first list** of a
+**batch**: the earlier of its **expiry date** and its **after-opening date**. The app calculates it each time. The
+app does not store it.
+_Avoid_: Effective date, real expiry date, final date
 
 **Estimated date**:
 An **expiry date** that the app suggested from the **expiry estimate**. The app shows it as an estimate.
@@ -84,8 +122,8 @@ The number of days that a food stays good in a **storage kind**, from the table 
 _Avoid_: Shelf life (the old rule with eight categories), lifetime
 
 **Days left**:
-The number of calendar days from today to the **expiry date**. Today is the date in the time zone of the device. It is
-0 on the expiry date and negative after it.
+The number of calendar days from today to the **good-until date**. Today is the date in the time zone of the device.
+It is 0 on the good-until date and negative after it.
 _Avoid_: Days remaining, time left
 
 **Freshness**:
@@ -93,8 +131,25 @@ The state of a **batch** that its **days left** give: fresh, expiring, expired, 
 it each time. The app does not store it.
 _Avoid_: Status, condition
 
+**After-date class**:
+What the table of foods says about a food after its date: strict or check. A strict food is not good to eat after its
+date, and the person cannot see, smell, or taste if it is safe: raw meat, fish, soft cheese, and prepared food are
+examples. A check food is often still good after its date, and the person can look at it, smell it, and taste it:
+bread, hard cheese, and jam are examples.
+_Avoid_: Risk class, safety class, perishable
+
+**Later-date offer**:
+The controls of "Still good?" that let the person select a **chosen date** for a **batch**. The app shows them only
+when the rule for the offer permits it.
+_Avoid_: Extend, snooze, postpone
+
+**Before-date tip**:
+A short text from a named source about what to do with a food before its date: freeze it, cook it, or use it up. The
+app shows it only while the **batch** is expiring. It is not advice for expired food.
+_Avoid_: Rescue tip, recipe, hack. **Storage tips** say how to keep a food. They are not before-date tips.
+
 **Use-first list**:
-The **batches** of the **inventory**, with the fewest **days left** first. **Home** shows the start of it.
+The **batches** of the **inventory**, with the earliest **good-until date** first. **Home** shows the start of it.
 _Avoid_: Dashboard
 
 **Home**:

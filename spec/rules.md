@@ -20,6 +20,9 @@ that is a defect in this folder. Correct it here first.
   The app gets it from the product lookup, and the person does not write it.
 - **Category.** `produce`, `dairy`, `meat`, `condiment`, `beverage`, `bakery`, `leftovers`, or `other`.
 - **Storage kind.** `pantry`, `fridge`, or `freezer`. Each storage area has one kind.
+- **Date type.** `useBy`, `bestBefore`, or none. It is what the words on the package say about a printed expiry date.
+  None means that the app does not know the type.
+- **After-date class.** `strict` or `check`. It says if a food can be good after its date (rule 9.1).
 
 ## 2. Calendar dates
 
@@ -37,7 +40,8 @@ that is a defect in this folder. Correct it here first.
 
 ## 3. Freshness
 
-- **Days left** are the days from today to the expiry date. A batch with no expiry date has no days left.
+- **Days left** are the days from today to the good-until date of the batch (rule 5.2). A batch with no good-until
+  date has no days left. For a batch with no opened date, the good-until date is the expiry date.
 - **Freshness** from the days left:
 
 | Days left | Freshness |
@@ -64,8 +68,15 @@ that is a defect in this folder. Correct it here first.
 - A food can be **common**: a food that people add often. A food can have **aliases**: other names for the food, in
   lowercase. `tools/food-extras.json` has them. They are for the suggestions of the add form, and they give no
   estimate.
+- A food can have **opened days** (`openedDays`): for a storage kind, the number of days that the food stays good
+  after its package is opened. The table has opened days for the pantry and for the fridge only. A food with no
+  `openedDays` key has none. `tools/build-foods.py` has the rule that sets them. Rule 5.2 uses them.
+- A food has an **after-date class** (`afterDate`): `strict` or `check`. `tools/food-classes.json` has the classes,
+  and `tools/build-foods.py` adds them. A food with no `afterDate` key is `strict`. Rule 9 uses the class.
 
-## 5. Batches and the use-first order
+## 5. Batches, the good-until date, and the use-first order
+
+### 5.1 Batches
 
 - A batch is **active** when its quantity is above 0. A batch with a quantity of 0 is **ended**.
 - An expiry date has a source: `printed`, `estimated`, or `chosen`. A batch has both the date and the source, or none of
@@ -74,11 +85,39 @@ that is a defect in this folder. Correct it here first.
   - `estimated`: the date from the table of foods (rule 4).
   - `chosen`: a later date that the person selected because the food is still good after its printed or estimated
     date. It is not from the package and not from the table.
-- The **use-first order** of active batches:
-  1. A batch with an expiry date comes before a batch without one.
-  2. The earlier expiry date comes first. The source of the date has no effect.
-  3. Then the earlier date added comes first.
-  4. Then the smaller batch identifier comes first.
+- A batch can have a **date type** (`dateType`): `useBy` or `bestBefore`. Only a batch with the source `printed` can
+  have one. A printed date with no date type has a type that the app does not know.
+- A batch can have an **opened date** (`openedDate`): the calendar date on which the person opened the package. It
+  can be before the date added. A batch with no expiry date can have an opened date.
+
+### 5.2 The good-until date
+
+The good-until date is the date that the days left (rule 3), the use-first order (5.3), and rules 9 and 10 use. The
+core calculates it each time. No change and no batch has it.
+
+1. Find the opened days of the batch: the opened days of the food of its product (rule 4) for the storage kind of its
+   storage area. There are none when the product has no food, when the food is not in the table, or when the food has
+   no opened days for that kind.
+2. The **after-opening date** is the opened date plus the opened days. There is none when the batch has no opened
+   date, when the batch has no opened days, or when the result is after year 9999.
+3. If there is an after-opening date, and the batch has no expiry date or the after-opening date is earlier than the
+   expiry date, the good-until date is the after-opening date. Its source is `opened`.
+4. In each other case, the good-until date is the expiry date, with the source of the expiry date. A batch with no
+   expiry date then has no good-until date and no source.
+
+The source of a good-until date is thus `printed`, `estimated`, `chosen`, or `opened`. A date with the source `opened`
+is an estimate, and the app shows it as an estimate. When the two dates are the same, the source is the source of the
+expiry date. The rule has no exception for a chosen date: an after-opening date that is earlier than a chosen date
+comes first.
+
+### 5.3 The use-first order
+
+The **use-first order** of active batches:
+
+1. A batch with a good-until date comes before a batch without one.
+2. The earlier good-until date comes first. The source of the date has no effect.
+3. Then the earlier date added comes first.
+4. Then the smaller batch identifier comes first.
 
 ## 6. Plan a use
 
@@ -113,8 +152,9 @@ that made it, and a body with a type.
 | `productDeleted` | `productId` | Removes the product, its batches, and the history of those batches. | `unknownProduct` |
 | `storageAreaSaved` | `area` (identifier, name, kind) | Adds the storage area, or replaces the one with the same identifier. | `fixedStorageArea`: the identifier is `fridge` or `freezer` |
 | `storageAreaDeleted` | `storageAreaId` | Removes the storage area. | `fixedStorageArea`, `unknownStorageArea`, or `storageAreaInUse`: an active batch is in it. The checks are in this order. |
-| `batchAdded` | `batch` | Adds the batch. | `duplicateBatch`, `unknownProduct`, `unknownStorageArea`, or `invalidQuantity`: the quantity is 0 or less. The checks are in this order. |
-| `batchEdited` | `batchId`, `quantity`, `storageAreaId`, `dateAdded`, `expiryDate`, `expirySource` | Replaces these values of the batch. It makes no history. It can make an ended batch active again. | `unknownBatch`, `unknownStorageArea`, or `invalidQuantity`: the quantity is 0 or less. The checks are in this order. |
+| `batchAdded` | `batch` (identifier, product, quantity, storage area, date added, expiry date, expiry source, date type, opened date) | Adds the batch. A batch with no `dateType` key has no date type, and a batch with no `openedDate` key has no opened date: changes from before these values do not have the keys. | `duplicateBatch`, `unknownProduct`, `unknownStorageArea`, or `invalidQuantity`: the quantity is 0 or less. The checks are in this order. |
+| `batchEdited` | `batchId`, `quantity`, `storageAreaId`, `dateAdded`, `expiryDate`, `expirySource`, `dateType`, `openedDate` | Replaces these values of the batch. A change with no `dateType` key gives the batch no date type, and a change with no `openedDate` key gives the batch no opened date. It makes no history. It can make an ended batch active again. | `unknownBatch`, `unknownStorageArea`, or `invalidQuantity`: the quantity is 0 or less. The checks are in this order. |
+| `batchOpened` | `batchId`, `date` | Sets the opened date of the batch to the date, or replaces the opened date that the batch has. It changes no other value. | `unknownBatch`, or `batchEnded`: the quantity of the batch is 0. The checks are in this order. |
 | `batchUsed` | `batchId`, `quantity`, `date` | Takes the quantity from the batch, but not more than the batch has. Adds a history entry with the outcome `used`, the quantity that was taken, and the date. | `unknownBatch`, `invalidQuantity`: the quantity is 0 or less, or `batchEnded`. The checks are in this order. |
 | `batchThrownAway` | `batchId`, `quantity`, `date` | The same as `batchUsed`, with the outcome `thrownAway`. | The same as `batchUsed` |
 | `batchDeleted` | `batchId` | Removes the batch and its history. A delete is for a mistake. | `unknownBatch` |
@@ -129,12 +169,14 @@ The history is in the order of the replay.
   effect: it can be before or after the change that it names.
 - The replay skips an undone change. A skipped change is not in the rejected list.
 - An undo cannot be undone. To get the same result again, the app makes a new change.
+- The undo of a `batchOpened` change gives the batch the opened date that it had before that change, or none. A later
+  `batchEdited` change still sets the opened date that it has.
 
 ### 7.4 The result
 
 The result of a replay has the products, the storage areas (each with `fixed`: true or false), all batches (active
-and ended), the history, and the rejected changes. In the vectors, the products, the storage areas, and the batches
-are in the order of their identifiers.
+and ended), the history, and the rejected changes. Each batch has `dateType` and `openedDate`, with `null` for no
+value. In the vectors, the products, the storage areas, and the batches are in the order of their identifiers.
 
 ## 8. The storage hint of a looked-up product
 
@@ -192,3 +234,58 @@ tag of the product. A tag is compared character by character. With no such kind,
 
 The storage text comes before the tags because it is about this one product. A tag can be wrong, and a tag is about a
 group of products.
+
+## 9. The later-date offer
+
+The later-date offer is the set of controls with which the person selects a chosen date for a batch ("Still good?").
+This rule says if the app can show the offer. ADR 0014 has the reasons.
+
+### 9.1 The after-date class of a product
+
+1. If the product has a food, and the food is in the table of foods, the class is the after-date class of the food
+   (rule 4).
+2. If not, the category of the product gives the class:
+
+| Category | After-date class |
+|---|---|
+| `condiment`, `beverage`, `bakery` | `check` |
+| `produce`, `dairy`, `meat`, `leftovers`, `other` | `strict` |
+
+### 9.2 The offer
+
+The rule uses the good-until date of the batch and its source (rule 5.2), and the freshness that this date gives for
+today (rule 3). The result is an offer, or no offer with a reason. The first line of the table that is true for the
+batch gives the result.
+
+| # | Condition | Result |
+|---|---|---|
+| 1 | The freshness is not `expiring` and not `expired`. | No offer, reason `notDue` |
+| 2 | The source of the good-until date is `printed`, and the date type of the batch is `useBy`. | No offer, reason `useByDate` |
+| 3 | The after-date class of the product is `strict`. | No offer, reason `strictFood` |
+| 4 | The source of the good-until date is `opened`. | No offer, reason `opened` |
+| 5 | Each other case. | Offer, no reason |
+
+- Line 3 is also true for a strict food with the date type `bestBefore`, with no date type, and with an estimated
+  date.
+- Line 4: a chosen date is an expiry date, and it cannot move a good-until date that comes from the opened date
+  (rule 5.2). An offer would have no effect.
+- The storage kind has an effect only through the opened days. A batch in a freezer follows the same lines.
+
+## 10. The before-date tips
+
+A before-date tip is a short text about what to do with a food before its date. The table for this rule is
+`before-date-tips.json`. It has the sources (`sources`: a name, a URL, and a licence for each) and the tips (`tips`).
+A tip has an identifier, a kind (`freeze`, `cook`, or `useUp`), a list of foods of the table of foods, a text, and
+the key of its source. ADR 0015 has the reasons.
+
+The tips that a batch shows are the tips of the table, in the order of the table, for which all these lines are true:
+
+1. The product of the batch has a food, the food is in the table of foods, and the list of foods of the tip has it.
+2. The freshness of the batch for today is `expiring` (rule 3, with the good-until date of rule 5.2). A batch that is
+   fresh, a batch that is expired, and a batch with no good-until date show no tip.
+3. For a tip of the kind `freeze`: the food has days for the freezer (rule 4), and the storage kind of the storage
+   area of the batch is not `freezer`.
+
+- The after-date class has no effect on the tips. An expired batch shows no tip, for a strict food and for a check
+  food.
+- The app shows the text as it is in the table, with the name of its source.

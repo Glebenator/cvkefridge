@@ -1,0 +1,614 @@
+{
+  "description": "Rule 10 of spec/rules.md: the identifiers of the before-date tips that a batch shows on 'today'. 'storageKind' is the storage kind of the storage area of the batch. The table of tips in 'table' and the table of foods are small samples. They are not spec/before-date-tips.json and spec/foods.json.",
+  "foods": [
+    {
+      "id": "food-chicken",
+      "name": "Chicken",
+      "category": "meat",
+      "days": {
+        "fridge": 1,
+        "freezer": 270
+      },
+      "afterDate": "strict"
+    },
+    {
+      "id": "food-banana",
+      "name": "Bananas",
+      "category": "produce",
+      "days": {
+        "fridge": 3,
+        "freezer": 60
+      },
+      "afterDate": "check"
+    },
+    {
+      "id": "food-egg",
+      "name": "Eggs",
+      "category": "dairy",
+      "days": {
+        "fridge": 21
+      },
+      "afterDate": "strict"
+    },
+    {
+      "id": "food-sausage",
+      "name": "Sausage",
+      "category": "meat",
+      "days": {
+        "fridge": 14,
+        "freezer": 30
+      },
+      "openedDays": {
+        "fridge": 7
+      },
+      "afterDate": "strict"
+    },
+    {
+      "id": "food-plain",
+      "name": "Food with no tip",
+      "category": "other",
+      "days": {
+        "pantry": 30,
+        "freezer": 90
+      },
+      "afterDate": "check"
+    }
+  ],
+  "table": {
+    "sources": {
+      "source-a": {
+        "name": "Source A",
+        "url": "https://example.org/a",
+        "licence": "Licence A"
+      },
+      "source-b": {
+        "name": "Source B",
+        "url": "https://example.org/b",
+        "licence": "Licence B"
+      }
+    },
+    "tips": [
+      {
+        "id": "tip-freeze-meat",
+        "kind": "freeze",
+        "foods": [
+          "food-chicken",
+          "food-sausage"
+        ],
+        "text": "Freeze tip for meat.",
+        "source": "source-a"
+      },
+      {
+        "id": "tip-cook-meat",
+        "kind": "cook",
+        "foods": [
+          "food-chicken",
+          "food-sausage"
+        ],
+        "text": "Cook tip for meat.",
+        "source": "source-b"
+      },
+      {
+        "id": "tip-use-banana",
+        "kind": "useUp",
+        "foods": [
+          "food-banana"
+        ],
+        "text": "Use-up tip for bananas.",
+        "source": "source-a"
+      },
+      {
+        "id": "tip-freeze-banana",
+        "kind": "freeze",
+        "foods": [
+          "food-banana"
+        ],
+        "text": "Freeze tip for bananas.",
+        "source": "source-a"
+      },
+      {
+        "id": "tip-freeze-egg",
+        "kind": "freeze",
+        "foods": [
+          "food-egg"
+        ],
+        "text": "Freeze tip for a food with no days for the freezer.",
+        "source": "source-b"
+      },
+      {
+        "id": "tip-cook-egg",
+        "kind": "cook",
+        "foods": [
+          "food-egg"
+        ],
+        "text": "Cook tip for eggs.",
+        "source": "source-b"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "an expiring batch shows the tips of its food, in the order of the table",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-18",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": [
+          "tip-freeze-meat",
+          "tip-cook-meat"
+        ]
+      }
+    },
+    {
+      "name": "on the expiry date the batch shows the tips",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-17",
+        "expirySource": "printed",
+        "dateType": "useBy",
+        "openedDate": null
+      },
+      "expect": {
+        "tips": [
+          "tip-freeze-meat",
+          "tip-cook-meat"
+        ]
+      }
+    },
+    {
+      "name": "2 days left: tips",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-19",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": [
+          "tip-freeze-meat",
+          "tip-cook-meat"
+        ]
+      }
+    },
+    {
+      "name": "3 days left: no tips",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-20",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": []
+      }
+    },
+    {
+      "name": "a fresh batch shows no tips",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-25",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": []
+      }
+    },
+    {
+      "name": "an expired batch of a strict food shows no tips",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-16",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": []
+      }
+    },
+    {
+      "name": "an expired batch of a check food shows no tips",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Bananas",
+        "category": "produce",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-banana",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-16",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": []
+      }
+    },
+    {
+      "name": "a batch with no good-until date shows no tips",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": null,
+        "expirySource": null,
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": []
+      }
+    },
+    {
+      "name": "a batch in a freezer shows no freeze tip",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-18",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": [
+          "tip-cook-meat"
+        ]
+      }
+    },
+    {
+      "name": "a batch in a pantry shows the freeze tip",
+      "today": "2026-11-17",
+      "storageKind": "pantry",
+      "product": {
+        "id": "p-1",
+        "name": "Bananas",
+        "category": "produce",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-banana",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "a-pantry",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-18",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": [
+          "tip-use-banana",
+          "tip-freeze-banana"
+        ]
+      }
+    },
+    {
+      "name": "a food with no days for the freezer shows no freeze tip",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Eggs",
+        "category": "dairy",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-egg",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-18",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": [
+          "tip-cook-egg"
+        ]
+      }
+    },
+    {
+      "name": "a product with no food shows no tips",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-18",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": []
+      }
+    },
+    {
+      "name": "a food that is not in the table shows no tips",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-unknown",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-18",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": []
+      }
+    },
+    {
+      "name": "a food with no tip shows no tips",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "other",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-plain",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-18",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "tips": []
+      }
+    },
+    {
+      "name": "the opened rule makes the batch expiring: tips",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-12-05",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": "2026-11-11"
+      },
+      "expect": {
+        "tips": [
+          "tip-freeze-meat",
+          "tip-cook-meat"
+        ]
+      }
+    },
+    {
+      "name": "the opened rule makes the batch expired: no tips",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-12-05",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": "2026-11-05"
+      },
+      "expect": {
+        "tips": []
+      }
+    }
+  ]
+}

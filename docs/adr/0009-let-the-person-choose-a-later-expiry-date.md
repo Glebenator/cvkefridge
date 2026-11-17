@@ -7,6 +7,10 @@ The core had two sources of an expiry date: `printed` and `estimated`. A later d
 app keeps it as a printed date, the screen says "Printed date" for a date that is not on the package. The product
 rule "Do not show a guess as a fact" does not permit that.
 
+On 17 November 2026, [ADR 0014](0014-offer-a-later-date-only-for-food-that-the-person-can-check.md) replaced a part of
+the third decision: a batch has "Still good?" only when rule 9 of `spec/rules.md` gives an offer. A batch with a
+use-by date, a batch of a strict food, and a batch with a date from its opened date (ADR 0013) have none.
+
 ## Decisions
 
 - **An expiry date has a third source: `chosen`.** A chosen date is a later date that the person selected because the

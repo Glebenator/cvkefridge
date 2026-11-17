@@ -1,0 +1,1066 @@
+{
+  "description": "Rule 9 of spec/rules.md. Section 'classes': the after-date class of a product (9.1). Section 'cases': if the app can offer a later date for a batch on 'today', and the reason when it cannot (9.2). 'storageKind' is the storage kind of the storage area of the batch. The table of foods here is a small sample. It is not spec/foods.json.",
+  "foods": [
+    {
+      "id": "food-chicken",
+      "name": "Chicken",
+      "category": "meat",
+      "days": {
+        "fridge": 1,
+        "freezer": 270
+      },
+      "afterDate": "strict"
+    },
+    {
+      "id": "food-bread",
+      "name": "Bread",
+      "category": "bakery",
+      "days": {
+        "pantry": 14,
+        "freezer": 90
+      },
+      "afterDate": "check"
+    },
+    {
+      "id": "food-jam",
+      "name": "Jam",
+      "category": "condiment",
+      "days": {
+        "pantry": 180
+      },
+      "openedDays": {
+        "fridge": 30
+      },
+      "afterDate": "check"
+    },
+    {
+      "id": "food-sausage",
+      "name": "Sausage",
+      "category": "meat",
+      "days": {
+        "fridge": 14,
+        "freezer": 30
+      },
+      "openedDays": {
+        "fridge": 7
+      },
+      "afterDate": "strict"
+    },
+    {
+      "id": "food-old",
+      "name": "Food of an old table",
+      "category": "other",
+      "days": {
+        "pantry": 30
+      }
+    }
+  ],
+  "classes": [
+    {
+      "name": "a strict food",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "strict"
+      }
+    },
+    {
+      "name": "a check food",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "check"
+      }
+    },
+    {
+      "name": "a food with no afterDate key is strict",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "condiment",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-old",
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "strict"
+      }
+    },
+    {
+      "name": "the class of the food comes before the category: a strict food in the category bakery",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "strict"
+      }
+    },
+    {
+      "name": "the class of the food comes before the category: a check food in the category meat",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "check"
+      }
+    },
+    {
+      "name": "a food that is not in the table: the category gives the class",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "condiment",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-unknown",
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "check"
+      }
+    },
+    {
+      "name": "no food, category produce",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "produce",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "strict"
+      }
+    },
+    {
+      "name": "no food, category dairy",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "dairy",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "strict"
+      }
+    },
+    {
+      "name": "no food, category meat",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "strict"
+      }
+    },
+    {
+      "name": "no food, category condiment",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "condiment",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "check"
+      }
+    },
+    {
+      "name": "no food, category beverage",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "beverage",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "check"
+      }
+    },
+    {
+      "name": "no food, category bakery",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "check"
+      }
+    },
+    {
+      "name": "no food, category leftovers",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "leftovers",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "strict"
+      }
+    },
+    {
+      "name": "no food, category other",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "other",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "expect": {
+        "afterDate": "strict"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "name": "a fresh batch gets no offer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-25",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "notDue"
+      }
+    },
+    {
+      "name": "3 days left: no offer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-20",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "notDue"
+      }
+    },
+    {
+      "name": "2 days left: an offer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-19",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "offer": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "a batch with no good-until date gets no offer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": null,
+        "expirySource": null,
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "notDue"
+      }
+    },
+    {
+      "name": "a check food, expired, with no date type",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-15",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "offer": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "a check food, expired, with a best-before date",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-10",
+        "expirySource": "printed",
+        "dateType": "bestBefore",
+        "openedDate": null
+      },
+      "expect": {
+        "offer": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "a check food, expiring, with a use-by date",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-18",
+        "expirySource": "printed",
+        "dateType": "useBy",
+        "openedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "useByDate"
+      }
+    },
+    {
+      "name": "a check food, expired, with a use-by date",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-16",
+        "expirySource": "printed",
+        "dateType": "useBy",
+        "openedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "useByDate"
+      }
+    },
+    {
+      "name": "a check food, fresh, with a use-by date: the batch is not due",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-30",
+        "expirySource": "printed",
+        "dateType": "useBy",
+        "openedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "notDue"
+      }
+    },
+    {
+      "name": "a strict food with a best-before date gets no offer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-16",
+        "expirySource": "printed",
+        "dateType": "bestBefore",
+        "openedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "strictFood"
+      }
+    },
+    {
+      "name": "a strict food with no date type gets no offer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-17",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "strictFood"
+      }
+    },
+    {
+      "name": "a strict food with an estimated date gets no offer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-18",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "strictFood"
+      }
+    },
+    {
+      "name": "a strict food with a use-by date: the reason is the date",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-16",
+        "expirySource": "printed",
+        "dateType": "useBy",
+        "openedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "useByDate"
+      }
+    },
+    {
+      "name": "a check food with an estimated date, expired",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-12",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "offer": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "a check food with a chosen date that is expiring again",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-18",
+        "expirySource": "chosen",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "offer": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "a check food with a good-until date from the opened rule gets no offer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Jam",
+        "category": "condiment",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-jam",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2027-03-01",
+        "expirySource": "printed",
+        "dateType": "bestBefore",
+        "openedDate": "2026-10-17"
+      },
+      "expect": {
+        "offer": false,
+        "reason": "opened"
+      }
+    },
+    {
+      "name": "a check food that is opened, but its expiry date is earlier",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Jam",
+        "category": "condiment",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-jam",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-16",
+        "expirySource": "printed",
+        "dateType": "bestBefore",
+        "openedDate": "2026-11-10"
+      },
+      "expect": {
+        "offer": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "a use-by date that is later than the after-opening date: the reason is the opened rule",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Jam",
+        "category": "condiment",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-jam",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-12-20",
+        "expirySource": "printed",
+        "dateType": "useBy",
+        "openedDate": "2026-10-17"
+      },
+      "expect": {
+        "offer": false,
+        "reason": "opened"
+      }
+    },
+    {
+      "name": "a use-by date that is earlier than the after-opening date: the reason is the date",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Jam",
+        "category": "condiment",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-jam",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-16",
+        "expirySource": "printed",
+        "dateType": "useBy",
+        "openedDate": "2026-11-10"
+      },
+      "expect": {
+        "offer": false,
+        "reason": "useByDate"
+      }
+    },
+    {
+      "name": "a strict food with a good-until date from the opened rule: the reason is the food",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-30",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": "2026-11-10"
+      },
+      "expect": {
+        "offer": false,
+        "reason": "strictFood"
+      }
+    },
+    {
+      "name": "no food, category beverage: an offer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "beverage",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-14",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "offer": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "no food, category other, with a best-before date: no offer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "other",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-14",
+        "expirySource": "printed",
+        "dateType": "bestBefore",
+        "openedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "strictFood"
+      }
+    },
+    {
+      "name": "no food, category meat: no offer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-18",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "strictFood"
+      }
+    },
+    {
+      "name": "no food, category dairy, with a use-by date: the reason is the date",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Food",
+        "category": "dairy",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-14",
+        "expirySource": "printed",
+        "dateType": "useBy",
+        "openedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "useByDate"
+      }
+    },
+    {
+      "name": "a check food in the freezer",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-10",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "offer": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "a strict food in the freezer gets no offer",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-10",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "strictFood"
+      }
+    }
+  ]
+}

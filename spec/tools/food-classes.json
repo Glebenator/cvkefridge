@@ -1,0 +1,49 @@
+{
+  "note": "Edited by hand. build-foods.py adds the after-date class of each food to spec/foods.json as 'afterDate'. 'categories' gives the class of each FoodKeeper category, with the name of the category in the source. 'foods' lists the foods that have the other class than their category. A category that is not in this file is strict. ADR 0014 has the rule for the selection: when the class of a food is not clear, the food is strict.",
+  "categories": {
+    "1": {"name": "Baby Food", "afterDate": "strict"},
+    "2": {"name": "Baked Goods: Bakery", "afterDate": "check"},
+    "3": {"name": "Baked Goods: Baking and Cooking", "afterDate": "check"},
+    "4": {"name": "Baked Goods: Refrigerated Dough", "afterDate": "strict"},
+    "5": {"name": "Beverages", "afterDate": "check"},
+    "6": {"name": "Condiments, Sauces & Canned Goods", "afterDate": "check"},
+    "7": {"name": "Dairy Products & Eggs", "afterDate": "strict"},
+    "8": {"name": "Food Purchased Frozen", "afterDate": "check"},
+    "9": {"name": "Grains, Beans & Pasta", "afterDate": "check"},
+    "10": {"name": "Meat: Fresh", "afterDate": "strict"},
+    "11": {"name": "Meat: Shelf Stable Foods", "afterDate": "check"},
+    "12": {"name": "Meat: Smoked or Processed", "afterDate": "strict"},
+    "13": {"name": "Meat: Stuffed or Assembled", "afterDate": "strict"},
+    "14": {"name": "Poultry: Cooked or Processed", "afterDate": "strict"},
+    "15": {"name": "Poultry: Fresh", "afterDate": "strict"},
+    "16": {"name": "Poultry: Shelf Stable Foods", "afterDate": "check"},
+    "17": {"name": "Poultry: Stuffed or Assembled", "afterDate": "strict"},
+    "18": {"name": "Produce: Fresh Fruits", "afterDate": "check"},
+    "19": {"name": "Produce: Fresh Vegetables", "afterDate": "check"},
+    "20": {"name": "Seafood: Fresh", "afterDate": "strict"},
+    "21": {"name": "Seafood: Shellfish", "afterDate": "strict"},
+    "22": {"name": "Seafood: Smoked", "afterDate": "strict"},
+    "23": {"name": "Shelf Stable Foods", "afterDate": "check"},
+    "24": {"name": "Vegetarian Proteins", "afterDate": "strict"},
+    "25": {"name": "Deli & Prepared Foods", "afterDate": "strict"}
+  },
+  "foods": {
+    "strict": [
+      "fk-198", "fk-201", "fk-205", "fk-206", "fk-209", "fk-210", "fk-211", "fk-542",
+      "fk-457", "fk-536", "fk-537", "fk-538", "fk-558", "fk-568", "fk-569", "fk-662",
+      "fk-342", "fk-484", "fk-566", "fk-624", "fk-646", "fk-647", "fk-648", "fk-670", "fk-671",
+      "fk-309", "fk-310", "fk-311", "fk-312", "fk-320", "fk-322", "fk-323", "fk-325", "fk-326", "fk-327", "fk-328",
+      "fk-330", "fk-571", "fk-666",
+      "fk-332", "fk-426", "fk-498", "fk-679",
+      "fk-107", "fk-110",
+      "fk-562",
+      "fk-415", "fk-491", "fk-549", "fk-570", "fk-597",
+      "fk-651", "fk-652"
+    ],
+    "check": [
+      "fk-1", "fk-2", "fk-3", "fk-4", "fk-6", "fk-25", "fk-26", "fk-27", "fk-29", "fk-30", "fk-31", "fk-33",
+      "fk-421", "fk-427", "fk-428", "fk-429", "fk-430", "fk-465", "fk-543", "fk-649",
+      "fk-169", "fk-170", "fk-171"
+    ]
+  }
+}
