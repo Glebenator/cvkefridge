@@ -82,6 +82,6 @@ ADR, the decision is the more careful option.
   date also shows its source: a date with the source `opened` is an estimate.
 - The opened days are the minimum of the range of one source from the United States. The research found that the
   sources do not agree on the numbers (section 3.5 of the research). The values are estimates.
-- The values of the source for "after thawing" are not in the table. ADR 0016 has the proposal for thawed food.
+- The values of the source for "after thawing" are not in the table. ADR 0016 has the decision for thawed food: 1 day for each food.
 - Section 8.2 of the plan has the decisions that the owner has to make: if a chosen date can come before the
   after-opening date, and if the storage text gives the days after opening.

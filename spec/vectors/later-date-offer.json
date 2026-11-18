@@ -1141,6 +1141,358 @@
         "offer": false,
         "reason": "strictFood"
       }
+    },
+    {
+      "name": "a frozen check food on the last day of its freezer time gets no offer",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-08-11",
+        "expiryDate": "2026-08-25",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-08-19",
+        "thawedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "frozen"
+      }
+    },
+    {
+      "name": "a frozen check food after its freezer time gets no offer",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-07-27",
+        "expiryDate": "2026-08-10",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-08-01",
+        "thawedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "frozen"
+      }
+    },
+    {
+      "name": "a frozen strict food on the last day of its freezer time: the strict food comes first",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-02-20",
+        "expiryDate": "2026-02-21",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-02-20",
+        "thawedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "strictFood"
+      }
+    },
+    {
+      "name": "a frozen batch in its freezer time is not due",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-12",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-11-10",
+        "thawedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "notDue"
+      }
+    },
+    {
+      "name": "a frozen check food with a use-by date: the printed date is not the good-until date",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-08-11",
+        "expiryDate": "2026-08-25",
+        "expirySource": "printed",
+        "dateType": "useBy",
+        "openedDate": null,
+        "frozenDate": "2026-08-19",
+        "thawedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "frozen"
+      }
+    },
+    {
+      "name": "a frozen food with no days for the freezer has the default freezer days, and it is not due",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Jam",
+        "category": "condiment",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-jam",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-12",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-11-10",
+        "thawedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "notDue"
+      }
+    },
+    {
+      "name": "a thawed check food gets no offer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-12-01",
+        "expirySource": "printed",
+        "dateType": "bestBefore",
+        "openedDate": null,
+        "frozenDate": "2026-10-01",
+        "thawedDate": "2026-11-17"
+      },
+      "expect": {
+        "offer": false,
+        "reason": "thawed"
+      }
+    },
+    {
+      "name": "a thawed check food that is expired gets no offer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-12-01",
+        "expirySource": "printed",
+        "dateType": "bestBefore",
+        "openedDate": null,
+        "frozenDate": "2026-10-01",
+        "thawedDate": "2026-11-10"
+      },
+      "expect": {
+        "offer": false,
+        "reason": "thawed"
+      }
+    },
+    {
+      "name": "a thawed strict food: the strict food comes first",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-10-01",
+        "expiryDate": "2026-10-02",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-10-01",
+        "thawedDate": "2026-11-17"
+      },
+      "expect": {
+        "offer": false,
+        "reason": "strictFood"
+      }
+    },
+    {
+      "name": "a thawed batch of a product with no food and a check category gets no offer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Rolls",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": null,
+        "expirySource": null,
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": null,
+        "thawedDate": "2026-11-17"
+      },
+      "expect": {
+        "offer": false,
+        "reason": "thawed"
+      }
+    },
+    {
+      "name": "a frozen check food with no days for the freezer, on the last of the default freezer days, gets no offer",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Jam",
+        "category": "condiment",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-jam",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-10-10",
+        "expiryDate": "2026-10-20",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-10-18",
+        "thawedDate": null
+      },
+      "expect": {
+        "offer": false,
+        "reason": "frozen"
+      }
     }
   ]
 }

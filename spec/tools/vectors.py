@@ -26,6 +26,10 @@ AFTER_DATE_CLASSES = ["strict", "check"]
 # The categories that give the after-date class `check` to a product with no food of the table (rule 9.1).
 CHECK_CATEGORIES = ["condiment", "beverage", "bakery", "grains", "canned", "baking", "snacks"]
 TIP_KINDS = ["freeze", "cook", "useUp"]
+# The days that a batch stays good after it is thawed, for each food (rule 5.2).
+THAWED_DAYS = 1
+# The days in the freezer for a frozen batch of a food with no days for the freezer (rule 5.2).
+DEFAULT_FREEZER_DAYS = 30
 ID_CHARACTERS = set("abcdefghijklmnopqrstuvwxyz0123456789-")
 EPOCH = datetime.date(1970, 1, 1)
 
@@ -96,9 +100,23 @@ def opened_days(foods, food_id, storage_kind):
     return None if food is None else food.get("openedDays", {}).get(storage_kind)
 
 
-def good_until(batch, days_opened):
+def freezer_days(foods, food_id):
+    """The days of a food for the freezer, or None (rule 4)."""
+    food = food_of(foods, food_id)
+    return None if food is None else food["days"].get("freezer")
+
+
+def good_until(batch, days_opened, days_freezer):
     """The good-until date of a batch and its source (rule 5.2). `days_opened` is the opened days of the food of the
-    batch for the storage kind of its storage area, or None."""
+    batch for the storage kind of its storage area, or None. `days_freezer` is the days of that food for the freezer,
+    or None. With None, a frozen batch has the default freezer days."""
+    if batch.get("thawedDate") is not None:
+        date = plus_days(parse_date(batch["thawedDate"]), THAWED_DAYS)
+        return {"date": format_date(date), "source": None if date is None else "thawed"}
+    if batch.get("frozenDate") is not None:
+        days = DEFAULT_FREEZER_DAYS if days_freezer is None else days_freezer
+        date = plus_days(parse_date(batch["frozenDate"]), days)
+        return {"date": format_date(date), "source": None if date is None else "frozen"}
     expiry = None if batch["expiryDate"] is None else parse_date(batch["expiryDate"])
     opened = None if batch.get("openedDate") is None else parse_date(batch["openedDate"])
     after_opening = None if opened is None or days_opened is None else plus_days(opened, days_opened)
@@ -109,11 +127,22 @@ def good_until(batch, days_opened):
 
 def good_until_in(foods, products, areas, batch):
     """The good-until date of a batch of an inventory. A batch with no product, no food, or no storage area in the
-    lists has no opened days."""
+    lists has no opened days. A batch with no product or no food in the lists has no days for the freezer."""
     product = next((p for p in products if p["id"] == batch["productId"]), None)
     area = next((a for a in areas if a["id"] == batch["storageAreaId"]), None)
     days = None if product is None or area is None else opened_days(foods, product.get("foodId"), area["kind"])
-    return good_until(batch, days)
+    return good_until(batch, days, None if product is None else freezer_days(foods, product.get("foodId")))
+
+
+def good_until_of(foods, product, batch, storage_kind):
+    """The good-until date of a batch of a product, in a storage area of a storage kind."""
+    food_id = product.get("foodId")
+    return good_until(batch, opened_days(foods, food_id, storage_kind), freezer_days(foods, food_id))
+
+
+def freshness_of(until, today):
+    """The freshness that a good-until date gives for today (rule 3)."""
+    return freshness(days_left(today, None if until["date"] is None else parse_date(until["date"])))
 
 
 def use_first(batches, date_of=lambda batch: batch["expiryDate"]):
@@ -152,19 +181,34 @@ def after_date_class(foods, product):
 
 def later_date_offer(foods, product, batch, storage_kind, today):
     """If the app can offer a later date for a batch, and the reason when it cannot (rule 9.2)."""
-    until = good_until(batch, opened_days(foods, product.get("foodId"), storage_kind))
-    state = freshness(days_left(today, None if until["date"] is None else parse_date(until["date"])))
+    until = good_until_of(foods, product, batch, storage_kind)
+    state = freshness_of(until, today)
     if state not in ("expiring", "expired"):
         reason = "notDue"
     elif until["source"] == "printed" and batch.get("dateType") == "useBy":
         reason = "useByDate"
     elif after_date_class(foods, product) == "strict":
         reason = "strictFood"
-    elif until["source"] == "opened":
-        reason = "opened"
+    elif until["source"] in ("opened", "frozen", "thawed"):
+        reason = until["source"]
     else:
         reason = None
     return {"offer": reason is None, "reason": reason}
+
+
+# ---- 11. The freeze check
+
+def freeze_check(foods, product, batch, storage_kind, today):
+    """If the app can move a batch to a freezer, and the reason when it cannot (rule 11)."""
+    if storage_kind == "freezer":
+        reason = "inFreezer"
+    elif batch.get("thawedDate") is not None:
+        reason = "thawed"
+    elif freshness_of(good_until_of(foods, product, batch, storage_kind), today) == "expired":
+        reason = "afterDate"
+    else:
+        reason = None
+    return {"permitted": reason is None, "reason": reason}
 
 
 # ---- 10. The before-date tips
@@ -174,14 +218,14 @@ def before_date_tips(table, foods, product, batch, storage_kind, today):
     food = food_of(foods, product.get("foodId"))
     if food is None:
         return []
-    until = good_until(batch, food.get("openedDays", {}).get(storage_kind))
-    if freshness(days_left(today, None if until["date"] is None else parse_date(until["date"]))) != "expiring":
+    if freshness_of(good_until_of(foods, product, batch, storage_kind), today) != "expiring":
         return []
+    can_freeze = "freezer" in food["days"] and freeze_check(foods, product, batch, storage_kind, today)["permitted"]
     shown = []
     for tip in table["tips"]:
         if food["id"] not in tip["foods"]:
             continue
-        if tip["kind"] == "freeze" and (storage_kind == "freezer" or "freezer" not in food["days"]):
+        if tip["kind"] == "freeze" and not can_freeze:
             continue
         shown.append(tip["id"])
     return shown
@@ -220,6 +264,9 @@ def check_tips(table, where, foods=None, freezer_days=False):
 
 
 # ---- 7. The change log
+
+# The values of a batch that a change from before them does not have. A missing key is no value.
+OPTIONAL_BATCH_FIELDS = ("dateType", "openedDate", "frozenDate", "thawedDate")
 
 FIXED_AREAS = {
     "fridge": {"id": "fridge", "name": "Fridge", "kind": "fridge", "fixed": True},
@@ -295,8 +342,8 @@ def replay(changes):
             if batch["quantity"] <= 0:
                 return "invalidQuantity"
             batch = dict(batch)
-            batch.setdefault("dateType", None)
-            batch.setdefault("openedDate", None)
+            for field in OPTIONAL_BATCH_FIELDS:
+                batch.setdefault(field, None)
             batches[batch["id"]] = batch
         elif kind == "batchEdited":
             batch = batches.get(body["batchId"])
@@ -308,7 +355,7 @@ def replay(changes):
                 return "invalidQuantity"
             for field in ("quantity", "storageAreaId", "dateAdded", "expiryDate", "expirySource"):
                 batch[field] = body[field]
-            for field in ("dateType", "openedDate"):
+            for field in OPTIONAL_BATCH_FIELDS:
                 batch[field] = body.get(field)
         elif kind == "batchOpened":
             batch = batches.get(body["batchId"])
@@ -317,6 +364,20 @@ def replay(changes):
             if batch["quantity"] == 0:
                 return "batchEnded"
             batch["openedDate"] = body["date"]
+        elif kind in ("batchFrozen", "batchThawed"):
+            batch = batches.get(body["batchId"])
+            if batch is None:
+                return "unknownBatch"
+            if batch["quantity"] == 0:
+                return "batchEnded"
+            if body["storageAreaId"] not in areas:
+                return "unknownStorageArea"
+            batch["storageAreaId"] = body["storageAreaId"]
+            if kind == "batchFrozen":
+                batch["frozenDate"] = body["date"]
+                batch["thawedDate"] = None
+            else:
+                batch["thawedDate"] = body["date"]
         elif kind in ("batchUsed", "batchThrownAway"):
             batch = batches.get(body["batchId"])
             if batch is None:
@@ -388,8 +449,9 @@ def check_expiry(record, where):
     date_type = record.get("dateType")
     if date_type is not None and (date_type not in DATE_TYPES or source != "printed"):
         raise ValueError("%s: bad date type, or a date type for a date that is not printed" % where)
-    if record.get("openedDate") is not None and parse_date(record["openedDate"]) is None:
-        raise ValueError("%s: openedDate is not a date" % where)
+    for field in ("openedDate", "frozenDate", "thawedDate"):
+        if record.get(field) is not None and parse_date(record[field]) is None:
+            raise ValueError("%s: %s is not a date" % (where, field))
 
 
 def check_product(product, where):
@@ -422,8 +484,10 @@ def check_change(change, where):
         check_id(body["batchId"], where)
         check_id(body["storageAreaId"], where)
         check_expiry(body, where)
-    elif kind in ("batchUsed", "batchThrownAway", "batchOpened"):
+    elif kind in ("batchUsed", "batchThrownAway", "batchOpened", "batchFrozen", "batchThawed"):
         check_id(body["batchId"], where)
+        if kind in ("batchFrozen", "batchThawed"):
+            check_id(body["storageAreaId"], where)
         if parse_date(body["date"]) is None:
             raise ValueError("%s: bad date" % where)
     elif kind in ("productDeleted", "storageAreaDeleted", "batchDeleted", "changeUndone"):
@@ -672,7 +736,7 @@ def expect_storage_hints_table(data):
 
 
 def check_case(case, where):
-    """Checks the product and the batch of a case of rules 5.2, 9, and 10."""
+    """Checks the product and the batch of a case of rules 5.2, 9, 10, and 11."""
     check_product(case["product"], where)
     check_batch(case["batch"], where)
     if case["storageKind"] not in STORAGE_KINDS or parse_date(case["today"]) is None:
@@ -684,7 +748,7 @@ def expect_good_until(data):
     foods = data["foods"]
     for case in data["cases"]:
         check_case(case, "good-until.json " + case["name"])
-        until = good_until(case["batch"], opened_days(foods, case["product"].get("foodId"), case["storageKind"]))
+        until = good_until_of(foods, case["product"], case["batch"], case["storageKind"])
         left = days_left(parse_date(case["today"]), None if until["date"] is None else parse_date(until["date"]))
         yield case, {"date": until["date"], "source": until["source"], "daysLeft": left, "freshness": freshness(left)}
     for section in ("order", "plan"):
@@ -716,6 +780,14 @@ def expect_later_date_offer(data):
         check_case(case, "later-date-offer.json " + case["name"])
         yield case, later_date_offer(data["foods"], case["product"], case["batch"], case["storageKind"],
                                      parse_date(case["today"]))
+
+
+def expect_freeze_check(data):
+    check_foods(data, "freeze-check.json")
+    for case in data["cases"]:
+        check_case(case, "freeze-check.json " + case["name"])
+        yield case, freeze_check(data["foods"], case["product"], case["batch"], case["storageKind"],
+                                 parse_date(case["today"]))
 
 
 def expect_before_date_tips(data):
@@ -756,6 +828,7 @@ FILES = {
     "later-date-offer.json": expect_later_date_offer,
     "before-date-tips.json": expect_before_date_tips,
     "before-date-tips-table.json": expect_before_date_tips_table,
+    "freeze-check.json": expect_freeze_check,
 }
 
 

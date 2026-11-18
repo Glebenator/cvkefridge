@@ -1,10 +1,11 @@
 # Plan: two native apps for CVKE Fridge
 
-Date: 17 November 2026, seventh version. The owner agreed the scope in section 2 and the decisions in section 8.1 on
+Date: 18 November 2026, eighth version. The owner agreed the scope in section 2 and the decisions in section 8.1 on
 10 November 2026, the two screens of ADR 0006 on 11 November 2026, the wallpaper colours of ADR 0007 on 12 November
 2026, the progress report, ADR 0008, and ADR 0009 on 13 November 2026, and the features of the expiry research on
-17 November 2026. ADR 0013 to ADR 0015 record how these features work, and ADR 0016 is a proposal. The owner did not
-read these four ADRs before they were written. Section 8.2 lists the decisions that are open.
+17 November 2026. ADR 0013 to ADR 0015 record how these features work. The owner did not read these three ADRs before
+they were written. On 18 November 2026 the owner selected option A of ADR 0016 for frozen and thawed food, with 1 day
+for thawed food. Section 8.2 lists the decisions that are open.
 [PROGRESS.html](../PROGRESS.html) records the progress of each milestone, with screenshots and test results.
 
 CVKE Fridge is the overhaul of FridgeFriend, a React Native app. The overhaul is a full rewrite as a native Android
@@ -41,7 +42,7 @@ for later.
 | | The date for the days left, the freshness, and the use-first list is the good-until date: the earlier of the expiry date and the after-opening date (ADR 0013). | An opened date on a batch, and opened days for a food in the table of foods (ADR 0013) | |
 | | "Still good?" shows only when the rule for the later-date offer permits it: not for a use-by date, and not for a strict food (ADR 0014). This changes ADR 0009. | The date type of a printed date, and an after-date class for each food (ADR 0014) | |
 | | | Before-date tips while a batch is expiring, each with a named source (ADR 0015) | |
-| | | A short time for thawed food, and no move to a freezer after the date. Agreed as scope on 17 November 2026. Not built: ADR 0016 is a proposal with the options. | |
+| | A move to a freezer or out of a freezer is not only a new storage area: the batch gets a frozen date or a thawed date, and its good-until date comes from that date (ADR 0016). | "Move to freezer" and "Move to fridge" on a batch. A thawed batch is good for 1 day. A batch goes into a freezer only up to its good-until date. A frozen batch always has a date, and "Change date" changes it (ADR 0016). | |
 
 [ADR 0003](adr/0003-keep-stock-as-products-and-batches.md) records the product and batch model.
 
@@ -196,6 +197,10 @@ then into `:core` and `CVKEFridgeCore`.
 | 4 | The reminder text for a date from the opened date | `reminder/ReminderRules.kt`, `reminder/ReminderText.kt` |
 | 3 | The opened days as general advice in the storage tips | `inventory/StorageAdvice.kt` |
 | 2 | The opened date of the edit form is not after today | `ui/FormParts.kt` |
+| 2 | The edit form and the freezer: a form that moves a batch to a freezer or out of a freezer sets the frozen date or the thawed date of today, the form does not save a move that the freeze check does not permit, and the form can remove the two dates (ADR 0016) | `inventory/EditForms.kt` |
+| 2 | The storage areas of "Move to freezer" and "Move to fridge": the freezers or the fridges, Fridge and Freezer first, then by name | `ui/FoodDetail.kt` |
+| 2 | "Change date" for a batch in a freezer: when the screen has it, and the edit that it writes: the chosen date as the expiry date, and no frozen date (ADR 0016) | `inventory/InventoryAction.kt`, `ui/FoodDetail.kt` |
+| 2 | The expiry date below a date from the frozen date or from the thawed date: only a printed date | `ui/FoodDetail.kt` |
 
 The rules of ADR 0013 to ADR 0015 are in `spec/`, so they add no line to this table. They change two things for the
 rules of this table. The reminder rules use the days left, so they must use the good-until date (rule 5.2 of
@@ -239,6 +244,9 @@ Each workflow runs for a push to `main`, for a pull request, and on request.
 | A batch has an optional opened date, and the table of foods has opened days. The app uses the good-until date: the earlier of the expiry date and the opened date plus the opened days. A date from the opened date is an estimate. | [ADR 0013](adr/0013-keep-an-opened-date-on-the-batch.md) |
 | A printed date can have a date type: use by or best before. Each food has an after-date class: strict or check. "Still good?" shows only for a batch that is not strict, that has no use-by date, and that does not get its date from its opened date. This replaces a part of ADR 0009. | [ADR 0014](adr/0014-offer-a-later-date-only-for-food-that-the-person-can-check.md) |
 | An expiring batch shows before-date tips: freeze it, cook it, or use it up. Each text has the words of a named source. An expired batch shows no tip. | [ADR 0015](adr/0015-show-before-date-tips-from-named-sources.md) |
+| A batch has an optional frozen date and an optional thawed date, with the changes `batchFrozen` and `batchThawed`. A thawed batch is good for 1 day, for each food. A frozen batch has the time of its food in the freezer from its frozen date. A batch goes into a freezer only up to its good-until date, for a strict food and for a check food. Agreed on 18 November 2026. | [ADR 0016](adr/0016-give-thawed-food-one-day-and-freeze-food-only-up-to-its-date.md) |
+| Thawed food does not go into a freezer again. A frozen batch and a thawed batch get no "Still good?". A batch that the person adds to a freezer has no frozen date. The owner confirmed these three decisions on 18 November 2026. | [ADR 0016](adr/0016-give-thawed-food-one-day-and-freeze-food-only-up-to-its-date.md) |
+| A frozen batch of a food with no days for the freezer has the default freezer days, so that it has a date. The person can change the date of a batch in a freezer on the screen of the food ("Change date"). Agreed on 18 November 2026. | [ADR 0016](adr/0016-give-thawed-food-one-day-and-freeze-food-only-up-to-its-date.md) |
 
 ### 8.2 Open
 
@@ -247,13 +255,11 @@ Each workflow runs for a push to `main`, for a pull request, and on request.
 | 1 | The product name in the stores and on the screen | "CVKE Fridge", as for CVKE GPS. |
 | 2 | The product identity in `design/product.md` (teal accent, the shelf line motif) | On 11 November 2026 the owner saw Home and All food with this identity and did not want them. Home and My Fridge now copy the look of FridgeFriend (ADR 0006). The identity is not used. Decide if it stays for other surfaces. |
 | 3 | The words in `GLOSSARY.md`, mainly "batch", "used", and "thrown away" | Agree in milestone 1. |
-| 4 | Frozen and thawed food: how a batch gets a short time after it is thawed, and how the app stops a move to a freezer after the date. [ADR 0016](adr/0016-proposal-for-frozen-and-thawed-food.md) has options A, B, and C. | Option A: the changes `batchFrozen` and `batchThawed`, with 1 day for thawed food. |
-| 5 | The time for thawed food: 1 day for each food (Food Standards Agency), or 3 days for some foods (ANSES) | 1 day. |
 | 6 | If the person can select a later date for a batch that gets its good-until date from its opened date. Now the app gives no offer, because a chosen date does not come before the after-opening date (ADR 0013). | Permit it for a check food, with a second chosen date on the batch that replaces the after-opening date. Until then, the person removes or corrects the opened date in the edit form. |
 | 7 | If the core reads the days after opening from the storage text of a product ("use within 3 days of opening"). It is not built (ADR 0013). | Count real storage texts first, as ADR 0011 did, and then decide. |
 | 8 | The after-date classes in `spec/tools/food-classes.json`. They are a selection by hand: 262 foods are strict and 399 are check. | The owner reads the classes of the 142 common foods. A person who knows food safety checks the file before a release. |
 | 9 | The class of eggs. Eggs are strict, so they get no "Still good?". The Food Standards Agency says that eggs are safe for a couple of days after the best-before date if they are cooked well. | Keep eggs strict. |
 | 10 | The class of a product with no food of the table. It comes from the category. Since ADR 0017, the pantry categories `grains`, `canned`, `baking`, and `snacks` are check, and `other` has few foods: 13 of 661 foods of the table, and 2 of 100 most-scanned products of Canada and of the United States. `produce`, `dairy`, `meat`, `meals`, `leftovers`, and `other` are strict. | Keep it. Check the class of `produce` with no food when the app has more scans of fresh produce. |
-| 11 | If a strict food in a freezer gets "Still good?" after its estimated date. Now it gets none, because the core does not know when the batch was frozen. | Decide it with decision 4. |
+| 11 | The default freezer days: the days in the freezer for a frozen batch of a food with no days for the freezer. Now 30, the lowest value of the table of foods for the food "Leftovers" (ADR 0016). The USDA says 3 to 4 months for leftovers. | Keep 30. The person can change the date with "Change date". |
 | 12 | The sources of the before-date tips. Now a text must have the words of a source with a licence that permits the copy, and the table has 4 tips from the Food Standards Agency and GOV.UK. Love Food Hate Waste refused our requests. | Keep the rule. Ask Love Food Hate Waste for permission, and check the licences of Health Canada and of the Voedingscentrum. |
 | 13 | If a before-date tip can be a short sentence in our own words with a link to its source. ADR 0012 does not permit a text that no source has. The two tips for meat and fish have the words "use-by date", also for a batch with a different date type. | Keep the words of the source. |

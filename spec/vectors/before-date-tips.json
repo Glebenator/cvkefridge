@@ -609,6 +609,106 @@
       "expect": {
         "tips": []
       }
+    },
+    {
+      "name": "a thawed batch shows no freeze tip",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-10-01",
+        "expiryDate": "2026-10-02",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-10-01",
+        "thawedDate": "2026-11-17"
+      },
+      "expect": {
+        "tips": [
+          "tip-cook-meat"
+        ]
+      }
+    },
+    {
+      "name": "a batch with a frozen date in a freezer shows no freeze tip",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Chicken",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-chicken",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-02-21",
+        "expiryDate": "2026-02-22",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-02-21",
+        "thawedDate": null
+      },
+      "expect": {
+        "tips": [
+          "tip-cook-meat"
+        ]
+      }
+    },
+    {
+      "name": "a frozen date has no effect on the freeze tip of a batch that is not in a freezer and not thawed",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-10-15",
+        "expiryDate": "2026-11-25",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-10-19",
+        "thawedDate": null
+      },
+      "expect": {
+        "tips": [
+          "tip-freeze-meat",
+          "tip-cook-meat"
+        ]
+      }
     }
   ]
 }

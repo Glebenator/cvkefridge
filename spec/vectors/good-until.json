@@ -1,5 +1,5 @@
 {
-  "description": "Rules 3, 5.2, 5.3, and 6 of spec/rules.md. Section 'cases': the good-until date of one batch and its source, with the days left and the freshness for 'today'. The product gives the food, and 'storageKind' is the storage kind of the storage area of the batch. Section 'order': the use-first order of the batches of an inventory. Section 'plan': the plan of a use. The table of foods here is a small sample. It is not spec/foods.json.",
+  "description": "Rules 3, 5.2, 5.3, and 6 of spec/rules.md. Section 'cases': the good-until date of one batch and its source, with the days left and the freshness for 'today'. The product gives the food, and 'storageKind' is the storage kind of the storage area of the batch. A batch with no 'frozenDate' key or no 'thawedDate' key has no such date. Section 'order': the use-first order of the batches of an inventory. Section 'plan': the plan of a use. The table of foods here is a small sample. It is not spec/foods.json.",
   "foods": [
     {
       "id": "food-sausage",
@@ -740,6 +740,686 @@
         "daysLeft": null,
         "freshness": "noExpiryDate"
       }
+    },
+    {
+      "name": "a frozen batch has the frozen date plus the days for the freezer",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-20",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-11-15",
+        "thawedDate": null
+      },
+      "expect": {
+        "date": "2026-12-15",
+        "source": "frozen",
+        "daysLeft": 28,
+        "freshness": "fresh"
+      }
+    },
+    {
+      "name": "a frozen batch: a printed date before today has no effect",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-16",
+        "expirySource": "printed",
+        "dateType": "useBy",
+        "openedDate": null,
+        "frozenDate": "2026-11-15",
+        "thawedDate": null
+      },
+      "expect": {
+        "date": "2026-12-15",
+        "source": "frozen",
+        "daysLeft": 28,
+        "freshness": "fresh"
+      }
+    },
+    {
+      "name": "a frozen batch with no expiry date",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-11-05",
+        "expiryDate": null,
+        "expirySource": null,
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-11-15",
+        "thawedDate": null
+      },
+      "expect": {
+        "date": "2026-12-15",
+        "source": "frozen",
+        "daysLeft": 28,
+        "freshness": "fresh"
+      }
+    },
+    {
+      "name": "a frozen batch: the opened date has no effect",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-20",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": "2026-11-01",
+        "frozenDate": "2026-11-15",
+        "thawedDate": null
+      },
+      "expect": {
+        "date": "2026-12-15",
+        "source": "frozen",
+        "daysLeft": 28,
+        "freshness": "fresh"
+      }
+    },
+    {
+      "name": "a frozen batch of a food with no days for the freezer has the default freezer days",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Spread",
+        "category": "other",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-spread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2027-01-01",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-11-15",
+        "thawedDate": null
+      },
+      "expect": {
+        "date": "2026-12-15",
+        "source": "frozen",
+        "daysLeft": 28,
+        "freshness": "fresh"
+      }
+    },
+    {
+      "name": "a frozen batch of a product with no food has the default freezer days",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Soup",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-20",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-11-15",
+        "thawedDate": null
+      },
+      "expect": {
+        "date": "2026-12-15",
+        "source": "frozen",
+        "daysLeft": 28,
+        "freshness": "fresh"
+      }
+    },
+    {
+      "name": "a frozen batch of a food that is not in the table has the default freezer days",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Soup",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-unknown",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-20",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-11-15",
+        "thawedDate": null
+      },
+      "expect": {
+        "date": "2026-12-15",
+        "source": "frozen",
+        "daysLeft": 28,
+        "freshness": "fresh"
+      }
+    },
+    {
+      "name": "a frozen batch on the last day of its freezer time",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-10-10",
+        "expiryDate": "2026-10-20",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-10-18",
+        "thawedDate": null
+      },
+      "expect": {
+        "date": "2026-11-17",
+        "source": "frozen",
+        "daysLeft": 0,
+        "freshness": "expiring"
+      }
+    },
+    {
+      "name": "a frozen batch after its freezer time",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-10-10",
+        "expiryDate": "2026-10-20",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-10-10",
+        "thawedDate": null
+      },
+      "expect": {
+        "date": "2026-11-09",
+        "source": "frozen",
+        "daysLeft": -8,
+        "freshness": "expired"
+      }
+    },
+    {
+      "name": "a frozen date has the same effect in a storage area that is not a freezer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-20",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": "2026-11-01",
+        "frozenDate": "2026-11-15",
+        "thawedDate": null
+      },
+      "expect": {
+        "date": "2026-12-15",
+        "source": "frozen",
+        "daysLeft": 28,
+        "freshness": "fresh"
+      }
+    },
+    {
+      "name": "the freezer time ends after year 9999: there is no good-until date",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-20",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "9999-12-20",
+        "thawedDate": null
+      },
+      "expect": {
+        "date": null,
+        "source": null,
+        "daysLeft": null,
+        "freshness": "noExpiryDate"
+      }
+    },
+    {
+      "name": "a thawed batch has the thawed date plus 1 day",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-10-30",
+        "expiryDate": "2026-11-10",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-11-01",
+        "thawedDate": "2026-11-17"
+      },
+      "expect": {
+        "date": "2026-11-18",
+        "source": "thawed",
+        "daysLeft": 1,
+        "freshness": "expiring"
+      }
+    },
+    {
+      "name": "a thawed batch on the day after its thawed date",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-10-30",
+        "expiryDate": "2026-11-10",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-11-01",
+        "thawedDate": "2026-11-16"
+      },
+      "expect": {
+        "date": "2026-11-17",
+        "source": "thawed",
+        "daysLeft": 0,
+        "freshness": "expiring"
+      }
+    },
+    {
+      "name": "a thawed batch two days after its thawed date is expired",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-10-30",
+        "expiryDate": "2026-11-10",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-11-01",
+        "thawedDate": "2026-11-15"
+      },
+      "expect": {
+        "date": "2026-11-16",
+        "source": "thawed",
+        "daysLeft": -1,
+        "freshness": "expired"
+      }
+    },
+    {
+      "name": "a thawed batch with no frozen date: the person added it to the freezer",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Bread",
+        "category": "bakery",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-bread",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2027-02-01",
+        "expirySource": "estimated",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": null,
+        "thawedDate": "2026-11-17"
+      },
+      "expect": {
+        "date": "2026-11-18",
+        "source": "thawed",
+        "daysLeft": 1,
+        "freshness": "expiring"
+      }
+    },
+    {
+      "name": "a thawed batch: a later printed date has no effect",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-12-24",
+        "expirySource": "printed",
+        "dateType": "bestBefore",
+        "openedDate": null,
+        "frozenDate": "2026-11-01",
+        "thawedDate": "2026-11-17"
+      },
+      "expect": {
+        "date": "2026-11-18",
+        "source": "thawed",
+        "daysLeft": 1,
+        "freshness": "expiring"
+      }
+    },
+    {
+      "name": "a thawed batch: an earlier after-opening date has no effect",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-01",
+        "expiryDate": "2026-11-20",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": "2026-11-02",
+        "frozenDate": "2026-11-03",
+        "thawedDate": "2026-11-17"
+      },
+      "expect": {
+        "date": "2026-11-18",
+        "source": "thawed",
+        "daysLeft": 1,
+        "freshness": "expiring"
+      }
+    },
+    {
+      "name": "a thawed batch of a product with no food",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Soup",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": null,
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": null,
+        "expirySource": null,
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-11-01",
+        "thawedDate": "2026-11-17"
+      },
+      "expect": {
+        "date": "2026-11-18",
+        "source": "thawed",
+        "daysLeft": 1,
+        "freshness": "expiring"
+      }
+    },
+    {
+      "name": "a thawed date has the same effect in a freezer",
+      "today": "2026-11-17",
+      "storageKind": "freezer",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "freezer",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-10",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": "2026-11-01",
+        "thawedDate": "2026-11-17"
+      },
+      "expect": {
+        "date": "2026-11-18",
+        "source": "thawed",
+        "daysLeft": 1,
+        "freshness": "expiring"
+      }
+    },
+    {
+      "name": "the thawed date is the last day of year 9999: there is no good-until date",
+      "today": "2026-11-17",
+      "storageKind": "fridge",
+      "product": {
+        "id": "p-1",
+        "name": "Sausage",
+        "category": "meat",
+        "unit": null,
+        "barcode": null,
+        "foodId": "food-sausage",
+        "note": null,
+        "storageText": null
+      },
+      "batch": {
+        "id": "b-1",
+        "productId": "p-1",
+        "quantity": 1000,
+        "storageAreaId": "fridge",
+        "dateAdded": "2026-11-05",
+        "expiryDate": "2026-11-20",
+        "expirySource": "printed",
+        "dateType": null,
+        "openedDate": null,
+        "frozenDate": null,
+        "thawedDate": "9999-12-31"
+      },
+      "expect": {
+        "date": null,
+        "source": null,
+        "daysLeft": null,
+        "freshness": "noExpiryDate"
+      }
     }
   ],
   "order": [
@@ -1119,6 +1799,120 @@
           "b-2"
         ]
       }
+    },
+    {
+      "name": "a thawed batch is first, and a frozen batch with the default freezer days is in the order of its date",
+      "products": [
+        {
+          "id": "p-sausage",
+          "name": "Sausage",
+          "category": "meat",
+          "unit": null,
+          "barcode": null,
+          "foodId": "food-sausage",
+          "note": null,
+          "storageText": null
+        },
+        {
+          "id": "p-spread",
+          "name": "Spread",
+          "category": "other",
+          "unit": null,
+          "barcode": null,
+          "foodId": "food-spread",
+          "note": null,
+          "storageText": null
+        },
+        {
+          "id": "p-bread",
+          "name": "Bread",
+          "category": "bakery",
+          "unit": null,
+          "barcode": null,
+          "foodId": "food-bread",
+          "note": null,
+          "storageText": null
+        }
+      ],
+      "storageAreas": [
+        {
+          "id": "a-pantry",
+          "name": "Pantry",
+          "kind": "pantry"
+        },
+        {
+          "id": "freezer",
+          "name": "Freezer",
+          "kind": "freezer"
+        },
+        {
+          "id": "fridge",
+          "name": "Fridge",
+          "kind": "fridge"
+        }
+      ],
+      "batches": [
+        {
+          "id": "b-1",
+          "productId": "p-sausage",
+          "quantity": 1000,
+          "storageAreaId": "freezer",
+          "dateAdded": "2026-11-05",
+          "expiryDate": "2026-11-18",
+          "expirySource": "printed",
+          "dateType": null,
+          "openedDate": null,
+          "frozenDate": "2026-11-15",
+          "thawedDate": null
+        },
+        {
+          "id": "b-2",
+          "productId": "p-bread",
+          "quantity": 1000,
+          "storageAreaId": "fridge",
+          "dateAdded": "2026-11-05",
+          "expiryDate": "2027-02-01",
+          "expirySource": "estimated",
+          "dateType": null,
+          "openedDate": null,
+          "frozenDate": null,
+          "thawedDate": "2026-11-17"
+        },
+        {
+          "id": "b-3",
+          "productId": "p-spread",
+          "quantity": 1000,
+          "storageAreaId": "freezer",
+          "dateAdded": "2026-11-05",
+          "expiryDate": "2026-11-12",
+          "expirySource": "printed",
+          "dateType": null,
+          "openedDate": null,
+          "frozenDate": "2026-11-10",
+          "thawedDate": null
+        },
+        {
+          "id": "b-4",
+          "productId": "p-sausage",
+          "quantity": 1000,
+          "storageAreaId": "fridge",
+          "dateAdded": "2026-11-05",
+          "expiryDate": "2026-11-20",
+          "expirySource": "printed",
+          "dateType": null,
+          "openedDate": null,
+          "frozenDate": null,
+          "thawedDate": null
+        }
+      ],
+      "expect": {
+        "order": [
+          "b-2",
+          "b-4",
+          "b-3",
+          "b-1"
+        ]
+      }
     }
   ],
   "plan": [
@@ -1283,6 +2077,114 @@
           }
         ],
         "shortfall": 500
+      }
+    },
+    {
+      "name": "a use takes from the thawed batch first, and from the frozen batch last",
+      "products": [
+        {
+          "id": "p-sausage",
+          "name": "Sausage",
+          "category": "meat",
+          "unit": null,
+          "barcode": null,
+          "foodId": "food-sausage",
+          "note": null,
+          "storageText": null
+        },
+        {
+          "id": "p-spread",
+          "name": "Spread",
+          "category": "other",
+          "unit": null,
+          "barcode": null,
+          "foodId": "food-spread",
+          "note": null,
+          "storageText": null
+        },
+        {
+          "id": "p-bread",
+          "name": "Bread",
+          "category": "bakery",
+          "unit": null,
+          "barcode": null,
+          "foodId": "food-bread",
+          "note": null,
+          "storageText": null
+        }
+      ],
+      "storageAreas": [
+        {
+          "id": "a-pantry",
+          "name": "Pantry",
+          "kind": "pantry"
+        },
+        {
+          "id": "freezer",
+          "name": "Freezer",
+          "kind": "freezer"
+        },
+        {
+          "id": "fridge",
+          "name": "Fridge",
+          "kind": "fridge"
+        }
+      ],
+      "productId": "p-sausage",
+      "quantity": 1500,
+      "batches": [
+        {
+          "id": "b-1",
+          "productId": "p-sausage",
+          "quantity": 1000,
+          "storageAreaId": "freezer",
+          "dateAdded": "2026-11-05",
+          "expiryDate": "2026-11-18",
+          "expirySource": "printed",
+          "dateType": null,
+          "openedDate": null,
+          "frozenDate": "2026-11-15",
+          "thawedDate": null
+        },
+        {
+          "id": "b-2",
+          "productId": "p-sausage",
+          "quantity": 1000,
+          "storageAreaId": "fridge",
+          "dateAdded": "2026-11-05",
+          "expiryDate": "2026-11-20",
+          "expirySource": "printed",
+          "dateType": null,
+          "openedDate": null,
+          "frozenDate": null,
+          "thawedDate": null
+        },
+        {
+          "id": "b-3",
+          "productId": "p-sausage",
+          "quantity": 1000,
+          "storageAreaId": "fridge",
+          "dateAdded": "2026-11-05",
+          "expiryDate": "2026-12-24",
+          "expirySource": "printed",
+          "dateType": null,
+          "openedDate": null,
+          "frozenDate": "2026-11-01",
+          "thawedDate": "2026-11-17"
+        }
+      ],
+      "expect": {
+        "takes": [
+          {
+            "batchId": "b-3",
+            "quantity": 1000
+          },
+          {
+            "batchId": "b-2",
+            "quantity": 500
+          }
+        ],
+        "shortfall": 0
       }
     }
   ]

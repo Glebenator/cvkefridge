@@ -99,7 +99,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -180,7 +182,9 @@
             "expiryDate": null,
             "expirySource": null,
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -439,7 +443,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [
@@ -548,7 +554,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [
@@ -660,7 +668,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [
@@ -791,7 +801,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [
@@ -974,7 +986,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -1200,7 +1214,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -1443,7 +1459,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [
@@ -1583,7 +1601,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -1695,7 +1715,9 @@
             "expiryDate": null,
             "expirySource": null,
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -1792,7 +1814,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -1976,7 +2000,9 @@
             "expiryDate": "2026-11-30",
             "expirySource": "estimated",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [
@@ -2119,7 +2145,9 @@
             "expiryDate": "2026-11-20",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [
@@ -2324,7 +2352,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           },
           {
             "id": "b-milk-2",
@@ -2335,7 +2365,9 @@
             "expiryDate": null,
             "expirySource": null,
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -2483,7 +2515,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           },
           {
             "id": "b-milk-2",
@@ -2494,7 +2528,9 @@
             "expiryDate": null,
             "expirySource": null,
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [
@@ -2612,7 +2648,9 @@
             "expiryDate": null,
             "expirySource": null,
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -2729,7 +2767,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [
@@ -2847,7 +2887,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -2957,7 +2999,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [
@@ -3072,7 +3116,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -3291,7 +3337,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -3406,7 +3454,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -3507,7 +3557,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -3619,7 +3671,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -3738,7 +3792,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [
@@ -3874,7 +3930,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [
@@ -4040,7 +4098,9 @@
             "expiryDate": "2026-11-30",
             "expirySource": "estimated",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           },
           {
             "id": "b-milk-1",
@@ -4051,7 +4111,9 @@
             "expiryDate": "2026-11-14",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [
@@ -4171,7 +4233,9 @@
             "expiryDate": "2026-11-12",
             "expirySource": "chosen",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -4673,7 +4737,9 @@
             "expiryDate": "2026-11-28",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": "2026-11-16"
+            "openedDate": "2026-11-16",
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -4776,7 +4842,9 @@
             "expiryDate": "2026-11-28",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": "2026-11-14"
+            "openedDate": "2026-11-14",
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -4869,7 +4937,9 @@
             "expiryDate": "2026-11-28",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": "2026-11-09"
+            "openedDate": "2026-11-09",
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -4983,7 +5053,9 @@
             "expiryDate": "2026-11-28",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [
@@ -5103,7 +5175,9 @@
             "expiryDate": "2026-11-28",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -5215,7 +5289,9 @@
             "expiryDate": "2026-11-28",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": "2026-11-14"
+            "openedDate": "2026-11-14",
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -5317,7 +5393,9 @@
             "expiryDate": "2026-11-28",
             "expirySource": "printed",
             "dateType": "useBy",
-            "openedDate": "2026-11-10"
+            "openedDate": "2026-11-10",
+            "frozenDate": null,
+            "thawedDate": null
           },
           {
             "id": "b-ham-2",
@@ -5328,7 +5406,9 @@
             "expiryDate": "2026-11-28",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -5438,7 +5518,9 @@
             "expiryDate": "2026-11-28",
             "expirySource": "printed",
             "dateType": "bestBefore",
-            "openedDate": "2026-11-16"
+            "openedDate": "2026-11-16",
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -5546,7 +5628,9 @@
             "expiryDate": "2026-11-28",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": null
+            "openedDate": null,
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -5645,7 +5729,9 @@
             "expiryDate": "2026-11-28",
             "expirySource": "printed",
             "dateType": "useBy",
-            "openedDate": "2026-11-15"
+            "openedDate": "2026-11-15",
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -5746,7 +5832,9 @@
             "expiryDate": "2026-12-05",
             "expirySource": "chosen",
             "dateType": null,
-            "openedDate": "2026-11-13"
+            "openedDate": "2026-11-13",
+            "frozenDate": null,
+            "thawedDate": null
           }
         ],
         "history": [],
@@ -5863,7 +5951,1886 @@
             "expiryDate": "2026-11-28",
             "expirySource": "printed",
             "dateType": null,
-            "openedDate": "2026-11-16"
+            "openedDate": "2026-11-16",
+            "frozenDate": null,
+            "thawedDate": null
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "a batch is frozen: it moves to the storage area and it gets the frozen date",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-ham-1",
+            "storageAreaId": "freezer",
+            "date": "2026-11-17"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "freezer",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": "2026-11-17",
+            "thawedDate": null
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "a frozen batch is thawed: it moves to the storage area and it keeps its frozen date",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-ham-1",
+            "storageAreaId": "freezer",
+            "date": "2026-11-17"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchThawed",
+            "batchId": "b-ham-1",
+            "storageAreaId": "fridge",
+            "date": "2026-12-20"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": "2026-11-17",
+            "thawedDate": "2026-12-20"
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "a batch in a freezer with no frozen date is thawed",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "freezer",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchThawed",
+            "batchId": "b-ham-1",
+            "storageAreaId": "fridge",
+            "date": "2026-12-20"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": null,
+            "thawedDate": "2026-12-20"
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "a thawed batch is frozen again: the thawed date is removed",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-ham-1",
+            "storageAreaId": "freezer",
+            "date": "2026-11-17"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchThawed",
+            "batchId": "b-ham-1",
+            "storageAreaId": "fridge",
+            "date": "2026-12-20"
+          }
+        },
+        {
+          "id": "c-05",
+          "at": 1794902700000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-ham-1",
+            "storageAreaId": "freezer",
+            "date": "2026-12-21"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "freezer",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": "2026-12-21",
+            "thawedDate": null
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "a second frozen change replaces the frozen date, and a second thawed change replaces the thawed date",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-ham-1",
+            "storageAreaId": "freezer",
+            "date": "2026-11-17"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-ham-1",
+            "storageAreaId": "freezer",
+            "date": "2026-11-18"
+          }
+        },
+        {
+          "id": "c-05",
+          "at": 1794902700000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchThawed",
+            "batchId": "b-ham-1",
+            "storageAreaId": "fridge",
+            "date": "2026-12-20"
+          }
+        },
+        {
+          "id": "c-06",
+          "at": 1794902760000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchThawed",
+            "batchId": "b-ham-1",
+            "storageAreaId": "fridge",
+            "date": "2026-12-22"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": "2026-11-18",
+            "thawedDate": "2026-12-22"
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "a frozen change or a thawed change for an unknown batch, an ended batch, or an unknown storage area is rejected",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-none",
+            "storageAreaId": "freezer",
+            "date": "2026-11-17"
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchThawed",
+            "batchId": "b-none",
+            "storageAreaId": "fridge",
+            "date": "2026-11-17"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-05",
+          "at": 1794902700000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-2",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-06",
+          "at": 1794902760000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchUsed",
+            "batchId": "b-ham-1",
+            "quantity": 1000,
+            "date": "2026-11-16"
+          }
+        },
+        {
+          "id": "c-07",
+          "at": 1794902820000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-ham-1",
+            "storageAreaId": "freezer",
+            "date": "2026-11-17"
+          }
+        },
+        {
+          "id": "c-08",
+          "at": 1794902880000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchThawed",
+            "batchId": "b-ham-1",
+            "storageAreaId": "a-none",
+            "date": "2026-11-17"
+          }
+        },
+        {
+          "id": "c-09",
+          "at": 1794902940000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-ham-2",
+            "storageAreaId": "a-none",
+            "date": "2026-11-17"
+          }
+        },
+        {
+          "id": "c-10",
+          "at": 1794903000000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchThawed",
+            "batchId": "b-ham-2",
+            "storageAreaId": "a-none",
+            "date": "2026-11-17"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 0,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": null,
+            "thawedDate": null
+          },
+          {
+            "id": "b-ham-2",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": null,
+            "thawedDate": null
+          }
+        ],
+        "history": [
+          {
+            "changeId": "c-06",
+            "batchId": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "outcome": "used",
+            "date": "2026-11-16"
+          }
+        ],
+        "rejected": [
+          {
+            "changeId": "c-02",
+            "reason": "unknownBatch"
+          },
+          {
+            "changeId": "c-03",
+            "reason": "unknownBatch"
+          },
+          {
+            "changeId": "c-07",
+            "reason": "batchEnded"
+          },
+          {
+            "changeId": "c-08",
+            "reason": "batchEnded"
+          },
+          {
+            "changeId": "c-09",
+            "reason": "unknownStorageArea"
+          },
+          {
+            "changeId": "c-10",
+            "reason": "unknownStorageArea"
+          }
+        ]
+      }
+    },
+    {
+      "name": "the replay does not check the storage kind of a frozen change or of a thawed change",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "storageAreaSaved",
+            "area": {
+              "id": "a-pantry",
+              "name": "Pantry",
+              "kind": "pantry"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-2",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-05",
+          "at": 1794902700000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-ham-1",
+            "storageAreaId": "a-pantry",
+            "date": "2026-11-17"
+          }
+        },
+        {
+          "id": "c-06",
+          "at": 1794902760000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchThawed",
+            "batchId": "b-ham-2",
+            "storageAreaId": "freezer",
+            "date": "2026-11-17"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "a-pantry",
+            "name": "Pantry",
+            "kind": "pantry",
+            "fixed": false
+          },
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "a-pantry",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": "2026-11-17",
+            "thawedDate": null
+          },
+          {
+            "id": "b-ham-2",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "freezer",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": null,
+            "thawedDate": "2026-11-17"
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "undo a frozen change: the batch is in its first storage area with no frozen date",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-ham-1",
+            "storageAreaId": "freezer",
+            "date": "2026-11-17"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "changeUndone",
+            "changeId": "c-03"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": null,
+            "thawedDate": null
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "undo a thawed change: the batch is in the freezer with its frozen date",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-ham-1",
+            "storageAreaId": "freezer",
+            "date": "2026-11-17"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchThawed",
+            "batchId": "b-ham-1",
+            "storageAreaId": "fridge",
+            "date": "2026-12-20"
+          }
+        },
+        {
+          "id": "c-05",
+          "at": 1794902700000,
+          "origin": "phone-a",
+          "body": {
+            "type": "changeUndone",
+            "changeId": "c-04"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "freezer",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": "2026-11-17",
+            "thawedDate": null
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "undo the frozen change of a thawed batch: the thawed date is back",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "freezer",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchThawed",
+            "batchId": "b-ham-1",
+            "storageAreaId": "fridge",
+            "date": "2026-11-17"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-ham-1",
+            "storageAreaId": "freezer",
+            "date": "2026-11-18"
+          }
+        },
+        {
+          "id": "c-05",
+          "at": 1794902700000,
+          "origin": "phone-a",
+          "body": {
+            "type": "changeUndone",
+            "changeId": "c-04"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": null,
+            "thawedDate": "2026-11-17"
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "an added batch with a frozen date and a thawed date",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14",
+              "frozenDate": "2026-11-15",
+              "thawedDate": "2026-11-17"
+            }
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 1000,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": "2026-11-15",
+            "thawedDate": "2026-11-17"
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "an edit with the frozen date and the thawed date keeps them",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-ham-1",
+            "storageAreaId": "freezer",
+            "date": "2026-11-15"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchThawed",
+            "batchId": "b-ham-1",
+            "storageAreaId": "fridge",
+            "date": "2026-11-17"
+          }
+        },
+        {
+          "id": "c-05",
+          "at": 1794902700000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchEdited",
+            "batchId": "b-ham-1",
+            "quantity": 500,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": "2026-11-15",
+            "thawedDate": "2026-11-17"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 500,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": "2026-11-15",
+            "thawedDate": "2026-11-17"
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "an edit with no keys for the frozen date and the thawed date removes them",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-ham-1",
+            "storageAreaId": "freezer",
+            "date": "2026-11-15"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchThawed",
+            "batchId": "b-ham-1",
+            "storageAreaId": "fridge",
+            "date": "2026-11-17"
+          }
+        },
+        {
+          "id": "c-05",
+          "at": 1794902700000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchEdited",
+            "batchId": "b-ham-1",
+            "quantity": 500,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 500,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": null,
+            "thawedDate": null
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "an edit gives a batch a frozen date, and a second edit removes it with null",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchEdited",
+            "batchId": "b-ham-1",
+            "quantity": 500,
+            "storageAreaId": "freezer",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": "2026-11-16",
+            "thawedDate": null
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchEdited",
+            "batchId": "b-ham-1",
+            "quantity": 500,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": null,
+            "thawedDate": null
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 500,
+            "storageAreaId": "fridge",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": null,
+            "thawedDate": null
+          }
+        ],
+        "history": [],
+        "rejected": []
+      }
+    },
+    {
+      "name": "an undone frozen change, and a later edit that has the frozen date",
+      "changes": [
+        {
+          "id": "c-01",
+          "at": 1794902460000,
+          "origin": "phone-a",
+          "body": {
+            "type": "productSaved",
+            "product": {
+              "id": "p-ham",
+              "name": "Ham",
+              "category": "meat",
+              "unit": "pack",
+              "barcode": null,
+              "foodId": "fk-515",
+              "note": null,
+              "storageText": null
+            }
+          }
+        },
+        {
+          "id": "c-02",
+          "at": 1794902520000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchAdded",
+            "batch": {
+              "id": "b-ham-1",
+              "productId": "p-ham",
+              "quantity": 1000,
+              "storageAreaId": "fridge",
+              "dateAdded": "2026-11-12",
+              "expiryDate": "2026-11-28",
+              "expirySource": "printed",
+              "dateType": "useBy",
+              "openedDate": "2026-11-14"
+            }
+          }
+        },
+        {
+          "id": "c-03",
+          "at": 1794902580000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchFrozen",
+            "batchId": "b-ham-1",
+            "storageAreaId": "freezer",
+            "date": "2026-11-17"
+          }
+        },
+        {
+          "id": "c-04",
+          "at": 1794902640000,
+          "origin": "phone-a",
+          "body": {
+            "type": "changeUndone",
+            "changeId": "c-03"
+          }
+        },
+        {
+          "id": "c-05",
+          "at": 1794902700000,
+          "origin": "phone-a",
+          "body": {
+            "type": "batchEdited",
+            "batchId": "b-ham-1",
+            "quantity": 500,
+            "storageAreaId": "freezer",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": "2026-11-17"
+          }
+        }
+      ],
+      "expect": {
+        "products": [
+          {
+            "id": "p-ham",
+            "name": "Ham",
+            "category": "meat",
+            "unit": "pack",
+            "barcode": null,
+            "foodId": "fk-515",
+            "note": null,
+            "storageText": null
+          }
+        ],
+        "storageAreas": [
+          {
+            "id": "freezer",
+            "name": "Freezer",
+            "kind": "freezer",
+            "fixed": true
+          },
+          {
+            "id": "fridge",
+            "name": "Fridge",
+            "kind": "fridge",
+            "fixed": true
+          }
+        ],
+        "batches": [
+          {
+            "id": "b-ham-1",
+            "productId": "p-ham",
+            "quantity": 500,
+            "storageAreaId": "freezer",
+            "dateAdded": "2026-11-12",
+            "expiryDate": "2026-11-28",
+            "expirySource": "printed",
+            "dateType": "useBy",
+            "openedDate": "2026-11-14",
+            "frozenDate": "2026-11-17",
+            "thawedDate": null
           }
         ],
         "history": [],

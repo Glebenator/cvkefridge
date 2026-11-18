@@ -42,7 +42,8 @@ that is a defect in this folder. Correct it here first.
 ## 3. Freshness
 
 - **Days left** are the days from today to the good-until date of the batch (rule 5.2). A batch with no good-until
-  date has no days left. For a batch with no opened date, the good-until date is the expiry date.
+  date has no days left. For a batch with no opened date, no frozen date, and no thawed date, the good-until date is
+  the expiry date.
 - **Freshness** from the days left:
 
 | Days left | Freshness |
@@ -90,26 +91,40 @@ that is a defect in this folder. Correct it here first.
   have one. A printed date with no date type has a type that the app does not know.
 - A batch can have an **opened date** (`openedDate`): the calendar date on which the person opened the package. It
   can be before the date added. A batch with no expiry date can have an opened date.
+- A batch can have a **frozen date** (`frozenDate`): the calendar date on which the person moved the batch to a
+  freezer. A batch can have a **thawed date** (`thawedDate`): the calendar date on which the person moved the batch
+  out of a freezer. A batch can have the two dates: it was frozen, and then it was thawed. A batch that the person
+  adds to a freezer has no frozen date. ADR 0016 has the reasons.
 
 ### 5.2 The good-until date
 
-The good-until date is the date that the days left (rule 3), the use-first order (5.3), and rules 9 and 10 use. The
-core calculates it each time. No change and no batch has it.
+The good-until date is the date that the days left (rule 3), the use-first order (5.3), and rules 9, 10, and 11 use.
+The core calculates it each time. No change and no batch has it. The first step that is true for the batch gives the
+result.
 
-1. Find the opened days of the batch: the opened days of the food of its product (rule 4) for the storage kind of its
-   storage area. There are none when the product has no food, when the food is not in the table, or when the food has
-   no opened days for that kind.
-2. The **after-opening date** is the opened date plus the opened days. There is none when the batch has no opened
+1. The batch has a thawed date. The good-until date is the thawed date plus the **thawed days**. The thawed days are
+   1 for each food. Its source is `thawed`. The expiry date, the opened date, and the frozen date have no effect.
+2. The batch has a frozen date. The good-until date is the frozen date plus the days of the food of its product for
+   the storage kind `freezer` (rule 4). Its source is `frozen`. The expiry date and the opened date have no effect.
+   When the product has no food, when the food is not in the table, or when the food has no days for the freezer,
+   the days are the **default freezer days**: 30. A frozen batch thus has a good-until date for each food.
+3. In each other case, find the opened days of the batch: the opened days of the food of its product (rule 4) for the
+   storage kind of its storage area. There are none when the product has no food, when the food is not in the table,
+   or when the food has no opened days for that kind.
+4. The **after-opening date** is the opened date plus the opened days. There is none when the batch has no opened
    date, when the batch has no opened days, or when the result is after year 9999.
-3. If there is an after-opening date, and the batch has no expiry date or the after-opening date is earlier than the
+5. If there is an after-opening date, and the batch has no expiry date or the after-opening date is earlier than the
    expiry date, the good-until date is the after-opening date. Its source is `opened`.
-4. In each other case, the good-until date is the expiry date, with the source of the expiry date. A batch with no
-   expiry date then has no good-until date and no source.
+6. If not, the good-until date is the expiry date, with the source of the expiry date. A batch with no expiry date
+   then has no good-until date and no source.
 
-The source of a good-until date is thus `printed`, `estimated`, `chosen`, or `opened`. A date with the source `opened`
-is an estimate, and the app shows it as an estimate. When the two dates are the same, the source is the source of the
-expiry date. The rule has no exception for a chosen date: an after-opening date that is earlier than a chosen date
-comes first.
+- The source of a good-until date is thus `printed`, `estimated`, `chosen`, `opened`, `frozen`, or `thawed`. A date
+  with the source `opened`, `frozen`, or `thawed` is an estimate, and the app shows it as an estimate.
+- In steps 1 and 2, a result after year 9999 gives no good-until date and no source.
+- In steps 1 and 2, the storage kind of the storage area of the batch has no effect. The two dates are facts about
+  the batch. The app sets them when the batch moves (rule 7.2).
+- In step 5, when the two dates are the same, the source is the source of the expiry date. The rule has no exception
+  for a chosen date: an after-opening date that is earlier than a chosen date comes first.
 
 ### 5.3 The use-first order
 
@@ -153,9 +168,11 @@ that made it, and a body with a type.
 | `productDeleted` | `productId` | Removes the product, its batches, and the history of those batches. | `unknownProduct` |
 | `storageAreaSaved` | `area` (identifier, name, kind) | Adds the storage area, or replaces the one with the same identifier. | `fixedStorageArea`: the identifier is `fridge` or `freezer` |
 | `storageAreaDeleted` | `storageAreaId` | Removes the storage area. | `fixedStorageArea`, `unknownStorageArea`, or `storageAreaInUse`: an active batch is in it. The checks are in this order. |
-| `batchAdded` | `batch` (identifier, product, quantity, storage area, date added, expiry date, expiry source, date type, opened date) | Adds the batch. A batch with no `dateType` key has no date type, and a batch with no `openedDate` key has no opened date: changes from before these values do not have the keys. | `duplicateBatch`, `unknownProduct`, `unknownStorageArea`, or `invalidQuantity`: the quantity is 0 or less. The checks are in this order. |
-| `batchEdited` | `batchId`, `quantity`, `storageAreaId`, `dateAdded`, `expiryDate`, `expirySource`, `dateType`, `openedDate` | Replaces these values of the batch. A change with no `dateType` key gives the batch no date type, and a change with no `openedDate` key gives the batch no opened date. It makes no history. It can make an ended batch active again. | `unknownBatch`, `unknownStorageArea`, or `invalidQuantity`: the quantity is 0 or less. The checks are in this order. |
+| `batchAdded` | `batch` (identifier, product, quantity, storage area, date added, expiry date, expiry source, date type, opened date, frozen date, thawed date) | Adds the batch. A batch with no `dateType` key has no date type. The same rule applies to the keys `openedDate`, `frozenDate`, and `thawedDate`: changes from before these values do not have the keys. | `duplicateBatch`, `unknownProduct`, `unknownStorageArea`, or `invalidQuantity`: the quantity is 0 or less. The checks are in this order. |
+| `batchEdited` | `batchId`, `quantity`, `storageAreaId`, `dateAdded`, `expiryDate`, `expirySource`, `dateType`, `openedDate`, `frozenDate`, `thawedDate` | Replaces these values of the batch. A change with no `dateType` key gives the batch no date type. The same rule applies to the keys `openedDate`, `frozenDate`, and `thawedDate`. It makes no history. It can make an ended batch active again. | `unknownBatch`, `unknownStorageArea`, or `invalidQuantity`: the quantity is 0 or less. The checks are in this order. |
 | `batchOpened` | `batchId`, `date` | Sets the opened date of the batch to the date, or replaces the opened date that the batch has. It changes no other value. | `unknownBatch`, or `batchEnded`: the quantity of the batch is 0. The checks are in this order. |
+| `batchFrozen` | `batchId`, `storageAreaId`, `date` | Moves the batch to the storage area, sets the frozen date of the batch to the date, and removes its thawed date. It changes no other value. | `unknownBatch`, `batchEnded`, or `unknownStorageArea`. The checks are in this order. |
+| `batchThawed` | `batchId`, `storageAreaId`, `date` | Moves the batch to the storage area, and sets the thawed date of the batch to the date. It changes no other value: the batch keeps its frozen date. | The same as `batchFrozen` |
 | `batchUsed` | `batchId`, `quantity`, `date` | Takes the quantity from the batch, but not more than the batch has. Adds a history entry with the outcome `used`, the quantity that was taken, and the date. | `unknownBatch`, `invalidQuantity`: the quantity is 0 or less, or `batchEnded`. The checks are in this order. |
 | `batchThrownAway` | `batchId`, `quantity`, `date` | The same as `batchUsed`, with the outcome `thrownAway`. | The same as `batchUsed` |
 | `batchDeleted` | `batchId` | Removes the batch and its history. A delete is for a mistake. | `unknownBatch` |
@@ -163,6 +180,9 @@ that made it, and a body with a type.
 
 A history entry has the identifier of its change, the batch, the product, the quantity, the outcome, and the date.
 The history is in the order of the replay.
+
+The replay does not look at the storage kind of the storage area of a `batchFrozen` or a `batchThawed` change, and it
+does not do the freeze check (rule 11). The app does the freeze check before it writes a `batchFrozen` change.
 
 ### 7.3 Undo
 
@@ -172,12 +192,14 @@ The history is in the order of the replay.
 - An undo cannot be undone. To get the same result again, the app makes a new change.
 - The undo of a `batchOpened` change gives the batch the opened date that it had before that change, or none. A later
   `batchEdited` change still sets the opened date that it has.
+- The undo of a `batchFrozen` or a `batchThawed` change gives the batch the storage area, the frozen date, and the
+  thawed date that it had before that change.
 
 ### 7.4 The result
 
 The result of a replay has the products, the storage areas (each with `fixed`: true or false), all batches (active
-and ended), the history, and the rejected changes. Each batch has `dateType` and `openedDate`, with `null` for no
-value. In the vectors, the products, the storage areas, and the batches are in the order of their identifiers.
+and ended), the history, and the rejected changes. Each batch has `dateType`, `openedDate`, `frozenDate`, and
+`thawedDate`, with `null` for no value. In the vectors, the products, the storage areas, and the batches are in the order of their identifiers.
 
 ## 8. The storage hint of a looked-up product
 
@@ -264,12 +286,14 @@ batch gives the result.
 | 2 | The source of the good-until date is `printed`, and the date type of the batch is `useBy`. | No offer, reason `useByDate` |
 | 3 | The after-date class of the product is `strict`. | No offer, reason `strictFood` |
 | 4 | The source of the good-until date is `opened`. | No offer, reason `opened` |
-| 5 | Each other case. | Offer, no reason |
+| 5 | The source of the good-until date is `frozen`. | No offer, reason `frozen` |
+| 6 | The source of the good-until date is `thawed`. | No offer, reason `thawed` |
+| 7 | Each other case. | Offer, no reason |
 
 - Line 3 is also true for a strict food with the date type `bestBefore`, with no date type, and with an estimated
   date.
-- Line 4: a chosen date is an expiry date, and it cannot move a good-until date that comes from the opened date
-  (rule 5.2). An offer would have no effect.
+- Lines 4, 5, and 6: a chosen date is an expiry date, and it cannot move a good-until date that comes from the opened
+  date, the frozen date, or the thawed date (rule 5.2). An offer would have no effect.
 - The storage kind has an effect only through the opened days. A batch in a freezer follows the same lines.
 
 ## 10. The before-date tips
@@ -284,9 +308,35 @@ The tips that a batch shows are the tips of the table, in the order of the table
 1. The product of the batch has a food, the food is in the table of foods, and the list of foods of the tip has it.
 2. The freshness of the batch for today is `expiring` (rule 3, with the good-until date of rule 5.2). A batch that is
    fresh, a batch that is expired, and a batch with no good-until date show no tip.
-3. For a tip of the kind `freeze`: the food has days for the freezer (rule 4), and the storage kind of the storage
-   area of the batch is not `freezer`.
+3. For a tip of the kind `freeze`: the food has days for the freezer (rule 4), and the freeze check permits the
+   batch (rule 11). For an expiring batch, that is: the storage kind of the storage area of the batch is not
+   `freezer`, and the batch has no thawed date.
 
 - The after-date class has no effect on the tips. An expired batch shows no tip, for a strict food and for a check
   food.
 - The app shows the text as it is in the table, with the name of its source.
+
+## 11. The freeze check
+
+The freeze check says if the app can move a batch to a freezer. The app does it before it writes a `batchFrozen`
+change, and before it shows the control for the move. ADR 0016 has the reasons.
+
+The rule uses the storage kind of the storage area of the batch, and the freshness that the good-until date of the
+batch gives for today (rules 3 and 5.2). The result is permitted, or not permitted with a reason. The first line of
+the table that is true for the batch gives the result.
+
+| # | Condition | Result |
+|---|---|---|
+| 1 | The storage kind of the storage area of the batch is `freezer`. | Not permitted, reason `inFreezer` |
+| 2 | The batch has a thawed date. | Not permitted, reason `thawed` |
+| 3 | The freshness is `expired`. | Not permitted, reason `afterDate` |
+| 4 | Each other case. | Permitted, no reason |
+
+- Line 2: food that was thawed does not go into a freezer again.
+- Line 3: the freezer does not make food good again. A batch can go into a freezer up to its good-until date, and
+  on that date. The after-date class has no effect: the line is the same for a strict food and for a check food.
+- A batch with no good-until date is permitted. The app does not know its date.
+- The days of the food for the freezer have no effect. A batch of a food with no days for the freezer is permitted,
+  and it then has the default freezer days (rule 5.2).
+- A move out of a freezer has no check. The app shows the control for it when the storage kind of the storage area
+  of the batch is `freezer`.

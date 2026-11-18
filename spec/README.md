@@ -46,16 +46,17 @@ Each case is a JSON object. Its `expect` value is the expected result. All other
 | `calendar-date.json` | 2 | Sections `parse`, `plusDays`, `daysUntil`, `order`, `dateOfInstant` |
 | `freshness.json` | 3 | |
 | `expiry-estimate.json` | 4 | It has its own small table of foods, so that a change to `foods.json` does not change it |
-| `use-first.json` | 5 | The batches have no opened date, so the good-until date is the expiry date |
+| `use-first.json` | 5 | The batches have no opened date, no frozen date, and no thawed date, so the good-until date is the expiry date |
 | `plan-use.json` | 6 | |
 | `change-log.json` | 7 | Each case is a full log and the result of its replay |
 | `food-table.json` | 4 | Facts about `foods.json`: the count, the usual storage kinds, the tips, the opened days, the after-date classes, the categories, and some foods. It proves that an app reads the whole table. |
 | `storage-hint.json` | 8 | Sections `temperatures` and `cases`. It has its own small table of hints in `hints`, so that a change to `storage-hints.json` does not change it. |
 | `storage-hints-table.json` | 8 | Section `facts`: the sizes of `storage-hints.json`. Section `cases`: the storage hints of real products with that table. A change to the table can change them. |
-| `good-until.json` | 3, 5.2, 5.3, 6 | Section `cases`: the good-until date of a batch and its source, with the days left and the freshness. Section `order`: the use-first order with opened batches. Section `plan`: the plan of a use with opened batches. It has its own small table of foods. |
+| `good-until.json` | 3, 5.2, 5.3, 6 | Section `cases`: the good-until date of a batch and its source, with the days left and the freshness. Section `order`: the use-first order with opened, frozen, and thawed batches. Section `plan`: the plan of a use with such batches. It has its own small table of foods. |
 | `later-date-offer.json` | 9 | Section `classes`: the after-date class of a product. Section `cases`: the offer, or the reason for no offer. It has its own small table of foods. |
 | `before-date-tips.json` | 10 | The tips that a batch shows. It has its own small table of foods, and its own small table of tips in `table`. |
 | `before-date-tips-table.json` | 10 | Section `facts`: the sizes of `before-date-tips.json`. Section `cases`: the tips of batches with that table and `foods.json`. A change to one of the two tables can change them. |
+| `freeze-check.json` | 11 | If the app can move a batch to a freezer, or the reason when it cannot. It has its own small table of foods. |
 
 Dates are text in the form `YYYY-MM-DD`. Quantities are whole thousandths. Instants are whole milliseconds from
 1970-01-01T00:00:00Z. A value of `null` means that there is no value. A batch in an input can have no `dateType` key

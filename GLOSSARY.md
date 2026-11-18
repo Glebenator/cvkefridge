@@ -4,7 +4,7 @@ The shared terms of the Android app and the iOS app. This is the second draft, a
 in [the plan](docs/plan.md). The owner agrees the words in milestone 1. Household sharing is deferred, so its terms
 are not here. The terms Home, My Fridge, and Food are from 11 November 2026 (ADR 0006). The terms for opened food,
 for the date type, for the food after its date, and for the before-date tips are from 17 November 2026 (ADR 0013,
-ADR 0014, ADR 0015).
+ADR 0014, ADR 0015). The terms for frozen and thawed food are from 18 November 2026 (ADR 0016).
 
 ## Inventory
 
@@ -104,9 +104,35 @@ The **opened date** of a **batch** plus the **opened days** of its food for the 
 area**. The app shows it as an estimate.
 _Avoid_: Opened expiry, open date
 
+**Frozen date**:
+The calendar date on which the person moved a **batch** to a freezer. A batch has one frozen date or none. A batch
+that the person adds to a freezer has none.
+_Avoid_: Freeze date, date frozen
+
+**Thawed date**:
+The calendar date on which the person moved a **batch** out of a freezer. A batch has one thawed date or none.
+_Avoid_: Defrost date, date thawed
+
+**Thawed days**:
+The number of days that a **batch** stays good after its **thawed date**. It is 1 for each food.
+_Avoid_: Defrost time, time after thawing
+
+**Default freezer days**:
+The number of days in the freezer for a frozen **batch** of a food with no **expiry estimate** for the freezer. It
+is 30. A frozen batch thus has a **good-until date** for each food.
+_Avoid_: Fallback time, standard freezer time
+
+**Freeze check**:
+The rule that says if a **batch** can go into a freezer. A batch can go into a freezer up to its **good-until date**
+and on that date. A batch with a **thawed date** cannot go into a freezer again.
+_Avoid_: Freeze rule, freezer validation
+
 **Good-until date**:
 The calendar date that the app uses for the **days left**, the **freshness**, and the **use-first list** of a
-**batch**: the earlier of its **expiry date** and its **after-opening date**. The app calculates it each time. The
+**batch**. For a batch with a **thawed date**, it is that date plus the **thawed days**. For a batch with a **frozen
+date** and no thawed date, it is that date plus the **expiry estimate** of its food for the freezer, or plus the
+**default freezer days**. For each other
+batch, it is the earlier of its **expiry date** and its **after-opening date**. The app calculates it each time. The
 app does not store it.
 _Avoid_: Effective date, real expiry date, final date
 
