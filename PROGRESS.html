@@ -121,10 +121,10 @@
       </div>
       <aside class="meta" aria-label="Report details">
         <dl>
-          <div><dt>Report updated</dt><dd><time datetime="2026-11-17">17 November 2026</time></dd></div>
-          <div><dt>Android app</dt><dd><code>main</code> at <a href="https://github.com/Glebenator/cvkefridge-android/commit/2a1712c"><code>2a1712c</code></a></dd></div>
+          <div><dt>Report updated</dt><dd><time datetime="2026-11-18">18 November 2026</time></dd></div>
+          <div><dt>Android app</dt><dd><code>main</code> at <a href="https://github.com/Glebenator/cvkefridge-android/commit/b1c79c2"><code>b1c79c2</code></a></dd></div>
           <div><dt>iOS app</dt><dd><code>main</code> at <a href="https://github.com/Glebenator/cvkefridge-ios/commit/6c01512"><code>6c01512</code></a></dd></div>
-          <div><dt>Shared specification</dt><dd><code>spec/</code> at <code>483284c</code> in Android and at <code>c4e1d3f</code> in iOS</dd></div>
+          <div><dt>Shared specification</dt><dd><code>spec/</code> at <code>ad69908</code> in Android and at <code>c4e1d3f</code> in iOS</dd></div>
           <div><dt>Publication status</dt><dd>Development builds</dd></div>
         </dl>
       </aside>
@@ -186,11 +186,14 @@
         food has an after-date class, and "Still good?" shows only when the rule permits it
         (<a href="docs/adr/0014-offer-a-later-date-only-for-food-that-the-person-can-check.md">ADR 0014</a>). An expiring
         batch shows before-date tips with the words of a named source
-        (<a href="docs/adr/0015-show-before-date-tips-from-named-sources.md">ADR 0015</a>). Frozen and thawed food is a
-        proposal only (<a href="docs/adr/0016-give-thawed-food-one-day-and-freeze-food-only-up-to-its-date.md">ADR 0016</a>). The Android app has
-        the screens for the first three parts. It also has "Scan date", which reads the printed date with text
-        recognition on the phone, and it reads the printed date of a GS1 2D barcode. The owner did not review the new
-        ADRs and the new text of the screens yet.</p>
+        (<a href="docs/adr/0015-show-before-date-tips-from-named-sources.md">ADR 0015</a>). A batch has a frozen
+        date and a thawed date: a thawed batch is good for 1 day, a frozen batch has the time of its food in the
+        freezer, and a batch goes into a freezer only up to its date
+        (<a href="docs/adr/0016-give-thawed-food-one-day-and-freeze-food-only-up-to-its-date.md">ADR 0016</a>). The Android app has
+        the screens for the four parts, with "Move to freezer", "Move to fridge", and "Change date" on a batch. It also
+        has "Scan date", which reads the printed date with text recognition on the phone, and it reads the printed date
+        of a GS1 2D barcode. On 18 November 2026 the owner saw the buttons for frozen food on the emulator and agreed
+        the decisions of ADR 0016. The owner did not review ADR 0013 to ADR 0015 and the text of their screens yet.</p>
       <div class="screens">
         <figure class="shot"><a href="docs/progress/images/2026-11-17-opened-batch.png"><img src="docs/progress/images/2026-11-17-opened-batch.png" alt="The screen of Orange juice: the batch says Expires in 3d, estimated after opening, with the estimated date after opening, the printed date, and Opened Nov 13 below it." loading="lazy"></a>
           <figcaption><strong>An opened batch</strong>17 Nov 2026 · Android emulator, API 37 · the working tree before Android ba6f9ab · sample data</figcaption></figure>
@@ -200,6 +203,12 @@
           <figcaption><strong>Before-date tips</strong>17 Nov 2026 · Android emulator, API 37 · the working tree before Android ba6f9ab · sample data</figcaption></figure>
         <figure class="shot"><a href="docs/progress/images/2026-11-17-date-scan-two-dates.png"><img src="docs/progress/images/2026-11-17-date-scan-two-dates.png" alt="The date scanner after it read 03/04/27: the question Which date is on the package? with March 4, 2027 and April 3, 2027, each with Label: Best before." loading="lazy"></a>
           <figcaption><strong>The date scanner asks which date</strong>17 Nov 2026 · Android emulator, API 37 · the working tree before Android ba6f9ab · the text is from a test, not from the camera</figcaption></figure>
+        <figure class="shot"><a href="docs/progress/images/2026-11-18-frozen-batch.png"><img src="docs/progress/images/2026-11-18-frozen-batch.png" alt="The screen of Greek yoghurt after Move to freezer: the batch says Expires in 30d, estimated for the freezer, with the estimated date in the freezer, the printed date, and Frozen Nov 18 below it, and the buttons Opened today, Move to fridge, and Change date." loading="lazy"></a>
+          <figcaption><strong>A frozen batch</strong>18 Nov 2026 · Android emulator, API 37 · Android 55b8f9a · sample data</figcaption></figure>
+        <figure class="shot"><a href="docs/progress/images/2026-11-18-thawed-batch.png"><img src="docs/progress/images/2026-11-18-thawed-batch.png" alt="The same batch after Move to fridge: it says Expires tomorrow, estimated after thawing, with Frozen Nov 18 and Thawed Nov 18. It has no Move to freezer, and the card says No later date: use thawed food in 1 day." loading="lazy"></a>
+          <figcaption><strong>A thawed batch is good for 1 day</strong>18 Nov 2026 · Android emulator, API 37 · Android 55b8f9a · sample data</figcaption></figure>
+        <figure class="shot"><a href="docs/progress/images/2026-11-18-frozen-leftovers.png"><img src="docs/progress/images/2026-11-18-frozen-leftovers.png" alt="The screen of a leftover lasagne after Move to freezer: the batch says Expires in 30d, estimated for the freezer, and General estimate for frozen food: 1 month. You can change the date. It has the button Change date." loading="lazy"></a>
+          <figcaption><strong>Leftovers get the general estimate, and "Change date"</strong>18 Nov 2026 · Android emulator, API 37 · the working tree before Android 55b8f9a · sample data</figcaption></figure>
       </div>
       <div class="grid verify">
         <div class="panel"><h3>Verification</h3>
@@ -208,13 +217,19 @@
             <li>Android, local, on the tree of <code>ba6f9ab</code>: 37 core tests, 228 unit tests of the app, lint with no issues, the debug and release builds, and 35 of 35 device tests at the normal size. At 640 × 1280 and density 320: 34 of 35.</li>
             <li>Android CI on <code>ba6f9ab</code>: <a href="https://github.com/Glebenator/cvkefridge-android/actions/runs/44196009665">Run 44196009665</a> failed. The build job passed. In the device job, <code>aSwipeRecordsTheOldestBatchAsUsedAndUndoBringsItBack</code> failed: after the swipe, the card of the milk has a later date and goes down in the list, below the visible part of a small screen, and the test did not scroll to it. This was also the cause of the failure of this test on this computer.</li>
             <li>Android CI on <code>2a1712c</code>, which corrects the test: <a href="https://github.com/Glebenator/cvkefridge-android/actions/runs/44198869697">Run 44198869697</a> passed, with the builds, lint, the unit tests, and 35 device tests on the API 35 emulator.</li>
-            <li>The debug build with the date scanner was installed on the Pixel 7 Pro of the owner before the screens for opened food were built. The phone does not have these screens yet.</li>
+            <li><code>spec/tools/vectors.py</code>: 426 cases, 0 failures, at <code>ad69908</code>, with the rules of ADR 0016. The Spec workflow passed on that commit: <a href="https://github.com/Glebenator/cvkefridge/actions/runs/44371874074">Run 44371874074</a>.</li>
+            <li>Android, local, on the tree of <code>55b8f9a</code>: 39 core tests, 239 unit tests of the app, lint with no issues, the debug and release builds, and 39 of 39 device tests at the normal size, 4 of them new for frozen food. On <code>b1c79c2</code>, at 640 × 1280 and density 320: 38 of 39 in the full run. <code>withNoConnectionTheScannerSaysSoAndKeepsTheBarcodeForEnterByHand</code> failed one time and passed in the next run.</li>
+            <li>Android CI on <code>55b8f9a</code>: <a href="https://github.com/Glebenator/cvkefridge-android/actions/runs/44372172790">Run 44372172790</a> failed. The build job passed. In the device job, two new tests of <code>FrozenFoodDeviceTest</code> failed: on the small screen, the message "moved to Freezer" was above the next button, and the touch of the test did not get to it. The app had no defect.</li>
+            <li>Android CI on <code>b1c79c2</code>, which corrects the two tests: <a href="https://github.com/Glebenator/cvkefridge-android/actions/runs/44376216471">Run 44376216471</a> passed, with the builds, lint, the unit tests, and 39 device tests on the API 35 emulator.</li>
+            <li>The debug build of <code>55b8f9a</code>, which has the same app code as <code>b1c79c2</code>, was installed on the Pixel 7 Pro of the owner on 18 November 2026. It was not used on the phone in this work.</li>
           </ul></div>
         <div class="panel"><h3>Known limits</h3>
           <ul>
             <li>The date scanner was not tested with a real package, and the GS1 reader was not tested with a real 2D barcode. The device tests give fixed text and fixed barcode values in the place of the camera.</li>
             <li>The text model in the app adds about 12.8 MB to a download for arm64. The universal APK went from 27.2 MB to 70.0 MB.</li>
-            <li>iOS: the copy of <code>spec/</code> at <code>483284c</code> and the core for the new rules are in the working tree only. They are not committed, and no Swift compiler has built them.</li>
+            <li>iOS: the app does not have the rules of ADR 0013 to ADR 0016. A core for them is in the working tree of one computer only. It is not committed, and no Swift compiler has built it. On 18 November 2026 the owner said to leave the iOS app for now.</li>
+            <li>Frozen food: a frozen batch of a food with no time in the freezer in the table gets a general 30 days, also a food that does not freeze well. After "Change date", the card does not say when the batch was frozen. A batch that the person adds to a freezer with a printed date expires on that date.</li>
+            <li>The new buttons were not checked in dark mode and with large text.</li>
             <li>The after-date classes are a selection by hand from the names of the foods: 262 strict and 399 check. No person who knows food safety checked them.</li>
             <li>The table has 4 before-date tips for 19 foods. Two tips say "use-by date" also for a batch with a different date type.</li>
             <li>A storage tip of the FoodKeeper data for orange juice says "Good for 1 week after date on package." The card shows it as it is (ADR 0012). This does not agree with the careful rule of ADR 0014.</li>
@@ -493,15 +508,15 @@
             <li>Build milestones 2 to 5 in the iOS app.</li>
             <li>Make the parent issues and the sub-issues of milestones 2 to 5.</li>
             <li>Milestone 6: screen readers, rotation, store listings, privacy details, and signing.</li>
-            <li>Commit the iOS core for the rules of ADR 0013 to ADR 0015, and make its CI run green.</li>
+            <li>Build the rules of ADR 0013 to ADR 0016 in the iOS core, from <code>spec/</code> and from the Android commits, and make its CI run green.</li>
             <li>Test the date scanner with real packages, and the GS1 reader with a real 2D barcode.</li>
             <li>A check of the after-date classes by a person who knows food safety, before a release.</li>
           </ul></div>
         <div class="panel"><h3>Open decisions and work in progress</h3>
           <ul>
             <li>Open decisions 1 to 3 of the plan: the store name, the product identity, and the glossary words.</li>
-            <li>Open decisions 4 to 13 of the plan, from the expiry research: frozen and thawed food (ADR 0016), a later date for an opened batch, the after-date classes, the class of eggs and of a product with no food, and the sources and the words of the tips.</li>
-            <li>The owner reviews ADR 0013 to ADR 0016 and the new text of the Android screens.</li>
+            <li>Open decisions 6 to 13 of the plan, from the expiry research: a later date for an opened batch, the after-date classes, the class of eggs and of a product with no food, the default freezer days (30 now), and the sources and the words of the tips. Decisions 4 and 5, for frozen and thawed food, are agreed.</li>
+            <li>The owner reviews ADR 0013 to ADR 0015 and the text of their Android screens.</li>
             <li>If the text model stays in the app (about 12.8 MB more for arm64), or the app downloads it after the install.</li>
           </ul></div>
       </div>
@@ -511,6 +526,7 @@
       <h2 id="history-heading">Change history</h2>
       <p class="section-intro">The newest entry is first. Keep the earlier entries.</p>
       <ol class="history">
+        <li><time datetime="2026-11-18">18 November 2026</time><span>Frozen and thawed food (ADR 0016). The owner selected option A, with 1 day for thawed food, and no move to a freezer after the date. <code>spec/</code> at cvkefridge <code>ad69908</code> has the frozen date and the thawed date of a batch, the changes <code>batchFrozen</code> and <code>batchThawed</code>, the new steps of the good-until date, the 30 default freezer days, and the freeze check (rule 11): 426 vector cases. Android <code>55b8f9a</code> has these rules in the core, "Move to freezer" and "Move to fridge" on a batch, "Change date" for a batch in a freezer, and the same moves in the edit form, with 4 new device tests and three screenshots. Android <code>b1c79c2</code> corrects two of these tests for the small screen of CI. The debug build is on the Pixel 7 Pro of the owner. The owner said to leave the iOS app for now, so this feature is not complete in the sense of this report.</span></li>
         <li><time datetime="2026-11-17">17 November 2026</time><span>The research on expiry dates (<code>docs/research/expiry-dates.md</code>), and from it the shared rules for opened food (ADR 0013), the later-date offer (ADR 0014), and the before-date tips (ADR 0015): cvkefridge <code>7af5ed4</code>, 348 vector cases. Frozen and thawed food is a proposal (ADR 0016). <code>spec/</code> is now at <code>483284c</code>, with the five new categories (ADR 0017) and the lookup pause (ADR 0018): 354 cases. Android <code>ba6f9ab</code> has these rules in the core, the screens for opened food, the date type, "Still good?" with limits, and the tips, the date scanner, and the printed date of a GS1 2D barcode. Its CI run failed on one device test that did not scroll to a card on a small screen. <code>2a1712c</code> corrects the test, and its CI run is green with 35 device tests. iOS is at <code>6c01512</code>: its core for the new rules is written and not committed, and no compiler has built it. The date scanner and the GS1 reader were not tested with a real package.</span></li>
         <li><time datetime="2026-11-14">14 November 2026</time><span>Committed and pushed: the storage hint of a scanned product (ADR 0011) and the storage tips (ADR 0012), with rule 8 and <code>spec/storage-hints.json</code> in the shared rules (243 vector cases). On Android, also: with one item left, "Used" and "Thrown away" need no dialog; a name match comes before an alias match in the suggestions, which show the alias; Recent shows the foods that were added, used, or thrown away last, with a button that removes one. <code>spec/</code> is at <code>c4e1d3f</code> in both apps. Android is at <code>8ad4020</code> and iOS at <code>6c01512</code>. Both CI runs are green; Android needed a second attempt because one device test timed out. Installed on the phone of the owner.</span></li>
         <li><time datetime="2026-11-14">14 November 2026</time><span>A note on a food (ADR 0010). A product has one optional note, in the <code>productSaved</code> change of the shared rules, with 2 new vector cases. Both core modules read a change with no <code>note</code> key. On Android, the screen of the food shows the note and edits it in place, the add form and the edit form have a note field, the card on My Fridge shows its first line, and the search finds it. Committed and pushed: spec/ is at <code>d37c5d7</code> in both apps. Android is at <code>25bcae3</code> and iOS at <code>5d9714c</code>, and the CI runs of both are green. The first CI run of Android found that the keyboard covered the buttons of the note editor on a small screen; <code>25bcae3</code> corrects it. iOS has only the core part of the note.</span></li>
